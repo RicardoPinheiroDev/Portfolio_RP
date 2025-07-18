@@ -10,7 +10,7 @@ function SkillsSection() {
   const [isMobile, setIsMobile] = useState(false)
 
   const buttons = ['frontend', 'backend', 'tools', 'android', 'database']
-  const visibleButtons = 2
+  const visibleButtons = 3
 
   useEffect(() => {
     const checkMobile = () => {
@@ -28,12 +28,17 @@ function SkillsSection() {
   }
 
   const handlePrevious = () => {
-    setCurrentIndex(prev => Math.max(0, prev - 1))
+    const container = document.querySelector('.horizontal-scrollable-container')
+    if (container) {
+      container.scrollBy({ left: -130, behavior: 'smooth' })
+    }
   }
 
   const handleNext = () => {
-    const maxIndex = Math.max(0, buttons.length - visibleButtons)
-    setCurrentIndex(prev => Math.min(maxIndex, prev + 1))
+    const container = document.querySelector('.horizontal-scrollable-container')
+    if (container) {
+      container.scrollBy({ left: 130, behavior: 'smooth' })
+    }
   }
 
   const getVisibleButtons = () => {
@@ -66,52 +71,41 @@ function SkillsSection() {
             </div>
             
             <div className="preset-questions">
-              {isMobile && (
-                <div className="carousel-container">
+              {isMobile ? (
+                <div className="scrollable-with-arrows">
                   <button 
                     className="carousel-arrow left"
                     onClick={handlePrevious}
-                    disabled={currentIndex === 0}
+                    disabled={false}
                   >
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M15 18l-6-6 6-6"/>
                     </svg>
                   </button>
                   
-                  <div className="carousel-track">
-                    <div 
-                      className="carousel-buttons"
-                      style={{
-                        transform: `translateX(-${currentIndex * (100 / visibleButtons)}%)`,
-                        transition: 'transform 0.3s ease-in-out',
-                        width: `${(buttons.length / visibleButtons) * 100}%`
-                      }}
-                    >
-                      {buttons.map((buttonKey) => (
-                        <button 
-                          key={buttonKey}
-                          onClick={() => handleQuestionClick(buttonKey)}
-                          className="carousel-button"
-                        >
-                          {t.skills[`${buttonKey}Button`]}
-                        </button>
-                      ))}
-                    </div>
+                  <div className="horizontal-scrollable-container">
+                    {buttons.map((buttonKey) => (
+                      <button 
+                        key={buttonKey}
+                        onClick={() => handleQuestionClick(buttonKey)}
+                        className={`horizontal-skill-btn ${selectedCategory === buttonKey ? 'active' : ''}`}
+                      >
+                        {t.skills[`${buttonKey}Button`]}
+                      </button>
+                    ))}
                   </div>
                   
                   <button 
                     className="carousel-arrow right"
                     onClick={handleNext}
-                    disabled={currentIndex >= buttons.length - visibleButtons}
+                    disabled={false}
                   >
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M9 18l6-6-6-6"/>
                     </svg>
                   </button>
                 </div>
-              )}
-              
-              {!isMobile && (
+              ) : (
                 <>
                   <button onClick={() => handleQuestionClick('frontend')}>
                     {t.skills.frontendButton}

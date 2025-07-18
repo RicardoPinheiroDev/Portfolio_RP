@@ -476,73 +476,34 @@
   margin-right: auto;
 }
 
-.carousel-container {
+.scrollable-with-arrows {
   display: flex;
   align-items: center;
   width: 100%;
-  max-width: 100%;
-  position: relative;
-  padding: 0 30px;
-  box-sizing: border-box;
+  max-width: 350px;
+  margin: 0 auto;
+  gap: 0.5rem;
 }
 
-.carousel-track {
-  flex: 1;
-  overflow: hidden;
-  position: relative;
-}
-
-.carousel-buttons {
+.horizontal-scrollable-container {
   display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
   width: 100%;
-  transition: transform 0.3s ease-in-out;
-  padding: 4px 0;
-  box-sizing: border-box;
-  gap: 6px;
-  min-width: 100%;
-  flex-wrap: nowrap;
-  overflow: visible;
-}
-
-.carousel-button {
-  flex: 1 0 auto;
-  min-width: 0;
-  outline: none !important;
-  background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(0, 212, 255, 0.05) 100%);
-  border: 2px solid rgba(0, 212, 255, 0.4);
-  color: #ffffff;
-  padding: 0.75rem 0.5rem;
-  font-size: clamp(0.85rem, 2.5vw, 1rem);
-  font-family: 'Inter', 'SF Pro Display', 'Segoe UI', sans-serif;
-  cursor: pointer;
+  max-width: 260px;
+  margin: 0 auto;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.5rem;
   border-radius: 10px;
-  position: relative;
-  backdrop-filter: blur(10px);
-  min-height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  transition: all 0.2s ease;
-  line-height: 1.3;
-  box-sizing: border-box;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
-  flex-shrink: 1;
-  flex-grow: 1;
-  flex-basis: 0;
-  word-break: break-word;
-  white-space: normal;
-  hyphens: auto;
-  margin: 0 2px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-.carousel-button:hover,
-.carousel-button.active {
-  background: linear-gradient(135deg, rgba(0, 212, 255, 0.25) 0%, rgba(0, 212, 255, 0.15) 100%);
-  border-color: #00d4ff;
-  color: #00d4ff;
+.horizontal-scrollable-container::-webkit-scrollbar {
+  display: none;
 }
 
 .carousel-arrow {
@@ -572,18 +533,50 @@
   transform: scale(1.1);
 }
 
-.carousel-arrow:hover:not(:disabled) svg {
-  transform: scale(1.1);
-}
-
 .carousel-arrow:disabled {
   opacity: 0.3;
   cursor: not-allowed;
-  transform: none;
 }
 
-.carousel-arrow:disabled svg {
-  transform: none;
+.horizontal-skill-btn {
+  outline: none !important;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(0, 212, 255, 0.05) 100%);
+  border: 2px solid rgba(0, 212, 255, 0.4);
+  color: #ffffff;
+  padding: 0.75rem 1rem;
+  font-size: clamp(0.85rem, 2.5vw, 1rem);
+  font-family: 'Inter', 'SF Pro Display', 'Segoe UI', sans-serif;
+  cursor: pointer;
+  border-radius: 10px;
+  position: relative;
+  backdrop-filter: blur(10px);
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: all 0.2s ease;
+  line-height: 1.3;
+  box-sizing: border-box;
+  word-break: break-word;
+  white-space: nowrap;
+  hyphens: auto;
+  flex-shrink: 0;
+  min-width: 120px;
+}
+
+.horizontal-skill-btn:hover,
+.horizontal-skill-btn.active {
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.25) 0%, rgba(0, 212, 255, 0.15) 100%);
+  border-color: #00d4ff;
+  color: #00d4ff;
+}
+
+.horizontal-skill-btn.active {
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.35) 0%, rgba(0, 170, 255, 0.25) 100%);
+  border-color: #00d4ff;
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+  font-weight: 500;
 }
 
 .preset-questions button {
@@ -912,10 +905,13 @@
     font-size: clamp(0.85rem, 2.5vw, 1rem);
   }
 
-  .carousel-button {
-    padding: 0.75rem 1rem;
-    min-height: 50px;
-    min-width: 120px;
+  .vertical-carousel-track {
+    height: 110px;
+  }
+  
+  .vertical-skill-btn {
+    padding: 0.6rem 0.8rem;
+    min-height: 45px;
     font-size: clamp(0.85rem, 2.5vw, 1rem);
   }
 
