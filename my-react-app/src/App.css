@@ -10,9 +10,8 @@
   color: #ffffff;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   min-height: calc(100vh - 70px);
-  padding-top: 4rem;
 }
 
 .hero-section {
