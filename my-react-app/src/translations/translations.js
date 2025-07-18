@@ -43,14 +43,14 @@ export const translations = {
           title: 'Projeto 01',
           description: 'O melhor lugar para encontrar filmes e séries sci-fi',
           tech: ['React', 'JavaScript', 'CSS'],
-          link: 'https://github.com/yourusername/project01',
+          link: 'https://github.com/RicardoPinheiroDev/TimeofScifi',
         },
         {
           id: 'projectEstagio',
           title: 'Projeto Estagio Ctesp',
           description: 'Plataforma de gestão e domínios com área de cliente',
           tech: ['PHP', 'Laravel', 'MySQL'],
-          link: 'https://github.com/yourusername/estagio-ctesp',
+          link: 'https://github.com/RicardoPinheiroDev/8220611_CTESP_Estagio_DWDM_2025',
         }
       ]
     }
@@ -100,14 +100,14 @@ export const translations = {
           title: 'Project 01',
           description: 'The best place to find scifi tv shows and movies',
           tech: ['React', 'JavaScript', 'CSS'],
-          link: 'https://github.com/yourusername/project01',
+          link: 'https://github.com/RicardoPinheiroDev/TimeofScifi',
         },
         {
           id: 'projectEstagio',
           title: 'Internship Project',
           description: 'Management and domains platform with client area',
           tech: ['PHP', 'Laravel', 'MySQL'],
-          link: 'https://github.com/yourusername/estagio-ctesp',
+          link: 'https://github.com/RicardoPinheiroDev/8220611_CTESP_Estagio_DWDM_2025',
         }
       ]
     }
