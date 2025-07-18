@@ -98,7 +98,7 @@ export const translations = {
         {
           id: 'project01',
           title: 'Project 01',
-          description: 'The best place to find scifi movies and tv shows',
+          description: 'The best place to find scifi tv shows and movies',
           tech: ['React', 'JavaScript', 'CSS'],
           link: 'https://github.com/yourusername/project01',
         },
