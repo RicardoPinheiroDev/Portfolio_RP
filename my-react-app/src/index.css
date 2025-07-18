@@ -1,0 +1,221 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: dark;
+  color: #ffffff;
+  background-color: #000000;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #000000;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* Custom Bootstrap Navbar Styles */
+.custom-navbar {
+  background: linear-gradient(135deg, #000000 0%, #0a0a0a 100%) !important;
+  border: none !important;
+  padding: 0.3rem 0;
+  box-shadow: 0 4px 20px rgba(0, 212, 255, 0.1) !important;
+  backdrop-filter: blur(10px);
+  position: relative;
+}
+
+.custom-navbar::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, #00d4ff 50%, transparent 100%);
+}
+
+.custom-brand {
+  color: #00d4ff !important;
+  font-size: 2.8rem !important;
+  font-weight: 600 !important;
+  font-family: 'Orbitron', 'SF Pro Display', 'Segoe UI', monospace !important;
+  letter-spacing: 0.08em !important;
+  text-decoration: none !important;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
+.custom-brand:hover {
+  color: #00d4ff !important;
+  transform: scale(1.05);
+  text-shadow: 0 0 30px rgba(0, 212, 255, 0.6);
+}
+
+.custom-navbar .navbar-nav .nav-link {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-size: 1.2rem !important;
+  margin-left: 2rem !important;
+  padding: 0.8rem 0.5rem !important;
+  font-weight: 500 !important;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border: none !important;
+  background: none !important;
+  position: relative;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-family: 'Orbitron', 'SF Pro Display', 'Segoe UI', monospace !important;
+}
+
+.custom-navbar .navbar-nav .nav-link:hover {
+  color: #00d4ff !important;
+  background: none !important;
+  text-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+}
+
+.custom-navbar .navbar-toggler {
+  border: 1px solid rgba(0, 212, 255, 0.3) !important;
+  padding: 0.5rem 0.8rem !important;
+  border-radius: 8px !important;
+  transition: all 0.3s ease !important;
+}
+
+.custom-navbar .navbar-toggler:hover {
+  border-color: #00d4ff !important;
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.3) !important;
+}
+
+.custom-navbar .navbar-toggler:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 212, 255, 0.25) !important;
+}
+
+.custom-navbar .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2800, 212, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+.language-dropdown {
+  background: none !important;
+  border: none !important;
+  color: #ffffff !important;
+  font-size: 1.5rem !important;
+  padding: 0.5rem !important;
+  margin-left: 1rem;
+  box-shadow: none !important;
+  transition: all 0.3s ease !important;
+}
+
+.language-dropdown:hover {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  transform: scale(1.1);
+}
+
+.language-dropdown:focus {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.language-dropdown::after {
+  display: none !important;
+}
+
+.language-menu {
+  background-color: #000000 !important;
+  border: 1px solid #00d4ff !important;
+  border-radius: 10px !important;
+  box-shadow: 0 5px 20px rgba(0, 212, 255, 0.2) !important;
+  margin-top: 0.5rem !important;
+  position: absolute !important;
+  z-index: 9999 !important;
+}
+
+.language-menu .dropdown-item {
+  color: #ffffff !important;
+  padding: 0.75rem 1.5rem !important;
+  font-family: 'Inter', 'SF Pro Display', 'Segoe UI', sans-serif !important;
+  font-size: 1rem !important;
+  transition: all 0.3s ease !important;
+}
+
+.language-menu .dropdown-item:hover {
+  background-color: rgba(0, 212, 255, 0.1) !important;
+  color: #00d4ff !important;
+}
+
+.language-menu .dropdown-item.active {
+  background-color: rgba(0, 212, 255, 0.2) !important;
+  color: #00d4ff !important;
+}
+
+@media (max-width: 991.98px) {
+  .custom-navbar .navbar-nav {
+    flex-direction: row !important;
+    justify-content: center !important;
+    gap: 2rem !important;
+  }
+  
+  .custom-navbar .navbar-nav .nav-link {
+    margin-left: 0 !important;
+    margin-bottom: 0 !important;
+    text-align: center;
+  }
+  
+  .language-dropdown {
+    margin-left: 0;
+    margin-top: 0;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
