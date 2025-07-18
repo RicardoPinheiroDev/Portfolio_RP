@@ -10,7 +10,7 @@ function SkillsSection() {
   const [isMobile, setIsMobile] = useState(false)
 
   const buttons = ['frontend', 'backend', 'tools', 'android', 'database']
-  const visibleButtons = 3
+  const visibleButtons = 2
 
   useEffect(() => {
     const checkMobile = () => {
@@ -82,7 +82,7 @@ function SkillsSection() {
                     <div 
                       className="carousel-buttons"
                       style={{
-                        transform: `translateX(-${currentIndex * (100 / buttons.length)}%)`,
+                        transform: `translateX(-${currentIndex * (100 / visibleButtons)}%)`,
                         transition: 'transform 0.3s ease-in-out',
                         width: `${(buttons.length / visibleButtons) * 100}%`
                       }}
