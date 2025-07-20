@@ -62,9 +62,24 @@ html, body {
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .main-content {
-    padding-top: 2rem;
+    padding-top: 0.5rem;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
+    justify-content: flex-start;
+    margin-top: 60px;
+  }
+  
+  .hero-section {
+    padding-top: 1rem;
+  }
+  
+  .greeting {
+    margin-bottom: 1rem;
+  }
+  
+  .intro-text {
+    margin-bottom: 1.5rem;
+    padding: 0 0.5rem;
   }
 }
 
