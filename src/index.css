@@ -1,7 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.cdnfonts.com/css/sf-pro-display');
 
 :root {
-  font-family: 'Rajdhani', sans-serif;
+  font-family: 'Inter', 'SF Pro Display', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -78,7 +79,7 @@ button:focus-visible {
   color: #00d4ff !important;
   font-size: 2.8rem !important;
   font-weight: 600 !important;
-  font-family: 'Orbitron', 'SF Pro Display', 'Segoe UI', monospace !important;
+  font-family: 'Orbitron', 'Inter', 'SF Pro Display', 'Segoe UI', sans-serif !important;
   letter-spacing: 0.08em !important;
   text-decoration: none !important;
   position: relative;
@@ -104,7 +105,7 @@ button:focus-visible {
   position: relative;
   text-transform: none;
   letter-spacing: 0.02em;
-  font-family: 'Orbitron', 'SF Pro Display', 'Segoe UI', monospace !important;
+  font-family: 'Orbitron', 'Inter', 'SF Pro Display', 'Segoe UI', sans-serif !important;
 }
 
 .custom-navbar .navbar-nav .nav-link:hover {

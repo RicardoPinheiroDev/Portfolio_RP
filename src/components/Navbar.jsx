@@ -50,6 +50,13 @@ function NavbarComponent() {
             <Nav className="ms-auto me-4">
               <Nav.Link
                 as={Link}
+                to="/"
+                className={`nav-link-custom ${location.pathname === '/' ? 'nav-active' : ''}`}
+              >
+                {t.nav.home}
+              </Nav.Link>
+              <Nav.Link
+                as={Link}
                 to="/habilidades"
                 className={`nav-link-custom ${location.pathname === '/habilidades' ? 'nav-active' : ''}`}
               >
@@ -115,6 +122,14 @@ function NavbarComponent() {
         </Offcanvas.Header>
         <Offcanvas.Body>
           <Nav className="flex-column">
+            <Nav.Link
+              as={Link}
+              to="/"
+              className={`nav-link-custom ${location.pathname === '/' ? 'nav-active' : ''}`}
+              onClick={handleClose}
+            >
+              {t.nav.home}
+            </Nav.Link>
             <Nav.Link
               as={Link}
               to="/habilidades"

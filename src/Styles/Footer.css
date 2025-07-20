@@ -41,7 +41,7 @@
   transition: all 0.3s ease;
   padding: 0.5rem;
   border-radius: 8px;
-  font-family: 'Inter', 'SF Pro Display', 'Segoe UI', sans-serif;
+  font-family: inherit;
 }
 
 .social-link:hover {
