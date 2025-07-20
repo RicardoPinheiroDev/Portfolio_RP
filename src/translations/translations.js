@@ -24,12 +24,14 @@ export const translations = {
       toolsButton: 'Ferramentas',
       androidButton: 'Desenvolvimento Android',
       databaseButton: 'Base de Dados',
+      desktopToolsButton: 'Ferramentas de Desktop',
       responses: {
         frontend: 'As maravilhas que o frontend trás, não há nada que nos possa separar. Tenho experiência em usar HTML, CSS, Javascript, Bootstrap e React',
-        backend: 'O backend tem sido uma tarefa difícil de sincronizar com o frontend, mas quero sempre dar o meu melhor! Tenho experiência com PHP, Laravel e Filament o que e perfeito para o desenvolvimento rapido de painéis administrativos. Também tenho conhecimentos em NodeJS.',
-        tools: 'Eu sei usar o Git para fazer uploads de projetos no Github ou Gitlab e também tenho conhecimentos basicos sobre o Postman.',
+        backend: 'O backend tem sido uma tarefa difícil de sincronizar com o frontend, mas quero sempre dar o meu melhor! Eu sei os basicos de PHP, Laravel ( framweork baseada em php) e Filament (framwework baseada em laravel para construção de paineis administrativos) Também tenho conhecimentos em NodeJS.',
+        tools: 'Eu sei usar o Git para fazer uploads de projetos no Github ou Gitlab e também tenho conhecimentos basicos sobre o Postman.E uso o vercel para fazer deploy dos meus projetos online',
         android: 'Durante a minha jornada, aprendi a desenvolver aplicações Android. Principalmente Java no Android Studio e também tenho vindo a explorar React Native e Kotlin',
-        database: 'Tenho experiência a trabalhar com Mongodb e SQlite'
+        database: 'Tenho experiência a trabalhar com Mongodb e SQlite',
+        desktopTools: 'Recentemente comecei a aprender Tauri, tem os mesmos fundamentos que o electron mas não utiliza chromium o que deixa a aplicação mais leve,também suporta desenvolvimento cross-plataform'
       }
     },
     projects: {
@@ -69,9 +71,8 @@ export const translations = {
       greeting: 'Hello,',
       intro: 'My name is Richard Pinewood, I am a junior web developer who likes to use creativity to develop innovative solutions for full stack applications.',
       downloadCV: 'Download CV',
-      copyright: '© 2024 Richard Pinewood'
+      copyright: ' 2024 Richard Pinewood'
     },
-   
     skills: {
       title: 'Skills',
       subtitle: 'Technologies and tools I master',
@@ -81,12 +82,14 @@ export const translations = {
       toolsButton: 'Tools',
       androidButton: 'Android Development',
       databaseButton: 'Databases',
+      desktopToolsButton: 'Desktop Tools',
       responses: {
         frontend: 'The wonders of frontend are such that nothing can keep us apart. I have experience using HTML, CSS, JavaScript, Bootstrap, and React.',
-        backend: 'Backend has been challenging to sync with frontend, but I always strive to do my best! I have experience with PHP, Laravel, and Filament wich is perfect for building quick admin panels. I\'ve also been focusing more on NodeJS.',
-        tools: 'I know how to use Git, giving me the advantage of uploading projects to GitHub and GitLab. I enjoy using MongoDB for monitoring and building databases and have been learning Postman.',
-        android: 'Throughout my journey, I also have started to the basics of developing Android applications using Java and working with APIs in Android Studio.',
-        database: 'I have experience working with both SQL and NoSQL databases. I\'m comfortable with MySQL for relational data and MongoDB for document-based storage. I also have basic knowledge of PostgreSQL and have been exploring database design and optimization.'
+        backend: 'The backend has been a challenging task to synchronize with the frontend, but I always want to give it my best! I know the basics of PHP, Laravel (a framework based on PHP), and Filament (a framework based on Laravel for building admin panels). I also have knowledge of NodeJS.',
+        tools: 'I know how to use Git, giving me the advantage of uploading projects to GitHub and GitLab and i know the basics of postman',
+        android: 'Has for mobile devolopment i have knowlowdge in programming java in Android Studio and recently i have been learning the basics of React Native for cross plataform development',
+        database: 'I have experience working with databses such has MongoDB and SQlite',
+        desktopTools: 'I have recently started learning Tauri, wich is a framework exacly the same has electron but uses less ram because it doesnt uses« chromium and supports cross plataform development'
       }
     },
     projects: {

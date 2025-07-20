@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useLanguage } from '../context/LanguageContext'
 import { translations } from '../translations/translations'
+import '../Styles/SkillsSection.css'
 
 function SkillsSection() {
   const { language } = useLanguage()
@@ -9,7 +10,7 @@ function SkillsSection() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
 
-  const buttons = ['frontend', 'backend', 'tools', 'android', 'database']
+  const buttons = ['frontend', 'backend', 'tools', 'android', 'database', 'desktopTools']
   const visibleButtons = 3
 
   useEffect(() => {
@@ -47,8 +48,8 @@ function SkillsSection() {
   }
 
   const getIndicatorPosition = (category) => {
-    const buttons = ['frontend', 'backend', 'tools', 'android', 'database']
-    const index = buttons.indexOf(category)
+    const buttonList = ['frontend', 'backend', 'tools', 'android', 'database', 'desktopTools']
+    const index = buttonList.indexOf(category)
     return index * 20 + 7 
   }
 
@@ -121,6 +122,9 @@ function SkillsSection() {
                   </button>
                   <button onClick={() => handleQuestionClick('database')}>
                     {t.skills.databaseButton}
+                  </button>
+                  <button onClick={() => handleQuestionClick('desktopTools')}>
+                    {t.skills.desktopToolsButton}
                   </button>
                 </>
               )}

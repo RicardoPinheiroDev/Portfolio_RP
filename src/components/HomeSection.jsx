@@ -4,6 +4,7 @@ import cvRicardoPinheiro from '../CV_Store/CV_RicardoPinheiro.pdf'
 import cvRichardPinewood from '../CV_Store/CV_RichardPinewood.pdf'
 import githubIcon from '../images/github_icon.png'
 import xIcon from '../images/xlogo_twitter.png'
+import '../Styles/Home.css'
 
 function HomeSection() {
   const { language } = useLanguage()

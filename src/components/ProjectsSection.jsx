@@ -1,5 +1,6 @@
 import { useLanguage } from '../context/LanguageContext'
 import { translations } from '../translations/translations'
+import '../Styles/ProjectsSection.css'
 
 function ProjectsSection() {
   const { language } = useLanguage()
