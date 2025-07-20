@@ -114,7 +114,7 @@ export const translations = {
           id: 'project01',
           title: 'Project 01',
           description: 'The best place to find scifi tv shows and movies',
-          tech: ['React', 'JavaScript', 'CSS'],
+          tech: ['Html', 'Css', 'Nodejs'],
           link: 'https://github.com/RicardoPinheiroDev/TimeofScifi',
         },
         {
