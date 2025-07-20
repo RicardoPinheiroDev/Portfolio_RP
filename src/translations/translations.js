@@ -83,7 +83,7 @@ export const translations = {
       intro: 'My name is Richard Pinewood, I am a junior web developer who likes to use creativity to develop innovative solutions for full stack applications.',
       downloadCV: 'Download CV',
       cvFileName: 'CV_RichardPinewood.pdf',
-      copyright: ' 2024 Richard Pinewood'
+      copyright: ' 2025 Richard Pinewood'
     },
     skills: {
       title: 'Skills',
