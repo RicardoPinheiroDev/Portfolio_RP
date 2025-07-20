@@ -10,7 +10,7 @@ export const translations = {
       english: 'Inglês'
     },
     home: {
-      greeting: 'Olá,',
+      greeting: 'Olá',
       intro: 'Chamo-me Ricardo Pinheiro, sou um programador web junior que gosta de usar a criatividade para desenvolver soluções inovadoras em aplicações full stack.',
       downloadCV: 'Baixar CV',
       copyright: '© 2024 Ricardo Pinheiro'
@@ -68,7 +68,7 @@ export const translations = {
       english: 'English'
     },
     home: {
-      greeting: 'Hello,',
+      greeting: 'Hello',
       intro: 'My name is Richard Pinewood, I am a junior web developer who likes to use creativity to develop innovative solutions for full stack applications.',
       downloadCV: 'Download CV',
       copyright: ' 2024 Richard Pinewood'
