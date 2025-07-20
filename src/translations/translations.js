@@ -30,13 +30,13 @@ export const translations = {
       toolsButton: 'Ferramentas',
       androidButton: 'Desenvolvimento Android',
       databaseButton: 'Base de Dados',
-      desktopToolsButton: 'Ferramentas de Desktop',
+      desktopToolsButton: 'Desktop',
       responses: {
         frontend: 'As maravilhas que o frontend trás, não há nada que nos possa separar. Tenho experiência em usar HTML, CSS, Javascript, Bootstrap e React',
         backend: 'O backend tem sido uma tarefa difícil de sincronizar com o frontend, mas quero sempre dar o meu melhor! Eu sei os basicos de PHP, Laravel ( framweork baseada em php) e Filament (framwework baseada em laravel para construção de paineis administrativos) Também tenho conhecimentos em NodeJS.',
-        tools: 'Eu sei usar o Git para fazer uploads de projetos no Github ou Gitlab e também tenho conhecimentos basicos sobre o Postman.E uso o vercel para fazer deploy dos meus projetos online',
+        tools: 'Eu sei usar o Git para fazer uploads de projetos no Github ou Gitlab e também tenho conhecimentos basicos sobre o Postman,para fazer deploy de projetos online recentemente tenho usado o vercel',
         android: 'Durante a minha jornada, aprendi a desenvolver aplicações Android. Principalmente Java no Android Studio e também tenho vindo a explorar React Native e Kotlin',
-        database: 'Tenho experiência a trabalhar com Mongodb e SQlite',
+        database: 'Tenho experiência em trabalhar com Mongodb e SQlite',
         desktopTools: 'Recentemente comecei a aprender Tauri, tem os mesmos fundamentos que o electron mas não utiliza chromium o que deixa a aplicação mais leve,também suporta desenvolvimento cross-plataform'
       }
     },
@@ -94,15 +94,15 @@ export const translations = {
       toolsButton: 'Tools',
       androidButton: 'Android Development',
       databaseButton: 'Databases',
-      desktopToolsButton: 'Desktop Tools',
+      desktopToolsButton: 'Desktop',
       responses: {
         frontend: 'The wonders of frontend are such that nothing can keep us apart. I have experience using HTML, CSS, JavaScript, Bootstrap, and React.',
-        backend: 'The backend has been a challenging task to synchronize with the frontend, but I always want to give it my best! I know the basics of PHP, Laravel (a framework based on PHP), and Filament (a framework based on Laravel for building admin panels). I also have knowledge of NodeJS.',
-        tools: 'I know how to use Git, giving me the advantage of uploading projects to GitHub and GitLab and i know the basics of postman',
-        android: 'Has for mobile devolopment i have knowlowdge in programming java in Android Studio and recently i have been learning the basics of React Native for cross plataform development',
-        database: 'I have experience working with databses such has MongoDB and SQlite',
-        desktopTools: 'I have recently started learning Tauri, wich is a framework exacly the same has electron but uses less ram because it doesnt uses« chromium and supports cross plataform development'
-      }
+        backend: 'The backend has been a challenging task to synchronize with the frontend, but I always give it my best! I know the basics of PHP, Laravel (a framework based on PHP), and Filament (a framework based on Laravel for building admin panels). I also have knowledge of Node.js wich i am more confortable with.',
+        tools: 'I know how to use Git, which gives me the advantage of uploading projects to GitHub and GitLab. I also have basic knowledge of Postman. For deploying projects online, regardings to deploying projects online i have started to use vercel more.',
+        android: 'As for mobile development, I have knowledge of programming in Java using Android Studio. Recently, I’ve been learning the basics of React Native for cross-platform development.',
+        database: 'I have experience working with databases such as MongoDB and SQLite.',
+        desktopTools: 'I’ve recently started learning Tauri, which is a framework similar to Electron but uses less RAM since it doesn’t rely on Chromium, and it supports cross-platform development.'
+      }      
     },
     projects: {
       title: 'My work',
