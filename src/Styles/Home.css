@@ -59,35 +59,33 @@ html, body {
   box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
 }
 
-/* Mobile Responsive */
 @media (max-width: 768px) {
   .main-content {
-    padding: 0.5rem 0.5rem 1rem;
+    padding: 0 0.5rem 1rem;
+    margin-top: 15px;
+    min-height: calc(100vh - 15px);
     justify-content: flex-start;
-    margin-top: 50px;
-    height: auto;
-    min-height: calc(100vh - 50px);
+    padding-top: 1rem;
   }
   
   .hero-section {
-    padding-top: 0.5rem;
+    padding-top: 0;
   }
   
   .greeting {
-    margin: 0.5rem 0 0.75rem;
+    margin: 0 0 0.5rem 0;
     font-size: clamp(1.8rem, 8vw, 3.5rem);
   }
   
   .intro-text {
-    margin: 0 0 1.25rem;
-    padding: 0 0.75rem;
-    font-size: 1rem;
-    line-height: 1.5;
+    margin: 0 0 1rem 0;
+    padding: 0;
+    font-size: 0.95rem;
+    line-height: 1.4;
   }
   
   .cv-button {
     margin-top: 0.5rem;
-    padding: 0.8rem 1.5rem;
   }
 }
 
