@@ -62,24 +62,32 @@ html, body {
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .main-content {
-    padding-top: 0.5rem;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    padding: 0.5rem 0.5rem 1rem;
     justify-content: flex-start;
-    margin-top: 60px;
+    margin-top: 50px;
+    height: auto;
+    min-height: calc(100vh - 50px);
   }
   
   .hero-section {
-    padding-top: 1rem;
+    padding-top: 0.5rem;
   }
   
   .greeting {
-    margin-bottom: 1rem;
+    margin: 0.5rem 0 0.75rem;
+    font-size: clamp(1.8rem, 8vw, 3.5rem);
   }
   
   .intro-text {
-    margin-bottom: 1.5rem;
-    padding: 0 0.5rem;
+    margin: 0 0 1.25rem;
+    padding: 0 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  .cv-button {
+    margin-top: 0.5rem;
+    padding: 0.8rem 1.5rem;
   }
 }
 
