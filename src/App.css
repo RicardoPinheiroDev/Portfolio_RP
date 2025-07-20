@@ -63,7 +63,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 1rem;
+  gap: 0.1rem;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -84,7 +84,7 @@
 
 .copyright {
   color: rgba(255, 255, 255, 0.6);
-  font-size: clamp(0.75rem, 2vw, 0.85rem);
+  font-size: 0.85rem;
   text-align: left;
   line-height: 1.4;
   padding: 0;
@@ -112,8 +112,8 @@
 }
 
 .social-icon-img {
-  width: clamp(24px, 6vw, 32px);
-  height: clamp(24px, 6vw, 32px);
+  width: 32px;
+  height: 32px;
   transition: transform 0.3s ease;
   filter: brightness(0.8);
 }
@@ -255,7 +255,6 @@
 
   .copyright {
     text-align: center;
-    font-size: 0.7rem;
   }
 }
 
