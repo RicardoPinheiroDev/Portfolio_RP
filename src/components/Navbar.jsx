@@ -10,12 +10,21 @@ import { translations } from '../translations/translations';
 import '../Styles/Navbar.css';
 
 function NavbarComponent() {
-  const { language, setLanguage } = useLanguage();
+  const { language, setLanguage, changeLanguage } = useLanguage();
   const [showOffcanvas, setShowOffcanvas] = useState(false);
   const location = useLocation();
   const t = translations[language];
  
   console.log('Current pathname:', location.pathname);
+  
+  const getLocalizedPath = (path) => {
+    return `/${language}${path}`;
+  };
+  
+  const isActivePath = (path) => {
+    const localizedPath = getLocalizedPath(path);
+    return location.pathname === localizedPath;
+  };
   
   const handleClose = () => setShowOffcanvas(false);
   const handleShow = () => setShowOffcanvas(true);
@@ -32,7 +41,7 @@ function NavbarComponent() {
   }, [showOffcanvas]);
 
   const handleLanguageChange = (lang) => {
-    setLanguage(lang);
+    changeLanguage(lang);
     setShowOffcanvas(false);
   };
 
@@ -44,28 +53,28 @@ function NavbarComponent() {
         fixed="top"
       >
         <Container>
-          <Navbar.Brand as={Link} to="/" className="custom-brand">RP</Navbar.Brand>
+          <Navbar.Brand as={Link} to={getLocalizedPath('/')} className="custom-brand">RP</Navbar.Brand>
           
           <Navbar.Collapse id="basic-navbar-nav" className="d-none d-lg-block">
             <Nav className="ms-auto me-4">
               <Nav.Link
                 as={Link}
-                to="/"
-                className={`nav-link-custom ${location.pathname === '/' ? 'nav-active' : ''}`}
+                to={getLocalizedPath('/')}
+                className={`nav-link-custom ${isActivePath('/') ? 'nav-active' : ''}`}
               >
                 {t.nav.home}
               </Nav.Link>
               <Nav.Link
                 as={Link}
-                to="/habilidades"
-                className={`nav-link-custom ${location.pathname === '/habilidades' ? 'nav-active' : ''}`}
+                to={getLocalizedPath('/habilidades')}
+                className={`nav-link-custom ${isActivePath('/habilidades') ? 'nav-active' : ''}`}
               >
                 {t.nav.skills}
               </Nav.Link>
               <Nav.Link
                 as={Link}
-                to="/projects"
-                className={`nav-link-custom ${location.pathname === '/projects' ? 'nav-active' : ''}`}
+                to={getLocalizedPath('/projects')}
+                className={`nav-link-custom ${isActivePath('/projects') ? 'nav-active' : ''}`}
               >
                 {t.nav.projects}
               </Nav.Link>
@@ -124,24 +133,24 @@ function NavbarComponent() {
           <Nav className="flex-column">
             <Nav.Link
               as={Link}
-              to="/"
-              className={`nav-link-custom ${location.pathname === '/' ? 'nav-active' : ''}`}
+              to={getLocalizedPath('/')}
+              className={`nav-link-custom ${isActivePath('/') ? 'nav-active' : ''}`}
               onClick={handleClose}
             >
               {t.nav.home}
             </Nav.Link>
             <Nav.Link
               as={Link}
-              to="/habilidades"
-              className={`nav-link-custom ${location.pathname === '/habilidades' ? 'nav-active' : ''}`}
+              to={getLocalizedPath('/habilidades')}
+              className={`nav-link-custom ${isActivePath('/habilidades') ? 'nav-active' : ''}`}
               onClick={handleClose}
             >
               {t.nav.skills}
             </Nav.Link>
             <Nav.Link
               as={Link}
-              to="/projects"
-              className={`nav-link-custom ${location.pathname === '/projects' ? 'nav-active' : ''}`}
+              to={getLocalizedPath('/projects')}
+              className={`nav-link-custom ${isActivePath('/projects') ? 'nav-active' : ''}`}
               onClick={handleClose}
             >
               {t.nav.projects}

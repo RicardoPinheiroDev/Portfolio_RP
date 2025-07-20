@@ -1,4 +1,5 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useState, useEffect } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 const LanguageContext = createContext()
 
@@ -10,15 +11,30 @@ export const useLanguage = () => {
   return context
 }
 
-export const LanguageProvider = ({ children }) => {
-  const [language, setLanguage] = useState('pt')
+export const LanguageProvider = ({ children, initialLanguage = 'pt' }) => {
+  const [language, setLanguage] = useState(initialLanguage)
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  useEffect(() => {
+    if (initialLanguage && initialLanguage !== language) {
+      setLanguage(initialLanguage)
+    }
+  }, [initialLanguage])
+
+  const changeLanguage = (newLang) => {
+    const currentPath = location.pathname.replace(/^\/(en|pt)/, '')
+    navigate(`/${newLang}${currentPath}`)
+    setLanguage(newLang)
+  }
 
   const toggleLanguage = () => {
-    setLanguage(prev => prev === 'pt' ? 'en' : 'pt')
+    const newLang = language === 'pt' ? 'en' : 'pt'
+    changeLanguage(newLang)
   }
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, toggleLanguage }}>
+    <LanguageContext.Provider value={{ language, setLanguage, toggleLanguage, changeLanguage }}>
       {children}
     </LanguageContext.Provider>
   )
