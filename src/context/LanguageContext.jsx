@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { translatePath } from '../utils/routeUtils'
 
 const LanguageContext = createContext()
 
@@ -23,8 +24,8 @@ export const LanguageProvider = ({ children, initialLanguage = 'pt' }) => {
   }, [initialLanguage])
 
   const changeLanguage = (newLang) => {
-    const currentPath = location.pathname.replace(/^\/(en|pt)/, '')
-    navigate(`/${newLang}${currentPath}`)
+    const newPath = translatePath(location.pathname, language, newLang)
+    navigate(newPath)
     setLanguage(newLang)
   }
 

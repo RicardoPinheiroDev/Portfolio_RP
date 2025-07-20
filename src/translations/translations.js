@@ -9,6 +9,11 @@ export const translations = {
       portuguese: 'Português',
       english: 'Inglês'
     },
+    routes: {
+      home: 'inicio',
+      skills: 'habilidades',
+      projects: 'projetos'
+    },
     home: {
       greeting: 'Olá',
       intro: 'Chamo-me Ricardo Pinheiro, sou um programador web junior que gosta de usar a criatividade para desenvolver soluções inovadoras em aplicações full stack.',
@@ -66,6 +71,11 @@ export const translations = {
       selectLanguage: 'Select Language',
       portuguese: 'Portuguese',
       english: 'English'
+    },
+    routes: {
+      home: 'home',
+      skills: 'skills',
+      projects: 'projects'
     },
     home: {
       greeting: 'Hello',

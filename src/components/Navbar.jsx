@@ -7,6 +7,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { translations } from '../translations/translations';
+import { getLocalizedPath } from '../utils/routeUtils';
 import '../Styles/Navbar.css';
 
 function NavbarComponent() {
@@ -17,13 +18,13 @@ function NavbarComponent() {
  
   console.log('Current pathname:', location.pathname);
   
-  const getLocalizedPath = (path) => {
-    return `/${language}${path}`;
+  const getNavPath = (routeKey) => {
+    return getLocalizedPath(language, routeKey);
   };
   
-  const isActivePath = (path) => {
-    const localizedPath = getLocalizedPath(path);
-    return location.pathname === localizedPath;
+  const isActivePath = (routeKey) => {
+    const expectedPath = getLocalizedPath(language, routeKey);
+    return location.pathname === expectedPath;
   };
   
   const handleClose = () => setShowOffcanvas(false);
@@ -53,28 +54,28 @@ function NavbarComponent() {
         fixed="top"
       >
         <Container>
-          <Navbar.Brand as={Link} to={getLocalizedPath('/')} className="custom-brand">RP</Navbar.Brand>
+          <Navbar.Brand as={Link} to={getNavPath('home')} className="custom-brand">RP</Navbar.Brand>
           
           <Navbar.Collapse id="basic-navbar-nav" className="d-none d-lg-block">
             <Nav className="ms-auto me-4">
               <Nav.Link
                 as={Link}
-                to={getLocalizedPath('/')}
-                className={`nav-link-custom ${isActivePath('/') ? 'nav-active' : ''}`}
+                to={getNavPath('home')}
+                className={`nav-link-custom ${isActivePath('home') ? 'nav-active' : ''}`}
               >
                 {t.nav.home}
               </Nav.Link>
               <Nav.Link
                 as={Link}
-                to={getLocalizedPath('/habilidades')}
-                className={`nav-link-custom ${isActivePath('/habilidades') ? 'nav-active' : ''}`}
+                to={getNavPath('skills')}
+                className={`nav-link-custom ${isActivePath('skills') ? 'nav-active' : ''}`}
               >
                 {t.nav.skills}
               </Nav.Link>
               <Nav.Link
                 as={Link}
-                to={getLocalizedPath('/projects')}
-                className={`nav-link-custom ${isActivePath('/projects') ? 'nav-active' : ''}`}
+                to={getNavPath('projects')}
+                className={`nav-link-custom ${isActivePath('projects') ? 'nav-active' : ''}`}
               >
                 {t.nav.projects}
               </Nav.Link>
@@ -133,24 +134,24 @@ function NavbarComponent() {
           <Nav className="flex-column">
             <Nav.Link
               as={Link}
-              to={getLocalizedPath('/')}
-              className={`nav-link-custom ${isActivePath('/') ? 'nav-active' : ''}`}
+              to={getNavPath('home')}
+              className={`nav-link-custom ${isActivePath('home') ? 'nav-active' : ''}`}
               onClick={handleClose}
             >
               {t.nav.home}
             </Nav.Link>
             <Nav.Link
               as={Link}
-              to={getLocalizedPath('/habilidades')}
-              className={`nav-link-custom ${isActivePath('/habilidades') ? 'nav-active' : ''}`}
+              to={getNavPath('skills')}
+              className={`nav-link-custom ${isActivePath('skills') ? 'nav-active' : ''}`}
               onClick={handleClose}
             >
               {t.nav.skills}
             </Nav.Link>
             <Nav.Link
               as={Link}
-              to={getLocalizedPath('/projects')}
-              className={`nav-link-custom ${isActivePath('/projects') ? 'nav-active' : ''}`}
+              to={getNavPath('projects')}
+              className={`nav-link-custom ${isActivePath('projects') ? 'nav-active' : ''}`}
               onClick={handleClose}
             >
               {t.nav.projects}
