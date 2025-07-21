@@ -1,6 +1,7 @@
 import './App.css'
 import { BrowserRouter as Router, Routes, Route, Navigate, useParams } from 'react-router-dom'
 import NavbarComponent from './components/Navbar'
+import AudioPlayer from './components/AudioPlayer'
 import { LanguageProvider } from './context/LanguageContext'
 import HomeSection from './components/HomeSection'
 import SkillsSection from './components/SkillsSection'
@@ -14,6 +15,7 @@ function LanguageWrapper() {
   return (
     <LanguageProvider initialLanguage={lang}>
       <NavbarComponent />
+      <AudioPlayer />
       <Routes>
         <Route path="/" element={
           <main className="main-content">

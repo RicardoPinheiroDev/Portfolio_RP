@@ -1,0 +1,267 @@
+.audio-player {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.85);
+  padding: 16px 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  z-index: 1001;
+  min-width: 280px;
+  max-width: calc(100vw - 40px);
+  border-radius: 15px;
+}
+
+.player-info {
+  margin-bottom: 8px;
+}
+
+.music-title {
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.time-display {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 12px;
+  font-family: 'Courier New', monospace;
+}
+
+.player-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8px;
+  gap: 8px;
+}
+
+.play-pause-btn {
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: none;
+}
+
+.play-pause-btn:hover {
+  background: transparent;
+  color: white;
+  transform: scale(1.2);
+}
+
+.play-pause-btn:active {
+  transform: scale(0.95);
+}
+
+.play-pause-btn.playing {
+  background: transparent;
+  color: white;
+}
+
+.skip-btn {
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: none;
+}
+
+.skip-btn:hover {
+  background: transparent;
+  color: white;
+  transform: scale(1.2);
+}
+
+.skip-btn:active {
+  transform: scale(0.95);
+}
+
+.welcome-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.welcome-modal {
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  backdrop-filter: blur(15px);
+  max-width: 400px;
+  width: 90%;
+  animation: slideIn 0.6s ease-out;
+}
+
+.welcome-content {
+  text-align: center;
+}
+
+.welcome-content h3 {
+  color: #00d4ff;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.welcome-content p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+}
+
+.note-text {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.85rem;
+  font-style: italic;
+  display: block;
+  margin-top: 0.5rem;
+}
+
+.welcome-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.consent-btn {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 120px;
+}
+
+.yes-btn {
+  background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+  color: #000;
+}
+
+.yes-btn:hover {
+  background: linear-gradient(135deg, #00b8e6 0%, #0088bb 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4);
+}
+
+.no-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.no-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { 
+    opacity: 0;
+    transform: translateY(-50px) scale(0.9);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .audio-player {
+    bottom: 15px;
+    right: 10px;
+    min-width: 250px;
+    max-width: calc(100vw - 20px);
+    padding: 10px 12px;
+  }
+  
+  .music-title {
+    font-size: 13px;
+  }
+  
+  .play-pause-btn {
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .audio-player {
+    bottom: 10px;
+    right: 5px;
+    left: 5px;
+    min-width: unset;
+    max-width: unset;
+    padding: 8px 10px;
+  }
+  
+  .music-title {
+    font-size: 12px;
+  }
+  
+  .time-display {
+    font-size: 11px;
+  }
+  
+  .welcome-modal {
+    padding: 1.5rem;
+    max-width: 350px;
+  }
+  
+  .welcome-buttons {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  
+  .consent-btn {
+    width: 100%;
+  }
+  
+  .play-pause-btn {
+    padding: 5px 10px;
+    font-size: 10px;
+  }
+}
