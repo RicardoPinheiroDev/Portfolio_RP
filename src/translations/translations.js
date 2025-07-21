@@ -23,7 +23,7 @@ export const translations = {
     },
     audioPlayer: {
       welcomeTitle: 'Bem-vindo ao meu Portfólio!',
-      welcomeMessage: 'Gostaria de ouvir música de fundo enquanto explora?',
+      welcomeMessage: 'Gostarias de ouvir música de fundo enquanto exploras?',
       welcomeNote: 'Nota: Recarregar a página irá mostrar este pop-up novamente',
       yesButton: 'Sim, tocar música',
       noButton: 'Não, obrigado'

@@ -30,7 +30,6 @@ const AudioPlayer = () => {
   const currentSong = playlist[currentTrack];
   const t = translations[language]?.audioPlayer || translations.pt.audioPlayer;
 
-  // Auto-minimize on mobile when music starts playing
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 768 && isPlaying) {
@@ -38,7 +37,7 @@ const AudioPlayer = () => {
       }
     };
 
-    handleResize(); // Check on mount
+    handleResize(); 
     window.addEventListener('resize', handleResize);
     
     return () => window.removeEventListener('resize', handleResize);
@@ -90,7 +89,6 @@ const AudioPlayer = () => {
     setShowWelcomeModal(false);
     
     if (consent) {
-      // Small delay to ensure audio element is ready
       setTimeout(async () => {
         const audio = audioRef.current;
         if (audio) {
@@ -254,7 +252,6 @@ const AudioPlayer = () => {
         </div>
       )}
       
-      {/* Show button when player is hidden on mobile */}
       {hasUserConsented && isHidden && window.innerWidth <= 768 && (
         <button 
           className="show-player-btn"
