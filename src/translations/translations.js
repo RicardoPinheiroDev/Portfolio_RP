@@ -21,6 +21,13 @@ export const translations = {
       cvFileName: 'CV_RicardoPinheiro.pdf',
       copyright: '© 2024 Ricardo Pinheiro'
     },
+    audioPlayer: {
+      welcomeTitle: 'Bem-vindo ao meu Portfólio!',
+      welcomeMessage: 'Gostaria de ouvir música de fundo enquanto explora?',
+      welcomeNote: 'Nota: Recarregar a página irá mostrar este pop-up novamente',
+      yesButton: 'Sim, tocar música',
+      noButton: 'Não, obrigado'
+    },
     skills: {
       title: 'Habilidades',
       subtitle: 'Tecnologias e ferramentas que domino',
@@ -84,6 +91,13 @@ export const translations = {
       downloadCV: 'Download CV',
       cvFileName: 'CV_RichardPinewood.pdf',
       copyright: ' 2025 Richard Pinewood'
+    },
+    audioPlayer: {
+      welcomeTitle: 'Welcome to my Portfolio!',
+      welcomeMessage: 'Would you like to enjoy some background music while exploring?',
+      welcomeNote: 'Note: Reloading the page will trigger this pop-up again',
+      yesButton: 'Yes, play music',
+      noButton: 'No, thanks'
     },
     skills: {
       title: 'Skills',
