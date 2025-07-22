@@ -156,9 +156,7 @@
   color: #00d4ff !important;
 }
 
-/* Mobile styles */
 @media (max-width: 991.98px) {
-  /* Custom hamburger menu animation */
   .custom-navbar-toggler {
     border: none;
     background: none;
@@ -208,7 +206,6 @@
     background-color: #00d4ff;
   }
 
-  /* Offcanvas menu styling */
   .offcanvas {
     background-color: rgba(0, 0, 0, 0.98);
     backdrop-filter: blur(10px);
@@ -250,7 +247,7 @@
     background-color: rgba(0, 212, 255, 0.1);
   }
 
-  /* Offcanvas language dropdown */
+
   .language-dropdown-offcanvas {
     width: 100%;
   }
@@ -314,7 +311,6 @@
   }
 }
 
-/* Force hide offcanvas on desktop screens */
 @media (min-width: 992px) {
   .offcanvas {
     display: none !important;

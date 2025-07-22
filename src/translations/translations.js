@@ -23,8 +23,8 @@ export const translations = {
     },
     audioPlayer: {
       welcomeTitle: 'Bem-vindo ao meu Portfólio!',
-      welcomeMessage: 'Gostarias de ouvir música de fundo enquanto exploras?',
-      welcomeNote: 'Nota: Recarregar a página irá mostrar este pop-up novamente',
+      welcomeMessage: 'Queres  ouvir música de fundo enquanto exploras?',
+      welcomeNote: 'Nota :Este pop_up irá aparecer novamente se recaregares a página',
       yesButton: 'Sim, tocar música',
       noButton: 'Não, obrigado'
     },
@@ -95,7 +95,7 @@ export const translations = {
     audioPlayer: {
       welcomeTitle: 'Welcome to my Portfolio!',
       welcomeMessage: 'Would you like to enjoy some background music while exploring?',
-      welcomeNote: 'Note: Reloading the page will trigger this pop-up again',
+      welcomeNote: 'Note : This pop_up will appear again if you reload the page',
       yesButton: 'Yes, play music',
       noButton: 'No, thanks'
     },

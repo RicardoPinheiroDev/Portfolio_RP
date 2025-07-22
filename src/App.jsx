@@ -1,5 +1,6 @@
 import './App.css'
 import { BrowserRouter as Router, Routes, Route, Navigate, useParams } from 'react-router-dom'
+import { useRef, useState, useEffect } from 'react'
 import NavbarComponent from './components/Navbar'
 import AudioPlayer from './components/AudioPlayer'
 import { LanguageProvider } from './context/LanguageContext'
@@ -11,11 +12,12 @@ import { translations } from './translations/translations'
 function LanguageWrapper() {
   const { lang } = useParams()
   const routes = translations[lang]?.routes || translations.pt.routes
+  const audioPlayerRef = useRef()
   
   return (
     <LanguageProvider initialLanguage={lang}>
       <NavbarComponent />
-      <AudioPlayer />
+
       <Routes>
         <Route path="/" element={
           <main className="main-content">
@@ -30,6 +32,8 @@ function LanguageWrapper() {
         <Route path={`/${routes.skills}`} element={<SkillsSection />} />
         <Route path={`/${routes.projects}`} element={<ProjectsSection />} />
       </Routes>
+      
+      <AudioPlayer ref={audioPlayerRef} />
     </LanguageProvider>
   )
 }
