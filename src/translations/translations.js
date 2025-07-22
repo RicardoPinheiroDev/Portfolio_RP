@@ -2,7 +2,7 @@ export const translations = {
   pt: {
     nav: {
       home: 'Início',
-      skills: 'Habilidades',
+      skills: '"Competencias',
       projects: 'Projetos',
       language: 'Idioma',
       selectLanguage: 'Selecionar Idioma',
@@ -23,7 +23,7 @@ export const translations = {
     },
     audioPlayer: {
       welcomeTitle: 'Bem-vindo ao meu Portfólio!',
-      welcomeMessage: 'Queres  ouvir música de fundo enquanto exploras?',
+      welcomeMessage: 'Gostarias de ouvir uma música de fundo enquanto exploras ?',
       welcomeNote: 'Nota :Este pop_up irá aparecer novamente se recaregares a página',
       yesButton: 'Sim, tocar música',
       noButton: 'Não, obrigado'
