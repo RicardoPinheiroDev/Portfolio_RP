@@ -2,7 +2,7 @@ export const translations = {
   pt: {
     nav: {
       home: 'Início',
-      skills: '"Competencias',
+      skills: 'Competencias',
       projects: 'Projetos',
       language: 'Idioma',
       selectLanguage: 'Selecionar Idioma',
