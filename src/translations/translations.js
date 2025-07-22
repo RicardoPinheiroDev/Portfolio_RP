@@ -2,7 +2,7 @@ export const translations = {
   pt: {
     nav: {
       home: 'Início',
-      skills: 'Competencias',
+      skills: '"competências',
       projects: 'Projetos',
       language: 'Idioma',
       selectLanguage: 'Selecionar Idioma',
@@ -11,13 +11,13 @@ export const translations = {
     },
     routes: {
       home: 'inicio',
-      skills: 'habilidades',
+      skills: 'competencias',
       projects: 'projetos'
     },
     home: {
       greeting: 'Olá',
       intro: 'Chamo-me Ricardo Pinheiro, sou um programador web junior que gosta de usar a criatividade para desenvolver soluções inovadoras em aplicações full stack.',
-      downloadCV: 'Baixar CV',
+      downloadCV: 'Descarregar CV',
       cvFileName: 'CV_RicardoPinheiro.pdf',
       copyright: '© 2025 Ricardo Pinheiro'
     },
