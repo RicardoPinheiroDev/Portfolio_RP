@@ -1,3 +1,14 @@
+.page-container {
+  height: 100vh;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.page-container::-webkit-scrollbar {
+  display: none;
+}
+
 .projects-section {
   width: 100%;
   max-width: 100%;
@@ -5,8 +16,6 @@
   padding: 3rem 0.5rem;
   color: #ffffff;
   position: relative;
-  overflow-y: auto;
-  max-height: 100vh;
 }
 
 .projects-section .container {
