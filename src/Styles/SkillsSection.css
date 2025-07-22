@@ -289,7 +289,6 @@
   background: linear-gradient(180deg, #0099cc 0%, #00d4ff 100%);
 }
 
-/* Mobile Responsive */
 @media (max-width: 768px) {
   .chatbot-container {
     margin: 1rem auto 0 auto;

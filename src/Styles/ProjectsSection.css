@@ -124,7 +124,6 @@
   text-decoration: none;
 }
 
-/* Mobile Responsive */
 @media (max-width: 768px) {
   .projects-grid {
     grid-template-columns: 1fr;
