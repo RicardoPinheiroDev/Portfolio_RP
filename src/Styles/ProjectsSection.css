@@ -5,7 +5,8 @@
   padding: 3rem 0.5rem;
   color: #ffffff;
   position: relative;
-  overflow: hidden;
+  overflow-y: auto;
+  max-height: 100vh;
 }
 
 .projects-section .container {
