@@ -29,17 +29,6 @@ export const translations = {
       noButton: 'Não, obrigado'
     },
     skills: {
-      commandDescriptions: {
-        frontend: 'Mostra as competências que tenho em Tecnologias Frontend',
-        backend: 'Mostra as competências que tenho em Tecnologias Backend',
-        tools: 'Mostro ferramentas uteis que utilizo no dia a dia',
-        android: 'Mostra as competências que tenho em  Desenvolvimento Android',
-        database: 'Mostra as competências que tenho em  Base de Dados',
-        desktopTools: 'Mostra as competências que tenho em Tecnologias  Desktop',
-        exit: 'Volta ao início',
-        ls: '',
-        clear: 'Limpa o terminal'
-      },
       errorMessages: {
         commandNotFound: 'command not found',
         helpSuggestion: "Digite 'ls' para ver os diretórios disponíveis"
@@ -106,34 +95,15 @@ export const translations = {
       noButton: 'No, thanks'
     },
     skills: {
-      title: 'Skills',
-      subtitle: 'Technologies and tools I master',
-      frontendButton: 'Frontend Technologies',
-      backendButton: 'Backend Technologies',
-      toolsButton: 'Tools',
-      androidButton: 'Android Development',
-      databaseButton: 'Databases',
-      desktopToolsButton: 'Desktop',
-      commandDescriptions: {
-        frontend: 'Show Frontend Technologies skills',
-        backend: 'Show Backend Technologies skills',
-        tools: 'Show Tools skills',
-        android: 'Show Android Development skills',
-        database: 'Shows my Database skills',
-        desktopTools: 'Shows my Desktop Technologies skills',
-        exit: 'Returns to the beginning',
-        ls: 'Shows available directories',
-        clear: 'Clears the terminal'
-      },
       errorMessages: {
         commandNotFound: 'command not found',
         helpSuggestion: "Type 'ls' to see available directories"
       },
       responses: {
         frontend: 'The wonders of frontend are such that nothing can keep us apart. I have experience using HTML, CSS, JavaScript, Bootstrap, and React.',
-        backend: 'The backend has been a challenging task to synchronize with the frontend, but I always give it my best! I know the basics of PHP, Laravel (a framework based on PHP), and Filament (a framework based on Laravel for building admin panels). I also have knowledge of Node.js wich i am more comfortable with.',
-        tools: 'I know how to use Git, which gives me the advantage of uploading projects to GitHub and GitLab. I also have some basic knowledge of Postman. For deploying projects online, i have started to use vercel with vercil cli wich is a command line tool to deploy and update projects quickly .',
-        android: 'Has for mobile development, I have knowledge of programming in Java using Android Studio. Recently, I also have been learning the basics of React Native for cross-platform development  wich i am  very curious to explore more.',
+        backend: 'The backend has been a challenging task to synchronize with the frontend, but I always give it my best! I know the basics of PHP, Laravel (a framework based on PHP), and Filament (a framework based on Laravel for building admin panels). I also have knowledge of Node.js which I am more comfortable with.',
+        tools: 'I know how to use Git, which gives me the advantage of uploading projects to GitHub and GitLab. I also have some basic knowledge of Postman. For deploying projects online, I have started to use Vercel with the Vercel CLI which is a command line tool to deploy and update projects quickly.',
+        android: 'As for mobile development, I have knowledge of programming in Java using Android Studio. Recently, I have also been learning the basics of React Native for cross-platform development which I am very curious to explore more.',
         database: 'I have experience working with databases such as MongoDB and SQLite.',
         desktopTools: 'I’ve recently started learning Tauri, which is a framework similar to Electron but uses less RAM since it doesn’t rely on Chromium, and it also supports cross-platform development.'
       }      
