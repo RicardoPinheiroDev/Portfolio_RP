@@ -31,13 +31,28 @@ export const translations = {
     skills: {
       title: 'Habilidades',
       subtitle: 'Tecnologias e ferramentas que domino',
-      chatTitle: 'Escolhe um dos botões para saberes mais sobre mim',
       frontendButton: 'Tecnologias Frontend',
       backendButton: 'Tecnologias Backend',
       toolsButton: 'Ferramentas',
       androidButton: 'Desenvolvimento Android',
       databaseButton: 'Base de Dados',
       desktopToolsButton: 'Desktop',
+     
+      commandDescriptions: {
+        frontend: 'Mostra as competências que tenho em Tecnologias Frontend',
+        backend: 'Mostra as competências que tenho em Tecnologias Backend',
+        tools: 'Mostro ferramentas uteis que utilizo no dia a dia',
+        android: 'Mostra as competências que tenho em  Desenvolvimento Android',
+        database: 'Mostra as competências que tenho em  Base de Dados',
+        desktopTools: 'Mostra as competências que tenho em Tecnologias  Desktop',
+        exit: 'Volta ao início',
+        ls: 'Mostra os diretórios disponíveis',
+        clear: 'Limpa o terminal'
+      },
+      errorMessages: {
+        commandNotFound: 'command not found',
+        helpSuggestion: "Digite 'ls' para ver os diretórios disponíveis"
+      },
       responses: {
         frontend: 'As maravilhas que o frontend trás, não há nada que nos possa separar. Tenho experiência em usar HTML, CSS, Javascript, Bootstrap e React',
         backend: 'O backend tem sido uma tarefa difícil de sincronizar com o frontend, mas quero sempre dar o meu melhor! Eu sei os basicos de PHP, Laravel ( framweork baseada em php) e Filament (framwework baseada em laravel para construção de paineis administrativos) Também tenho conhecimentos em NodeJS.',
@@ -102,13 +117,27 @@ export const translations = {
     skills: {
       title: 'Skills',
       subtitle: 'Technologies and tools I master',
-      chatTitle: 'Pick a button to get to know me better',
       frontendButton: 'Frontend Technologies',
       backendButton: 'Backend Technologies',
       toolsButton: 'Tools',
       androidButton: 'Android Development',
       databaseButton: 'Databases',
       desktopToolsButton: 'Desktop',
+      commandDescriptions: {
+        frontend: 'Show Frontend Technologies skills',
+        backend: 'Show Backend Technologies skills',
+        tools: 'Show Tools skills',
+        android: 'Show Android Development skills',
+        database: 'Shows my Database skills',
+        desktopTools: 'Shows my Desktop Technologies skills',
+        exit: 'Returns to the beginning',
+        ls: 'Shows available directories',
+        clear: 'Clears the terminal'
+      },
+      errorMessages: {
+        commandNotFound: 'command not found',
+        helpSuggestion: "Type 'ls' to see available directories"
+      },
       responses: {
         frontend: 'The wonders of frontend are such that nothing can keep us apart. I have experience using HTML, CSS, JavaScript, Bootstrap, and React.',
         backend: 'The backend has been a challenging task to synchronize with the frontend, but I always give it my best! I know the basics of PHP, Laravel (a framework based on PHP), and Filament (a framework based on Laravel for building admin panels). I also have knowledge of Node.js wich i am more confortable with.',

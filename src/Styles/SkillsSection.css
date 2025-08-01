@@ -1,390 +1,824 @@
-.chatbot-container {
+.terminal-container {
   width: 100%;
-  max-width: 1200px;
-  margin: 2rem auto 0 auto;
-  background: linear-gradient(145deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
-  border-radius: 20px;
-  padding: 1rem;
-  min-height: 60vh;
-  max-height: 85vh;
+  max-width: 900px;
+  margin: 2rem auto;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  height: 600px;
+  min-height: 400px;
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   z-index: 10;
-}
-
-.chatbot-header {
-  text-align: center;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  position: relative;
-  flex-shrink: 0;
-}
-
-.chatbot-header h1 {
-  font-size: clamp(1.5rem, 6vw, 2.5rem);
-  margin: 0 0 1rem 0;
-  color: #00d4ff;
-  font-family: 'Orbitron', 'Inter', 'SF Pro Display', 'Segoe UI', sans-serif;
-  font-weight: 700;
-  text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
-  line-height: 1.2;
-  padding: 0 1rem;
-}
-
-.chatbot-header p {
-  margin: 0;
-  color: rgba(255, 255, 255, 0.9);
-  font-size: clamp(1rem, 3vw, 1.2rem);
-  font-family: inherit;
-  font-weight: 300;
-  padding: 0 1rem;
-}
-
-.preset-questions {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
-  padding: 0 0.5rem;
-  max-width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.scrollable-with-arrows {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  max-width: 350px;
-  margin: 0 auto;
-  gap: 0.5rem;
-}
-
-.horizontal-scrollable-container {
-  display: flex;
-  flex-direction: row;
-  gap: 0.5rem;
-  width: 100%;
-  max-width: 260px;
-  margin: 0 auto;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding: 0.5rem;
-  border-radius: 10px;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.horizontal-scrollable-container::-webkit-scrollbar {
-  display: none;
-}
-
-.carousel-arrow {
-  background: transparent;
-  border: none;
-  color: #00d4ff;
-  padding: 0.5rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  flex-shrink: 0;
-}
-
-.carousel-arrow svg {
-  width: 20px;
-  height: 20px;
-  stroke: currentColor;
-  transition: all 0.2s ease;
-}
-
-.carousel-arrow:hover:not(:disabled) {
-  color: #ffffff;
-  transform: scale(1.1);
-}
-
-.carousel-arrow:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
-
-.horizontal-skill-btn {
-  outline: none !important;
-  background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(0, 212, 255, 0.05) 100%);
-  border: 2px solid rgba(0, 212, 255, 0.4);
-  color: #ffffff;
-  padding: 0.75rem 1rem;
-  font-size: clamp(0.85rem, 2.5vw, 1rem);
-  font-family: inherit;
-  cursor: pointer;
-  border-radius: 10px;
-  position: relative;
-  backdrop-filter: blur(10px);
-  min-height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  transition: all 0.2s ease;
-  line-height: 1.3;
+  font-family: 'Fira Code', 'Cascadia Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+  color: #f0f0f0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   box-sizing: border-box;
-  word-break: break-word;
-  white-space: nowrap;
-  hyphens: auto;
-  flex-shrink: 0;
-  min-width: 120px;
-}
-
-.horizontal-skill-btn:hover,
-.horizontal-skill-btn.active {
-  background: linear-gradient(135deg, rgba(0, 212, 255, 0.25) 0%, rgba(0, 212, 255, 0.15) 100%);
-  border-color: #00d4ff;
-  color: #00d4ff;
-}
-
-.horizontal-skill-btn.active {
-  background: linear-gradient(135deg, rgba(0, 212, 255, 0.35) 0%, rgba(0, 170, 255, 0.25) 100%);
-  border-color: #00d4ff;
-  box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
-  font-weight: 500;
-}
-
-.preset-questions button {
-  outline: none !important;
-  background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(0, 212, 255, 0.05) 100%);
-  border: 2px solid rgba(0, 212, 255, 0.4);
-  color: #ffffff;
-  padding: 0.75rem 0.5rem;
-  font-size: clamp(0.75rem, 2.5vw, 0.85rem);
-  font-family: inherit;
-  cursor: pointer;
   border-radius: 8px;
-  position: relative;
-  overflow: hidden;
-  backdrop-filter: blur(10px);
-  white-space: normal;
-  word-wrap: break-word;
-  min-height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  transition: all 0.2s ease;
-  line-height: 1.2;
+  border-top: 20px solid #2a2a2a;
+  box-shadow: 0 0 0 1px #444, 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
-.preset-questions button:hover,
-.preset-questions button.active {
-  background: linear-gradient(135deg, rgba(0, 212, 255, 0.25) 0%, rgba(0, 212, 255, 0.15) 100%);
-  border-color: #00d4ff;
-  color: #00d4ff;
-}
-
-.preset-questions button.active {
-  background: linear-gradient(135deg, rgba(0, 212, 255, 0.35) 0%, rgba(0, 170, 255, 0.25) 100%);
-  border-color: #00d4ff;
-  box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
-  font-weight: 500;
-}
-
-.preset-questions button::before {
+.terminal-container::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
-  opacity: 0;
+  top: -15px;
+  left: 10px;
+  width: 12px;
+  height: 12px;
+  background: #ff5f56;
+  border-radius: 50%;
+  box-shadow: 20px 0 0 #ffbd2e, 40px 0 0 #27c93f;
+  z-index: 11;
 }
 
-.preset-questions button:hover::before {
-  opacity: 1;
-}
 
-.chat-messages {
-  flex: 1;
-  min-height: 200px;
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  border-radius: 15px;
-  padding: 1rem;
-  background: linear-gradient(135deg, #050505 0%, #0f0f0f 50%, #050505 100%);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  overflow-y: auto;
-  backdrop-filter: blur(10px);
-  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
-  margin-bottom: 1rem;
-}
-
-.message {
-  display: flex;
-  flex-direction: column;
-}
-
-.message.user {
-  align-items: flex-end;
-}
-
-.message.bot {
-  align-items: flex-start;
-}
-
-.message-content {
-  max-width: 90%;
-  padding: 1rem 1.5rem;
-  font-family: inherit;
-  line-height: 1.6;
-  border-radius: 15px;
-  position: relative;
-  backdrop-filter: blur(10px);
-  font-size: clamp(0.85rem, 2.5vw, 1rem);
-}
-
-.message.user .message-content {
-  background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
-  color: #000000;
-  border: 1px solid #00d4ff;
+.terminal-header {
+  padding: 1rem 1rem 0.5rem 1rem;
+  flex-shrink: 0;
   text-align: left;
-  box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
 }
 
-.message.bot .message-content {
-  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+.terminal-header h1 {
+  font-size: clamp(1.2rem, 4vw, 1.8rem);
+  margin: 0 0 0.25rem 0;
   color: #ffffff;
-  border: 1px solid rgba(0, 212, 255, 0.2);
+  font-family: 'Courier New', 'Monaco', 'Lucida Console', monospace;
+  font-weight: normal;
+  line-height: 1.2;
   text-align: left;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-.message-time {
-  font-size: clamp(0.7rem, 2vw, 0.8rem);
-  color: rgba(255, 255, 255, 0.6);
-  margin-top: 0.5rem;
-  font-family: inherit;
+.terminal-header p {
+  margin: 0;
+  color: #00ff00;
+  font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+  font-family: 'Courier New', 'Monaco', 'Lucida Console', monospace;
+  font-weight: normal;
+  text-align: left;
 }
 
-.chat-messages::-webkit-scrollbar {
-  width: 6px;
+.terminal-welcome {
+  padding: 1rem;
+  background: #000000;
+  text-align: left;
 }
 
-.chat-messages::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 3px;
+.welcome-text {
+  color: #00ff00;
+  font-family: 'Ubuntu Mono', 'Courier New', 'Monaco', 'Lucida Console', monospace;
+  font-size: 0.9rem;
+  text-align: left;
+  font-weight: bold;
 }
 
-.chat-messages::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #00d4ff 0%, #0099cc 100%);
-  border-radius: 3px;
-  border: 1px solid rgba(0, 212, 255, 0.3);
+.terminal-input-line {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem 0;
+  line-height: 1.5;
+  width: 100%;
 }
 
-.chat-messages::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #0099cc 0%, #00d4ff 100%);
+.terminal-prompt {
+  color: #4caf50;
+  margin-right: 0.5rem;
+  white-space: nowrap;
+  user-select: none;
+  font-weight: bold;
+  text-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
 }
 
+.terminal-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #f0f0f0;
+  font-family: 'Fira Code', 'Cascadia Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.95rem;
+  outline: none;
+  padding: 0.25rem 0.5rem;
+  caret-color: #4caf50;
+  letter-spacing: 0.3px;
+}
+
+.terminal-input::placeholder {
+  color: #555555;
+}
+
+.command-text {
+  color: #ffffff;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.output-content {
+  margin: 0.5rem 0 1rem 0;
+  width: 100%;
+}
+
+.help-commands {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.help-command-item {
+  display: flex;
+  gap: 1rem;
+  line-height: 1.4;
+}
+
+.help-command-name {
+  color: #4caf50;
+  min-width: 150px;
+  font-weight: bold;
+}
+
+.help-command-desc {
+  color: #cccccc;
+  flex: 1;
+}
+
+.skill-content {
+  color: #ffffff;
+  white-space: pre-wrap;
+  line-height: 1.5;
+}
+
+.success-content {
+  color: #4caf50;
+  white-space: pre-wrap;
+  line-height: 1.5;
+}
+
+.file-list-content {
+  color: #ffffff;
+  white-space: pre-wrap;
+  line-height: 1.5;
+  font-family: 'Ubuntu Mono', 'Courier New', 'Monaco', 'Lucida Console', monospace;
+}
+
+.error-content {
+  color: #ff6b6b;
+  margin: 0.5rem 0;
+  line-height: 1.5;
+}
+
+.error-message {
+  font-family: 'Ubuntu Mono', 'Courier New', 'Monaco', 'Lucida Console', monospace;
+}
+
+.error-suggestion {
+  color: #aaaaaa;
+  font-style: italic;
+  margin-top: 0.25rem;
+}
+
+.welcome-message {
+  color: #4caf50;
+  margin: 0;
+  padding: 0.25rem 1rem 0.1rem;
+  white-space: pre-line;
+  line-height: 1.5;
+}
+
+.terminal-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.5rem 1rem;
+  scroll-behavior: smooth;
+  background: rgba(0, 0, 0, 0.2);
+  background-image: 
+    linear-gradient(rgba(50, 50, 50, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(50, 50, 50, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  scrollbar-width: thin;
+  scrollbar-color: #333 #1a1a1a;
+  min-height: 0;
+}
+
+.terminal-input-container {
+  background: #000000;
+  padding: 0.25rem 1rem;
+  flex-shrink: 0;
+}
+
+
+.terminal-output::-webkit-scrollbar {
+  width: 8px;
+}
+
+.terminal-output::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+.terminal-output::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+  border: 1px solid #444;
+}
+
+.terminal-output::-webkit-scrollbar-thumb:hover {
+  background: #444;
+}
+
+
+@keyframes blink {
+  from, to { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+
+.terminal-output ::selection {
+  background: rgba(76, 175, 80, 0.3);
+  color: #fff;
+}
+
+.terminal-output ::-moz-selection {
+  background: rgba(76, 175, 80, 0.3);
+  color: #fff;
+}
+
+.command-item {
+  color: #ffffff;
+  font-family: 'Ubuntu Mono', 'Courier New', 'Monaco', 'Lucida Console', monospace;
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 0.1rem 0;
+  text-align: left;
+  transition: background-color 0.1s ease;
+}
+
+.command-item:hover {
+  background-color: #1a1a1a;
+  color: #00ff00;
+}
+
+.command-name {
+  color: #00aaff;
+  font-weight: bold;
+}
+
+.command-desc {
+  color: #aaaaaa;
+}
+
+.terminal-output {
+  flex: 1;
+  background: #000000;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.terminal-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.1rem 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.terminal-response {
+  font-family: 'Ubuntu Mono', 'Courier New', 'Monaco', 'Lucida Console', monospace;
+  color: #ffffff;
+  line-height: 1.4;
+  text-align: left;
+  padding: 0.25rem 1rem;
+  margin: 0;
+}
+
+.command-executed {
+  color: #00ff00;
+  margin-bottom: 0.25rem;
+  font-size: 0.85rem;
+  text-align: left;
+  font-weight: bold;
+}
+
+.command-executed::before {
+  content: 'user@portfolio:~';
+  color: #00aa00;
+  font-weight: bold;
+  margin-right: 0.25rem;
+}
+
+.output-content {
+  color: #ffffff;
+  white-space: pre-wrap;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  margin-left: 0;
+  text-align: left;
+  padding-left: 1rem;
+  border-left: 2px solid #333333;
+  margin-left: 0.5rem;
+}
+
+.help-commands {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.help-command-item {
+  color: #ffffff;
+  font-family: 'Ubuntu Mono', 'Courier New', 'Monaco', 'Lucida Console', monospace;
+  font-size: 0.8rem;
+  padding: 0.1rem 0;
+  text-align: left;
+}
+
+.help-command-name {
+  color: #00aaff;
+  font-weight: bold;
+}
+
+.help-command-desc {
+  color: #aaaaaa;
+  margin-left: 1rem;
+}
+
+.error-content {
+  color: #ffffff;
+  white-space: pre-wrap;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  margin-left: 0;
+  text-align: left;
+  padding-left: 1rem;
+  border-left: 2px solid #ff4444;
+  margin-left: 0.5rem;
+}
+
+.error-message {
+  color: #ff6666;
+  font-family: 'Ubuntu Mono', 'Courier New', 'Monaco', 'Lucida Console', monospace;
+  font-size: 0.8rem;
+  margin-bottom: 0.25rem;
+}
+
+.error-suggestion {
+  color: #ffaa44;
+  font-family: 'Ubuntu Mono', 'Courier New', 'Monaco', 'Lucida Console', monospace;
+  font-size: 0.75rem;
+  font-style: italic;
+}
+
+.terminal-input-line {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  background: transparent;
+  font-family: 'Ubuntu Mono', 'Courier New', 'Monaco', 'Lucida Console', monospace;
+  text-align: left;
+}
+
+.terminal-prompt {
+  color: #4caf50;
+  margin-right: 0.5rem;
+  font-size: 0.9rem;
+  text-align: left;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.terminal-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-family: 'Ubuntu Mono', 'Courier New', 'Monaco', 'Lucida Console', monospace;
+  font-size: 0.9rem;
+  text-align: left;
+  caret-color: #4caf50;
+  padding: 0;
+  margin: 0;
+}
+
+.terminal-input::placeholder {
+  color: #555555;
+  text-align: left;
+}
+
+.terminal-input:focus {
+  background: transparent;
+  outline: none;
+}
+
+
+
+.terminal-output::-webkit-scrollbar {
+  width: 8px;
+}
+
+.terminal-output::-webkit-scrollbar-track {
+  background: #111111;
+}
+
+.terminal-output::-webkit-scrollbar-thumb {
+  background: #444444;
+  border-radius: 2px;
+}
+
+.terminal-output::-webkit-scrollbar-thumb:hover {
+  background: #666666;
+}
+
+/* General mobile touch improvements */
+.terminal-input {
+  -webkit-user-select: text;
+  user-select: text;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Mobile optimizations - FIXED */
 @media (max-width: 768px) {
-  .chatbot-container {
-    margin: 1rem auto 0 auto;
-    padding: 0.75rem;
-    border-radius: 15px;
-  }
-
-  .preset-questions {
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: 0.4rem;
-    padding: 0 0.25rem;
-  }
-
-  .preset-questions button {
-    padding: 0.75rem 0.5rem;
-    min-height: 50px;
-    font-size: clamp(0.85rem, 2.5vw, 1rem);
-  }
-
-  .vertical-carousel-track {
-    height: 110px;
+  .page-container {
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+    width: 100vw;
   }
   
-  .vertical-skill-btn {
-    padding: 0.6rem 0.8rem;
-    min-height: 45px;
-    font-size: clamp(0.85rem, 2.5vw, 1rem);
+  .skills-section {
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
+  .container {
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .terminal-container {
+    /* Fixed: Added proper top margin to account for navbar */
+    margin: 6rem auto 0.5rem auto;
+    border-radius: 6px;
+    max-width: 95vw;
+    width: 95vw;
+    /* Fixed: Changed height calculation to account for navbar (assume ~80px navbar) */
+    height: calc(100vh - 18rem);
+    max-height: calc(100vh - 18rem);
+    min-height: 300px;
+    border-top: 15px solid #2a2a2a;
+    overflow: hidden;
+  }
+
+  .terminal-help {
+    padding: 0.5rem;
+  }
+
+  .help-text {
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .command-item {
+    font-size: 0.75rem;
+    padding: 0.2rem 0;
+    word-wrap: break-word;
+  }
+
+  .command-name {
+    display: inline-block;
+    min-width: 100px;
+  }
+
+  .command-desc {
+    font-size: 0.7rem;
+  }
+
+  .terminal-content {
+    padding: 0.5rem 0.75rem;
+    max-height: calc(100% - 60px);
+    overflow-y: auto;
+  }
+
+  .terminal-input-container {
+    padding: 0.5rem 0.75rem;
+    flex-shrink: 0;
+    min-height: 50px;
+    background: #000000;
+  }
+
+  .command-executed {
+    font-size: 0.75rem;
+  }
+
+  .output-content {
+    font-size: 0.7rem;
+    line-height: 1.3;
+  }
+
+  .terminal-input-line {
+    padding: 0.25rem 0;
+  }
+
+  .terminal-prompt {
+    font-size: 0.8rem;
+    margin-right: 0.25rem;
+  }
+
+  .terminal-input {
+    font-size: 0.8rem;
+    min-height: 1.5rem;
+    padding: 0.25rem 0;
+    -webkit-tap-highlight-color: transparent;
   }
 }
 
 @media (max-width: 480px) {
-  .chatbot-container {
+  .page-container {
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+    width: 100vw;
+  }
+  
+  .skills-section {
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
+  .container {
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .terminal-container {
+    /* Fixed: Increased top margin for smaller screens */
+    margin: 7rem auto 0.25rem auto;
+    max-width: 98vw;
+    width: 98vw;
+    /* Fixed: Adjusted height calculation for smaller screens */
+    height: calc(100vh - 20rem);
+    max-height: calc(100vh - 20rem);
+    min-height: 250px;
+    border-radius: 4px;
+    border-top: 12px solid #2a2a2a;
+    overflow: hidden;
+  }
+
+  .terminal-help {
+    padding: 0.375rem;
+  }
+
+  .help-text {
+    font-size: 0.75rem;
+  }
+
+  .command-item {
+    font-size: 0.7rem;
+    padding: 0.15rem 0;
+    line-height: 1.2;
+  }
+
+  .command-name {
+    min-width: 80px;
+    font-size: 0.7rem;
+  }
+
+  .command-desc {
+    font-size: 0.65rem;
+    line-height: 1.2;
+  }
+
+  .terminal-content {
+    padding: 0.25rem 0.5rem;
+    -webkit-overflow-scrolling: touch;
+    max-height: calc(100% - 70px);
+    overflow-y: auto;
+    flex: 1;
+  }
+
+  .terminal-input-container {
     padding: 0.5rem;
-    margin: 0.5rem auto 0 auto;
+    flex-shrink: 0;
+    background: #000000;
+    min-height: 60px;
   }
 
-  .chatbot-header {
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
+  .command-executed {
+    font-size: 0.7rem;
   }
 
-  .preset-questions {
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
-    padding: 0 0.1rem;
+  .output-content {
+    font-size: 0.65rem;
+    line-height: 1.25;
   }
 
-  .preset-questions button {
-    padding: 0.8rem 0.5rem;
-    min-height: 50px;
-    font-size: 0.8rem;
+  .terminal-input-line {
+    padding: 0.25rem 0;
   }
 
-  .chat-messages {
-    padding: 0.75rem;
-    min-height: 150px;
+  .terminal-prompt {
+    font-size: 0.75rem;
+    margin-right: 0.25rem;
   }
 
-  .message-content {
-    padding: 0.75rem 1rem;
-    max-width: 95%;
+  .terminal-input {
+    font-size: 16px; /* Prevent zoom on iOS */
+    min-height: 2rem;
+    padding: 0.5rem 0.25rem;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+}
+
+/* Extra small mobile screens */
+@media (max-width: 360px) {
+  .terminal-container {
+    /* Fixed: Even more top margin for very small screens */
+    margin: 8rem auto 0.25rem auto;
+    max-width: 99vw;
+    width: 99vw;
+    /* Fixed: Further adjusted height */
+    height: calc(100vh - 22rem);
+    max-height: calc(100vh - 22rem);
+    min-height: 200px;
+  }
+
+  .terminal-content {
+    padding: 0.25rem;
+    max-height: calc(100% - 65px);
+  }
+
+  .terminal-input-container {
+    padding: 0.25rem;
+    min-height: 55px;
+  }
+
+  .terminal-input {
+    font-size: 14px;
+    min-height: 1.8rem;
+    padding: 0.4rem 0.2rem;
+  }
+
+  .terminal-prompt {
+    font-size: 0.7rem;
   }
 }
 
 @media (max-width: 320px) {
-  .chatbot-header h1 {
-    font-size: 1.3rem;
+  .page-container {
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+    width: 100vw;
+  }
+  
+  .skills-section {
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
+  .container {
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .terminal-container {
+    /* Fixed: Maximum top margin for smallest screens */
+    margin: 9rem auto 0.5rem auto;
+    max-width: 85vw;
+    width: 85vw;
+    /* Fixed: Use flexible height for very small screens */
+    min-height: 40vh;
+    max-height: calc(100vh - 24rem);
+    height: auto;
+    border-radius: 4px;
   }
 
-  .preset-questions button {
+  .terminal-help {
+    padding: 0.25rem;
+  }
+
+  .help-text {
     font-size: 0.7rem;
-    padding: 0.7rem 0.4rem;
+  }
+
+  .command-item {
+    font-size: 0.65rem;
+    padding: 0.1rem 0;
+  }
+
+  .command-name {
+    min-width: 70px;
+    font-size: 0.65rem;
+  }
+
+  .command-desc {
+    font-size: 0.6rem;
+  }
+
+  .terminal-output {
+    padding: 0.25rem;
+    min-height: 100px;
+  }
+
+  .command-executed {
+    font-size: 0.65rem;
+  }
+
+  .output-content {
+    font-size: 0.6rem;
+  }
+
+  .terminal-input-line {
+    padding: 0.25rem;
+  }
+
+  .terminal-prompt {
+    font-size: 0.65rem;
+    margin-right: 0.2rem;
+  }
+
+  .terminal-input {
+    font-size: 0.65rem;
+  }
+}
+
+/* Fixed height-based media queries */
+@media (max-height: 600px) {
+  .terminal-container {
+    /* Fixed: Ensure navbar clearance on short screens */
+    margin-top: 8rem;
+    min-height: 50vh;
+    max-height: calc(100vh - 10rem);
   }
 }
 
 @media (max-height: 500px) and (orientation: landscape) {
-  .chatbot-container {
-    max-height: 90vh;
-    min-height: 50vh;
+  .terminal-container {
+    /* Fixed: Better landscape handling */
+    max-height: calc(100vh - 8rem);
+    min-height: 60vh;
+    height: auto;
+    margin: 6rem auto 1rem auto;
+    max-width: 90vw;
+    width: 90vw;
   }
 
-  .chatbot-header h1 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
+  .terminal-help {
+    padding: 0.25rem 0.5rem;
   }
 
-  .chatbot-header {
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
+  .help-text {
+    font-size: 0.75rem;
   }
 
-  .preset-questions {
-    margin-bottom: 1rem;
+  .command-item {
+    font-size: 0.7rem;
+    padding: 0.1rem 0;
   }
 
-  .chat-messages {
-    min-height: 150px;
+  .command-desc {
+    font-size: 0.65rem;
+  }
+
+  .terminal-output {
+    padding: 0.25rem 0.5rem;
+    min-height: 60px;
+    flex: 1;
+  }
+
+  .output-content {
+    font-size: 0.7rem;
+  }
+
+  .terminal-input-line {
+    padding: 0.25rem 0.5rem;
+  }
+
+  .terminal-prompt {
+    font-size: 0.7rem;
+  }
+
+  .terminal-input {
+    font-size: 0.7rem;
   }
 }

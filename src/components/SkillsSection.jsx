@@ -7,137 +7,342 @@ function SkillsSection() {
   const { language } = useLanguage()
   const t = translations[language]
   const [selectedCategory, setSelectedCategory] = useState(null)
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [isMobile, setIsMobile] = useState(false)
+  const [currentDirectory, setCurrentDirectory] = useState('~')
+  const [terminalInput, setTerminalInput] = useState('')
+  const [hasExecutedCommand, setHasExecutedCommand] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
+  const [commandHistory, setCommandHistory] = useState([{ 
+    type: 'welcome', 
+    content: t.skills.welcomeMessage, 
+    timestamp: Date.now(),
+    id: 1
+  }])
 
-  const buttons = ['frontend', 'backend', 'tools', 'android', 'database', 'desktopTools']
-  const visibleButtons = 3
+  const directories = {
+    frontend: 'frontend',
+    backend: 'backend', 
+    tools: 'tools',
+    android: 'android',
+    database: 'database',
+    desktopTools: 'desktop-tools'
+  }
 
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768)
+  const handleCommand = (command) => {
+    if (command.trim() === '') {
+      return
     }
+
+    const newHistoryItem = { 
+      command, 
+      timestamp: Date.now(),
+      type: 'command',
+      output: [],
+      directory: currentDirectory, 
+      id: commandHistory.length > 0 ? Math.max(...commandHistory.map(item => item.id || 0)) + 1 : 1
+    }
+
+    if (command === 'exit') {
+      setCommandHistory([{ type: 'welcome', content: t.skills.welcomeMessage }])
+      setSelectedCategory(null)
+      setCurrentDirectory('~')
+      setErrorMessage('')
+      setHasExecutedCommand(false)
+      return
+    }
+
+    if (command === 'clear') {
+      setCommandHistory([])
+      setSelectedCategory(null)
+      setCurrentDirectory('~')
+      setErrorMessage('')
+      setHasExecutedCommand(true)
+      return
+    }
+
+    let response = null
     
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
+    if (command === 'ls') {
+      if (currentDirectory === '~') {
     
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
+        response = {
+          type: 'file-list',
+          content: 'competencias/'
+        }
+      } else if (currentDirectory === 'competencias') {
+        
+        const fileList = Object.values(directories).map(dir => `${dir}.txt`).join('\n')
+        response = {
+          type: 'file-list',
+          content: fileList
+        }
+      } else {
+       
+        const category = Object.keys(directories).find(key => directories[key] === currentDirectory)
+        if (category) {
+          response = {
+            type: 'file-list',
+            content: `${currentDirectory}.txt`
+          }
+        }
+      }
+    } else if (command.startsWith('cd ')) {
+      const targetDir = command.substring(3).trim()
+      if (targetDir === '~' || targetDir === '') {
+        setCurrentDirectory('~')
+        // No output message - just change directory silently
+        return
+      } else if (targetDir === 'competencias') {
+        setCurrentDirectory('competencias')
+        // No output message - just change directory silently
+        return
+      } else {
+        response = {
+          type: 'error',
+          content: command,
+          message: 'directory not found',
+          suggestion: "Type 'ls' to see available directories"
+        }
+      }
+    } else if (command.startsWith('cat ')) {
+      const filename = command.substring(4).trim()
+      
+      if (currentDirectory === 'competencias') {
 
-  const handleQuestionClick = (category) => {
-    setSelectedCategory(category)
+        const categoryKey = Object.keys(directories).find(key => `${directories[key]}.txt` === filename)
+        
+        if (categoryKey) {
+          response = {
+            type: 'skill',
+            content: t.skills.responses[categoryKey],
+            category: categoryKey
+          }
+        } else {
+          response = {
+            type: 'error',
+            content: command,
+            message: 'no such file or directory',
+            suggestion: "Use 'ls' to see available files"
+          }
+        }
+      } else {
+        response = {
+          type: 'error',
+          content: command,
+          message: 'no such file or directory',
+          suggestion: "Navigate to 'competencias' directory first: cd competencias"
+        }
+      }
+    } else if (command === 'cat') {
+      response = {
+        type: 'error',
+        content: command,
+        message: 'missing filename',
+        suggestion: "Usage: cat <filename>. Use 'ls' to see available files"
+      }
+    } else {
+      response = {
+        type: 'error',
+        content: command,
+        message: t.skills.errorMessages.commandNotFound,
+        suggestion: t.skills.errorMessages.helpSuggestion
+      }
+    }
+
+
+    setCommandHistory(prev => [
+      ...prev,
+      { ...newHistoryItem, output: [response] }
+    ])
+    setHasExecutedCommand(true)
   }
 
-  const handlePrevious = () => {
-    const container = document.querySelector('.horizontal-scrollable-container')
-    if (container) {
-      container.scrollBy({ left: -130, behavior: 'smooth' })
+  const handleTabCompletion = () => {
+    const input = terminalInput.trim()
+    let suggestions = []
+    let prefix = ''
+
+    if (input.includes(' ')) {
+      const parts = input.split(' ')
+      const command = parts[0]
+      const arg = parts.slice(1).join(' ')
+      
+      if (command === 'cd') {
+        if (currentDirectory === '~') {
+          suggestions = ['competencias']
+        } else if (currentDirectory === 'competencias') {
+          suggestions = ['~']
+        }
+        prefix = 'cd '
+      } else if (command === 'cat') {
+        if (currentDirectory === 'competencias') {
+          const files = Object.values(directories).map(dir => `${dir}.txt`)
+          suggestions = files
+        }
+        prefix = 'cat '
+      }
+      
+      const matches = suggestions.filter(item => item.startsWith(arg))
+      
+      if (matches.length === 1) {
+        setTerminalInput(prefix + matches[0])
+      } else if (matches.length > 1) {
+        const commonPrefix = matches.reduce((common, match) => {
+          let result = ''
+          for (let i = 0; i < Math.min(common.length, match.length); i++) {
+            if (common[i] === match[i]) {
+              result += common[i]
+            } else {
+              break
+            }
+          }
+          return result
+        })
+        
+        if (commonPrefix.length > arg.length) {
+          setTerminalInput(prefix + commonPrefix)
+        }
+      }
+    } else {
+
+      const baseCommands = ['ls', 'clear', 'exit', 'cd ', 'cat ']
+      const matches = baseCommands.filter(cmd => cmd.startsWith(input))
+      
+      if (matches.length === 1) {
+        setTerminalInput(matches[0])
+      } else if (matches.length > 1) {
+        const commonPrefix = matches.reduce((common, match) => {
+          let result = ''
+          for (let i = 0; i < Math.min(common.length, match.length); i++) {
+            if (common[i] === match[i]) {
+              result += common[i]
+            } else {
+              break
+            }
+          }
+          return result
+        })
+        
+        if (commonPrefix.length > input.length) {
+          setTerminalInput(commonPrefix)
+        }
+      }
     }
   }
 
-  const handleNext = () => {
-    const container = document.querySelector('.horizontal-scrollable-container')
-    if (container) {
-      container.scrollBy({ left: 130, behavior: 'smooth' })
+  const handleKeyDown = (e) => {
+    if (e.key === 'Tab') {
+      e.preventDefault()
+      e.stopPropagation()
+      handleTabCompletion()
     }
   }
 
-  const getVisibleButtons = () => {
-    if (!isMobile) return buttons
-    return buttons.slice(currentIndex, currentIndex + visibleButtons)
-  }
-
-  const getIndicatorPosition = (category) => {
-    const buttonList = ['frontend', 'backend', 'tools', 'android', 'database', 'desktopTools']
-    const index = buttonList.indexOf(category)
-    return index * 20 + 7 
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      const command = terminalInput.trim()
+      if (command) {
+        handleCommand(command)
+        setTerminalInput('')
+      } else {
+  
+        setCommandHistory(prev => [
+          ...prev,
+          { 
+            type: 'empty', 
+            timestamp: Date.now(),
+            directory: currentDirectory,
+            id: prev.length > 0 ? Math.max(...prev.map(item => item.id || 0)) + 1 : 1
+          }
+        ])
+      }
+    }
   }
 
   return (
     <div className="page-container">
       <section className="skills-section">
         <div className="container">
-          <div className="chatbot-container">
-            <div className="chatbot-header">
-              <h1>{t.skills.chatTitle}</h1>
-              <p>{t.skills.chatSubtitle}</p>
-              <div className="header-line">
-                {selectedCategory && (
-                  <div 
-                    className="header-line-indicator"
-                    style={{ left: `${getIndicatorPosition(selectedCategory)}%` }}
-                  />
-                )}
+          <div className="terminal-container">
+            {!hasExecutedCommand && (
+              <div className="terminal-welcome">
               </div>
-            </div>
-            
-            <div className="preset-questions">
-              {isMobile ? (
-                <div className="scrollable-with-arrows">
-                  <button 
-                    className="carousel-arrow left"
-                    onClick={handlePrevious}
-                    disabled={false}
-                  >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M15 18l-6-6 6-6"/>
-                    </svg>
-                  </button>
-                  
-                  <div className="horizontal-scrollable-container">
-                    {buttons.map((buttonKey) => (
-                      <button 
-                        key={buttonKey}
-                        onClick={() => handleQuestionClick(buttonKey)}
-                        className={`horizontal-skill-btn ${selectedCategory === buttonKey ? 'active' : ''}`}
-                      >
-                        {t.skills[`${buttonKey}Button`]}
-                      </button>
-                    ))}
-                  </div>
-                  
-                  <button 
-                    className="carousel-arrow right"
-                    onClick={handleNext}
-                    disabled={false}
-                  >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M9 18l6-6-6-6"/>
-                    </svg>
-                  </button>
-                </div>
-              ) : (
-                <>
-                  <button onClick={() => handleQuestionClick('frontend')}>
-                    {t.skills.frontendButton}
-                  </button>
-                  <button onClick={() => handleQuestionClick('backend')}>
-                    {t.skills.backendButton}
-                  </button>
-                  <button onClick={() => handleQuestionClick('tools')}>
-                    {t.skills.toolsButton}
-                  </button>
-                  <button onClick={() => handleQuestionClick('android')}>
-                    {t.skills.androidButton}
-                  </button>
-                  <button onClick={() => handleQuestionClick('database')}>
-                    {t.skills.databaseButton}
-                  </button>
-                  <button onClick={() => handleQuestionClick('desktopTools')}>
-                    {t.skills.desktopToolsButton}
-                  </button>
-                </>
-              )}
-            </div>
+            )}
 
-            <div className="chat-messages">
-              {selectedCategory && (
-                <div className="message bot">
-                  <div className="message-content">
-                    {t.skills.responses[selectedCategory]}
+
+            <div 
+              className="terminal-output"
+              onClick={() => {
+                // Focus the input when clicking anywhere in the terminal
+                const input = document.querySelector('.terminal-input');
+                if (input) input.focus();
+              }}
+            >
+              <div className="terminal-content">
+                {commandHistory.map((historyItem) => (
+                  <div key={historyItem.id || historyItem.timestamp} className="terminal-response">
+                    {historyItem.type === 'empty' ? (
+                      <div className="terminal-input-line">
+                        <span className="terminal-prompt">user@portfolio:{historyItem.directory || '~'}$</span>
+                      </div>
+                    ) : historyItem.type === 'welcome' ? (
+                      <div className="welcome-message">{historyItem.content}</div>
+                    ) : (
+                      <>
+                        <div className="terminal-input-line">
+                          <span className="terminal-prompt">user@portfolio:{historyItem.directory || '~'}$</span>
+                          <span className="command-text">{historyItem.command}</span>
+                        </div>
+                        {historyItem.output && historyItem.output.map((output, i) => (
+                          <div key={i} className="output-content">
+                            {output.type === 'help' && (
+                              <div className="help-commands">
+                                {output.output.map((item, idx) => (
+                                  <div key={idx} className="help-command-item">
+                                    <span className="help-command-name">{item.command}</span>
+                                    <span className="help-command-desc">{item.description}</span>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                            {output.type === 'skill' && (
+                              <div className="skill-content">{output.content}</div>
+                            )}
+                            {output.type === 'success' && (
+                              <div className="success-content">{output.content}</div>
+                            )}
+                            {output.type === 'file-list' && (
+                              <div className="file-list-content">{output.content}</div>
+                            )}
+                            {output.type === 'error' && (
+                              <div className="error-content">
+                                <div className="error-message">bash: {output.content}: {output.message}</div>
+                                <div className="error-suggestion">{output.suggestion}</div>
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </>
+                    )}
+                  </div>
+                ))}
+        
+                <div className="terminal-input-container">
+                  <div className="terminal-input-line">
+                    <span className="terminal-prompt">user@portfolio:{currentDirectory}$</span>
+                    <input
+                      type="text"
+                      value={terminalInput}
+                      onChange={(e) => setTerminalInput(e.target.value)}
+                      onKeyPress={handleKeyPress}
+                      onKeyDown={handleKeyDown}
+                      className="terminal-input"
+                      autoComplete="off"
+                      autoFocus
+                      spellCheck="false"
+                    />
                   </div>
                 </div>
-              )}
+              </div>
             </div>
           </div>
         </div>
