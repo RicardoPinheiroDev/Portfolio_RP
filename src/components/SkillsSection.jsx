@@ -27,6 +27,14 @@ function SkillsSection() {
     desktopTools: 'desktop-tools'
   }
 
+  const getSkillsDirectoryName = () => {
+    return language === 'es' ? 'competencias' : 'skills'
+  }
+
+  const isSkillsDirectory = (dirName) => {
+    return dirName === 'competencias' || dirName === 'skills'
+  }
+
   const handleCommand = (command) => {
     if (command.trim() === '') {
       return
@@ -63,20 +71,17 @@ function SkillsSection() {
     
     if (command === 'ls') {
       if (currentDirectory === '~') {
-    
         response = {
           type: 'file-list',
-          content: 'competencias/'
+          content: getSkillsDirectoryName() + '/'
         }
-      } else if (currentDirectory === 'competencias') {
-        
+      } else if (isSkillsDirectory(currentDirectory)) {
         const fileList = Object.values(directories).map(dir => `${dir}.txt`).join('\n')
         response = {
           type: 'file-list',
           content: fileList
         }
       } else {
-       
         const category = Object.keys(directories).find(key => directories[key] === currentDirectory)
         if (category) {
           response = {
@@ -89,11 +94,9 @@ function SkillsSection() {
       const targetDir = command.substring(3).trim()
       if (targetDir === '~' || targetDir === '') {
         setCurrentDirectory('~')
-        // No output message - just change directory silently
         return
-      } else if (targetDir === 'competencias') {
-        setCurrentDirectory('competencias')
-        // No output message - just change directory silently
+      } else if (isSkillsDirectory(targetDir)) {
+        setCurrentDirectory(getSkillsDirectoryName())
         return
       } else {
         response = {
@@ -106,8 +109,7 @@ function SkillsSection() {
     } else if (command.startsWith('cat ')) {
       const filename = command.substring(4).trim()
       
-      if (currentDirectory === 'competencias') {
-
+      if (isSkillsDirectory(currentDirectory)) {
         const categoryKey = Object.keys(directories).find(key => `${directories[key]}.txt` === filename)
         
         if (categoryKey) {
@@ -129,7 +131,7 @@ function SkillsSection() {
           type: 'error',
           content: command,
           message: 'no such file or directory',
-          suggestion: "Navigate to 'competencias' directory first: cd competencias"
+          suggestion: `Navigate to '${getSkillsDirectoryName()}' directory first: cd ${getSkillsDirectoryName()}`
         }
       }
     } else if (command === 'cat') {
@@ -147,7 +149,6 @@ function SkillsSection() {
         suggestion: t.skills.errorMessages.helpSuggestion
       }
     }
-
 
     setCommandHistory(prev => [
       ...prev,
@@ -168,13 +169,13 @@ function SkillsSection() {
       
       if (command === 'cd') {
         if (currentDirectory === '~') {
-          suggestions = ['competencias']
-        } else if (currentDirectory === 'competencias') {
+          suggestions = ['competencias', 'skills']
+        } else if (isSkillsDirectory(currentDirectory)) {
           suggestions = ['~']
         }
         prefix = 'cd '
       } else if (command === 'cat') {
-        if (currentDirectory === 'competencias') {
+        if (isSkillsDirectory(currentDirectory)) {
           const files = Object.values(directories).map(dir => `${dir}.txt`)
           suggestions = files
         }
@@ -203,7 +204,6 @@ function SkillsSection() {
         }
       }
     } else {
-
       const baseCommands = ['ls', 'clear', 'exit', 'cd ', 'cat ']
       const matches = baseCommands.filter(cmd => cmd.startsWith(input))
       
@@ -229,6 +229,18 @@ function SkillsSection() {
     }
   }
 
+  useEffect(() => {
+    if (isSkillsDirectory(currentDirectory)) {
+      setCurrentDirectory(getSkillsDirectoryName())
+    }
+    
+    setCommandHistory(prev => prev.map(item => 
+      item.type === 'welcome' 
+        ? { ...item, content: t.skills.welcomeMessage }
+        : item
+    ))
+  }, [language])
+
   const handleKeyDown = (e) => {
     if (e.key === 'Tab') {
       e.preventDefault()
@@ -244,7 +256,6 @@ function SkillsSection() {
         handleCommand(command)
         setTerminalInput('')
       } else {
-  
         setCommandHistory(prev => [
           ...prev,
           { 
@@ -267,7 +278,6 @@ function SkillsSection() {
               <div className="terminal-welcome">
               </div>
             )}
-
 
             <div 
               className="terminal-output"
