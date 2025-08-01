@@ -29,15 +29,6 @@ export const translations = {
       noButton: 'Não, obrigado'
     },
     skills: {
-      title: 'Habilidades',
-      subtitle: 'Tecnologias e ferramentas que domino',
-      frontendButton: 'Tecnologias Frontend',
-      backendButton: 'Tecnologias Backend',
-      toolsButton: 'Ferramentas',
-      androidButton: 'Desenvolvimento Android',
-      databaseButton: 'Base de Dados',
-      desktopToolsButton: 'Desktop',
-     
       commandDescriptions: {
         frontend: 'Mostra as competências que tenho em Tecnologias Frontend',
         backend: 'Mostra as competências que tenho em Tecnologias Backend',
@@ -46,7 +37,7 @@ export const translations = {
         database: 'Mostra as competências que tenho em  Base de Dados',
         desktopTools: 'Mostra as competências que tenho em Tecnologias  Desktop',
         exit: 'Volta ao início',
-        ls: 'Mostra os diretórios disponíveis',
+        ls: '',
         clear: 'Limpa o terminal'
       },
       errorMessages: {
@@ -170,4 +161,4 @@ export const translations = {
       ]
     }
   }
-}
+};
