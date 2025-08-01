@@ -272,7 +272,6 @@ function SkillsSection() {
             <div 
               className="terminal-output"
               onClick={() => {
-                // Focus the input when clicking anywhere in the terminal
                 const input = document.querySelector('.terminal-input');
                 if (input) input.focus();
               }}

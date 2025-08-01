@@ -29,6 +29,9 @@ export const translations = {
       noButton: 'Não, obrigado'
     },
     skills: {
+      commandDescriptions: {
+        ls: 'competencias.txt skills.txt frontend.txt backend.txt tools.txt android.txt database.txt desktop-tools.txt'
+      },
       errorMessages: {
         commandNotFound: 'command not found',
         helpSuggestion: "Digite 'ls' para ver os diretórios disponíveis"
