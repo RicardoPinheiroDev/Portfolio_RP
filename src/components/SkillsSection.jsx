@@ -27,336 +27,114 @@ function SkillsSection() {
     desktopTools: 'desktop-tools'
   }
 
-  const getSkillsDirectoryName = () => {
-    return language === 'es' ? 'competencias' : 'skills'
-  }
+  const SKILLS_DIR = 'skills'
 
-  const isSkillsDirectory = (dirName) => {
-    return dirName === 'competencias' || dirName === 'skills'
-  }
+  const isSkillsDirectory = (dirName) => dirName === SKILLS_DIR
 
   const handleCommand = (command) => {
-    if (command.trim() === '') {
-      return
-    }
+    if (command.trim() === '') return
 
     const newHistoryItem = { 
-      command, 
-      timestamp: Date.now(),
-      type: 'command',
-      output: [],
+      command, timestamp: Date.now(), type: 'command', output: [],
       directory: currentDirectory, 
       id: commandHistory.length > 0 ? Math.max(...commandHistory.map(item => item.id || 0)) + 1 : 1
     }
-
-    if (command === 'exit') {
-      setCommandHistory([{ type: 'welcome', content: t.skills.welcomeMessage }])
-      setSelectedCategory(null)
-      setCurrentDirectory('~')
-      setErrorMessage('')
-      setHasExecutedCommand(false)
-      return
-    }
-
-    if (command === 'clear') {
-      setCommandHistory([])
-      setSelectedCategory(null)
-      setCurrentDirectory('~')
-      setErrorMessage('')
-      setHasExecutedCommand(true)
-      return
-    }
-
     let response = null
-    
-    if (command === 'ls') {
-      if (currentDirectory === '~') {
-        response = {
-          type: 'file-list',
-          content: getSkillsDirectoryName() + '/'
-        }
-      } else if (isSkillsDirectory(currentDirectory)) {
-        const fileList = Object.values(directories).map(dir => `${dir}.txt`).join('\n')
-        response = {
-          type: 'file-list',
-          content: fileList
-        }
-      } else {
-        const category = Object.keys(directories).find(key => directories[key] === currentDirectory)
-        if (category) {
-          response = {
-            type: 'file-list',
-            content: `${currentDirectory}.txt`
-          }
-        }
-      }
-    } else if (command.startsWith('cd ')) {
-      const targetDir = command.substring(3).trim()
-      if (targetDir === '~' || targetDir === '') {
-        setCurrentDirectory('~')
+
+    switch (true) {
+      case command === 'exit':
+        setCommandHistory([{ type: 'welcome', content: t.skills.welcomeMessage, timestamp: Date.now(), id: 1 }])
+        setSelectedCategory(null); setCurrentDirectory('~'); setErrorMessage(''); setHasExecutedCommand(false)
         return
-      } else if (isSkillsDirectory(targetDir)) {
-        setCurrentDirectory(getSkillsDirectoryName())
+
+      case command === 'clear':
+        setCommandHistory([]); setSelectedCategory(null); setCurrentDirectory('~'); setErrorMessage(''); setHasExecutedCommand(true)
         return
-      } else {
-        response = {
-          type: 'error',
-          content: command,
-          message: 'directory not found',
-          suggestion: "Type 'ls' to see available directories"
-        }
+
+      case command === 'ls' && currentDirectory === '~':
+        response = { type: 'file-list', content: `${SKILLS_DIR}/` }
+        break
+
+      case command === 'ls' && isSkillsDirectory(currentDirectory):
+        response = { type: 'file-list', content: Object.values(directories).map(dir => `${dir}.txt`).join('\n') }
+        break
+
+      case command.startsWith('cd '): {
+        const target = command.slice(3).trim()
+        if (target === '~' || target === '') setCurrentDirectory('~')
+        else if (isSkillsDirectory(target)) setCurrentDirectory(SKILLS_DIR)
+        else response = { type: 'error', content: command, message: 'directory not found', suggestion: "Type 'ls' to see available directories" }
+        return
       }
-    } else if (command.startsWith('cat ')) {
-      const filename = command.substring(4).trim()
-      
-      if (isSkillsDirectory(currentDirectory)) {
-        const categoryKey = Object.keys(directories).find(key => `${directories[key]}.txt` === filename)
-        
-        if (categoryKey) {
-          response = {
-            type: 'skill',
-            content: t.skills.responses[categoryKey],
-            category: categoryKey
-          }
+
+      case command.startsWith('cat '): {
+        const file = command.slice(4).trim()
+        if (isSkillsDirectory(currentDirectory)) {
+          const key = Object.keys(directories).find(k => `${directories[k]}.txt` === file)
+          response = key ? { type: 'skill', content: t.skills.responses[key], category: key }
+            : { type: 'error', content: command, message: 'no such file or directory', suggestion: "Use 'ls' to see available files" }
         } else {
-          response = {
-            type: 'error',
-            content: command,
-            message: 'no such file or directory',
-            suggestion: "Use 'ls' to see available files"
-          }
+          response = { type: 'error', content: command, message: 'no such file or directory', suggestion: `Navigate to '${SKILLS_DIR}' first: cd ${SKILLS_DIR}` }
         }
-      } else {
-        response = {
-          type: 'error',
-          content: command,
-          message: 'no such file or directory',
-          suggestion: `Navigate to '${getSkillsDirectoryName()}' directory first: cd ${getSkillsDirectoryName()}`
-        }
+        break
       }
-    } else if (command === 'cat') {
-      response = {
-        type: 'error',
-        content: command,
-        message: 'missing filename',
-        suggestion: "Usage: cat <filename>. Use 'ls' to see available files"
-      }
-    } else {
-      response = {
-        type: 'error',
-        content: command,
-        message: t.skills.errorMessages.commandNotFound,
-        suggestion: t.skills.errorMessages.helpSuggestion
-      }
+
+      default:
+        response = { type: 'error', content: command, message: t.skills.errorMessages.commandNotFound, suggestion: t.skills.errorMessages.helpSuggestion }
     }
 
-    setCommandHistory(prev => [
-      ...prev,
-      { ...newHistoryItem, output: [response] }
-    ])
+    setCommandHistory(prev => [...prev, { ...newHistoryItem, output: [response] }])
     setHasExecutedCommand(true)
   }
 
   const handleTabCompletion = () => {
-    const input = terminalInput.trim()
-    let suggestions = []
-    let prefix = ''
-
+    const input = terminalInput.trim(); let prefix = '', suggestions = []
     if (input.includes(' ')) {
-      const parts = input.split(' ')
-      const command = parts[0]
-      const arg = parts.slice(1).join(' ')
-      
-      if (command === 'cd') {
-        if (currentDirectory === '~') {
-          suggestions = ['competencias', 'skills']
-        } else if (isSkillsDirectory(currentDirectory)) {
-          suggestions = ['~']
-        }
-        prefix = 'cd '
-      } else if (command === 'cat') {
-        if (isSkillsDirectory(currentDirectory)) {
-          const files = Object.values(directories).map(dir => `${dir}.txt`)
-          suggestions = files
-        }
-        prefix = 'cat '
-      }
-      
-      const matches = suggestions.filter(item => item.startsWith(arg))
-      
-      if (matches.length === 1) {
-        setTerminalInput(prefix + matches[0])
-      } else if (matches.length > 1) {
-        const commonPrefix = matches.reduce((common, match) => {
-          let result = ''
-          for (let i = 0; i < Math.min(common.length, match.length); i++) {
-            if (common[i] === match[i]) {
-              result += common[i]
-            } else {
-              break
-            }
-          }
-          return result
-        })
-        
-        if (commonPrefix.length > arg.length) {
-          setTerminalInput(prefix + commonPrefix)
-        }
-      }
+      const [cmd, arg] = input.split(/\s+(.+)/)
+      if (cmd === 'cd') suggestions = currentDirectory === '~' ? [SKILLS_DIR] : ['~'], prefix = 'cd '
+      if (cmd === 'cat' && isSkillsDirectory(currentDirectory)) suggestions = Object.values(directories).map(d => `${d}.txt`), prefix = 'cat '
+      const matches = suggestions.filter(i => i.startsWith(arg))
+      if (matches.length === 1) setTerminalInput(prefix + matches[0])
     } else {
-      const baseCommands = ['ls', 'clear', 'exit', 'cd ', 'cat ']
-      const matches = baseCommands.filter(cmd => cmd.startsWith(input))
-      
-      if (matches.length === 1) {
-        setTerminalInput(matches[0])
-      } else if (matches.length > 1) {
-        const commonPrefix = matches.reduce((common, match) => {
-          let result = ''
-          for (let i = 0; i < Math.min(common.length, match.length); i++) {
-            if (common[i] === match[i]) {
-              result += common[i]
-            } else {
-              break
-            }
-          }
-          return result
-        })
-        
-        if (commonPrefix.length > input.length) {
-          setTerminalInput(commonPrefix)
-        }
-      }
+      const base = ['ls','clear','exit','cd ','cat ']
+      const matches = base.filter(c => c.startsWith(input))
+      if (matches.length === 1) setTerminalInput(matches[0])
     }
   }
 
-  useEffect(() => {
-    if (isSkillsDirectory(currentDirectory)) {
-      setCurrentDirectory(getSkillsDirectoryName())
-    }
-    
-    setCommandHistory(prev => prev.map(item => 
-      item.type === 'welcome' 
-        ? { ...item, content: t.skills.welcomeMessage }
-        : item
-    ))
-  }, [language])
-
-  const handleKeyDown = (e) => {
-    if (e.key === 'Tab') {
-      e.preventDefault()
-      e.stopPropagation()
-      handleTabCompletion()
-    }
-  }
-
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      const command = terminalInput.trim()
-      if (command) {
-        handleCommand(command)
-        setTerminalInput('')
-      } else {
-        setCommandHistory(prev => [
-          ...prev,
-          { 
-            type: 'empty', 
-            timestamp: Date.now(),
-            directory: currentDirectory,
-            id: prev.length > 0 ? Math.max(...prev.map(item => item.id || 0)) + 1 : 1
-          }
-        ])
-      }
-    }
-  }
+  const handleKeyDown = (e) => { if (e.key === 'Tab') { e.preventDefault(); handleTabCompletion() } }
+  const handleKeyPress = (e) => { if (e.key === 'Enter') { handleCommand(terminalInput.trim()); setTerminalInput('') } }
 
   return (
-    <div className="page-container">
-      <section className="skills-section">
-        <div className="container">
-          <div className="terminal-container">
-            {!hasExecutedCommand && (
-              <div className="terminal-welcome">
-              </div>
-            )}
-
-            <div 
-              className="terminal-output"
-              onClick={() => {
-                const input = document.querySelector('.terminal-input');
-                if (input) input.focus();
-              }}
-            >
-              <div className="terminal-content">
-                {commandHistory.map((historyItem) => (
-                  <div key={historyItem.id || historyItem.timestamp} className="terminal-response">
-                    {historyItem.type === 'empty' ? (
-                      <div className="terminal-input-line">
-                        <span className="terminal-prompt">user@portfolio:{historyItem.directory || '~'}$</span>
-                      </div>
-                    ) : historyItem.type === 'welcome' ? (
-                      <div className="welcome-message">{historyItem.content}</div>
-                    ) : (
-                      <>
-                        <div className="terminal-input-line">
-                          <span className="terminal-prompt">user@portfolio:{historyItem.directory || '~'}$</span>
-                          <span className="command-text">{historyItem.command}</span>
-                        </div>
-                        {historyItem.output && historyItem.output.map((output, i) => (
-                          <div key={i} className="output-content">
-                            {output.type === 'help' && (
-                              <div className="help-commands">
-                                {output.output.map((item, idx) => (
-                                  <div key={idx} className="help-command-item">
-                                    <span className="help-command-name">{item.command}</span>
-                                    <span className="help-command-desc">{item.description}</span>
-                                  </div>
-                                ))}
-                              </div>
-                            )}
-                            {output.type === 'skill' && (
-                              <div className="skill-content">{output.content}</div>
-                            )}
-                            {output.type === 'success' && (
-                              <div className="success-content">{output.content}</div>
-                            )}
-                            {output.type === 'file-list' && (
-                              <div className="file-list-content">{output.content}</div>
-                            )}
-                            {output.type === 'error' && (
-                              <div className="error-content">
-                                <div className="error-message">bash: {output.content}: {output.message}</div>
-                                <div className="error-suggestion">{output.suggestion}</div>
-                              </div>
-                            )}
-                          </div>
-                        ))}
-                      </>
-                    )}
-                  </div>
-                ))}
-        
-                <div className="terminal-input-container">
+    <div className="page-container"><section className="skills-section"><div className="container"><div className="terminal-container">
+      <div className="terminal-output" onClick={() => document.querySelector('.terminal-input')?.focus()}>
+        <div className="terminal-content">
+          {commandHistory.map(item => (
+            <div key={item.id} className="terminal-response">
+              {item.type === 'welcome' ? <div className="welcome-message">{item.content}</div> : (
+                <>
                   <div className="terminal-input-line">
-                    <span className="terminal-prompt">user@portfolio:{currentDirectory}$</span>
-                    <input
-                      type="text"
-                      value={terminalInput}
-                      onChange={(e) => setTerminalInput(e.target.value)}
-                      onKeyPress={handleKeyPress}
-                      onKeyDown={handleKeyDown}
-                      className="terminal-input"
-                      autoComplete="off"
-                      autoFocus
-                      spellCheck="false"
-                    />
+                    <span className="terminal-prompt">user@portfolio:{item.directory || '~'}$</span>
+                    {item.command && <span className="command-text">{item.command}</span>}
                   </div>
-                </div>
-              </div>
+                  {item.output?.map((out,i) => (
+                    <div key={i} className="output-content">
+                      {out.type === 'skill' && <div className="skill-content">{out.content}</div>}
+                      {out.type === 'file-list' && <div className="file-list-content">{out.content}</div>}
+                      {out.type === 'error' && <div className="error-content"><div className="error-message">bash: {out.content}: {out.message}</div><div className="error-suggestion">{out.suggestion}</div></div>}
+                    </div>
+                  ))}
+                </>
+              )}
             </div>
-          </div>
+          ))}
+          <div className="terminal-input-container"><div className="terminal-input-line">
+            <span className="terminal-prompt">user@portfolio:{currentDirectory}$</span>
+            <input type="text" value={terminalInput} onChange={e => setTerminalInput(e.target.value)} onKeyDown={handleKeyDown} onKeyPress={handleKeyPress} className="terminal-input" autoComplete="off" autoFocus spellCheck="false"/>
+          </div></div>
         </div>
-      </section>
-    </div>
+      </div>
+    </div></div></section></div>
   )
 }
 
