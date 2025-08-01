@@ -55,7 +55,7 @@ export const translations = {
       },
       responses: {
         frontend: 'As maravilhas que o frontend trás, não há nada que nos possa separar. Tenho experiência em usar HTML, CSS, Javascript, Bootstrap e React',
-        backend: 'O backend tem sido uma tarefa difícil de sincronizar com o frontend, mas quero sempre dar o meu melhor! Eu sei os basicos de PHP, Laravel ( framweork baseada em php) e Filament (framwework baseada em laravel para construção de paineis administrativos) Também tenho conhecimentos em NodeJS.',
+        backend: 'O backend tem sido uma tarefa difícil de sincronizar com o frontend, mas quero sempre dar o meu melhor! Eu sei os basicos de PHP, Laravel ( framweork baseada em php) e Filament (framwework baseada em laravel para construção de paineis administrativos) Também tenho conhecimentos em NodeJS, a tal que me deixa mais confiavel em trabalhar',
         tools: 'Eu sei usar o Git para fazer uploads de projetos no Github ou Gitlab e também tenho conhecimentos basicos sobre o Postman,para fazer deploy de projetos online recentemente tenho usado o vercel com o vercel cli que  é um programa no temrinal que ajuda de uma maneira mais rapida  fazer deployements e atualizações de projetos em desenvolvimento sem precisar de ir ao site.',
         android: 'Durante a minha jornada, aprendi a desenvolver aplicações Android. Principalmente Java no Android Studio e também tenho vindo a explorar React Native e Kotlin',
         database: 'Tenho experiência em trabalhar com Mongodb e SQlite',
