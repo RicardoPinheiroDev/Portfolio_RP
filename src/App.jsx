@@ -23,8 +23,19 @@ function LanguageWrapper() {
         muted 
         loop 
         playsInline
+        controls={false}
+        preload="metadata"
+        webkit-playsinline="true"
+        x-webkit-airplay="deny"
+        onCanPlay={(e) => {
+          e.target.play().catch(() => {
+            // Fallback for browsers that don't support autoplay
+            console.log('Video autoplay blocked');
+          });
+        }}
       >
         <source src={backgroundVideo} type="video/mp4" />
+        Your browser does not support the video tag.
       </video>
       
       <NavbarComponent />
