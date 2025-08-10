@@ -27,12 +27,21 @@ function LanguageWrapper() {
         preload="metadata"
         webkit-playsinline="true"
         x-webkit-airplay="deny"
-        onCanPlay={(e) => {
-          e.target.play().catch(() => {
-            // Fallback for browsers that don't support autoplay
-            console.log('Video autoplay blocked');
-          });
+        onLoadedMetadata={(e) => {
+          // Force play on Opera
+          const playPromise = e.target.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(error => {
+              console.log('Video autoplay failed:', error);
+              // Try again after a short delay for Opera
+              setTimeout(() => {
+                e.target.play().catch(() => console.log('Second attempt failed'));
+              }, 100);
+            });
+          }
         }}
+        onError={(e) => console.log('Video error:', e)}
+        onStalled={(e) => console.log('Video stalled:', e)}
       >
         <source src={backgroundVideo} type="video/mp4" />
         Your browser does not support the video tag.
