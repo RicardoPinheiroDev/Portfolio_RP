@@ -8,6 +8,7 @@ import HomeSection from './components/HomeSection'
 import SkillsSection from './components/SkillsSection'
 import ProjectsSection from './components/ProjectsSection'
 import { translations } from './translations/translations'
+import backgroundVideo from './images/video_01.mp4'
 
 function LanguageWrapper() {
   const { lang } = useParams()
@@ -16,6 +17,16 @@ function LanguageWrapper() {
   
   return (
     <LanguageProvider initialLanguage={lang}>
+      <video 
+        className="video-background"
+        autoPlay 
+        muted 
+        loop 
+        playsInline
+      >
+        <source src={backgroundVideo} type="video/mp4" />
+      </video>
+      
       <NavbarComponent />
 
       <Routes>
