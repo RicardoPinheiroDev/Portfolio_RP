@@ -90,6 +90,14 @@
   text-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
 }
 
+/* Linux-like colored prompt segments */
+.terminal-prompt .prompt-user { color: #8ae234; }
+.terminal-prompt .prompt-at { color: #eeeeec; margin: 0 1px; }
+.terminal-prompt .prompt-host { color: #729fcf; }
+.terminal-prompt .prompt-colon { color: #eeeeec; margin: 0 2px; }
+.terminal-prompt .prompt-path { color: #e9b96e; }
+.terminal-prompt .prompt-symbol { color: #8ae234; margin-left: 2px; }
+
 .terminal-input {
   flex: 1;
   background: transparent;
@@ -161,11 +169,26 @@
   font-family: 'Ubuntu Mono', 'Courier New', 'Monaco', 'Lucida Console', monospace;
 }
 
+/* Subtle focus ring on input when active */
+.terminal-input:focus {
+  outline: none;
+  text-shadow: 0 0 2px rgba(76, 175, 80, 0.3);
+}
+
 .error-content {
   color: #ff6b6b;
   margin: 0.5rem 0;
-  line-height: 1.5;
 }
+
+/* Help output styling */
+.help-commands {
+  font-family: 'Ubuntu Mono', 'Courier New', 'Monaco', 'Lucida Console', monospace;
+  color: #e0e0e0;
+}
+.help-text { color: #9e9e9e; margin: 0.25rem 0; }
+.help-command-item { display: flex; gap: 1rem; margin: 0.125rem 0; }
+.help-command-name { color: #8ae234; min-width: 12ch; display: inline-block; }
+.help-command-desc { color: #d0d0d0; }
 
 .error-message {
   font-family: 'Ubuntu Mono', 'Courier New', 'Monaco', 'Lucida Console', monospace;

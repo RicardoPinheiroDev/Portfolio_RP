@@ -72,13 +72,7 @@ function NavbarComponent() {
               >
                 {t.nav.skills}
               </Nav.Link>
-              <Nav.Link
-                as={Link}
-                to={getNavPath('projects')}
-                className={`nav-link-custom ${isActivePath('projects') ? 'nav-active' : ''}`}
-              >
-                {t.nav.projects}
-              </Nav.Link>
+              { /* Projects link removed: handled inside Skills terminal */ }
               <Dropdown align="end">
                 <Dropdown.Toggle 
                   variant="link" 
@@ -148,14 +142,7 @@ function NavbarComponent() {
             >
               {t.nav.skills}
             </Nav.Link>
-            <Nav.Link
-              as={Link}
-              to={getNavPath('projects')}
-              className={`nav-link-custom ${isActivePath('projects') ? 'nav-active' : ''}`}
-              onClick={handleClose}
-            >
-              {t.nav.projects}
-            </Nav.Link>
+            { /* Projects link removed from offcanvas as well */ }
             <hr className="my-3" />
             <Dropdown className="language-dropdown-offcanvas">
               <Dropdown.Toggle 

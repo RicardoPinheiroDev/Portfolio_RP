@@ -29,12 +29,51 @@ export const translations = {
       noButton: 'Não, obrigado'
     },
     skills: {
-      commandDescriptions: {
-        ls: 'competencias.txt skills.txt frontend.txt backend.txt tools.txt android.txt database.txt desktop-tools.txt'
+      dirName: 'competencias',
+      fileNames: {
+        frontend: 'frontend',
+        backend: 'backend',
+        tools: 'ferramentas',
+        android: 'android',
+        database: 'base-de-dados',
+        desktopTools: 'ferramentas-desktop'
       },
+      welcomeMessage: 'Bem-vindo à secção de competências. Use os comandos no terminal para explorar os meus projetos e competências.',
       errorMessages: {
-        commandNotFound: 'command not found',
-        helpSuggestion: "Digite 'ls' para ver os diretórios disponíveis"
+        commandNotFound: 'comando não encontrado',
+        helpSuggestion: "Digite 'help' para listar os comandos disponíveis",
+        noSuchFileOrDirectory: 'ficheiro ou diretório inexistente',
+        repositoryNotFound: 'repositório não encontrado',
+        targetNotAvailable: 'alvo indisponível',
+        helpTopicNotFound: 'nenhum tópico de ajuda corresponde a'
+      },
+      labels: {
+        title: 'Título',
+        stack: 'Tecnologias',
+        summary: 'Resumo',
+        links: 'Ligações',
+        repo: 'Repositório',
+        demo: 'Demonstração',
+        opening: 'A abrir'
+      },
+      helpLabels: {
+        command: 'Comando',
+        usage: 'Uso',
+        description: 'Descrição',
+        examples: 'Exemplos'
+      },
+      helpTip: "Dica: escreva 'help <comando>' para ver detalhes",
+      help: {
+        ls: { usage: 'ls', description: 'Lista itens no local atual' },
+        cd: { usage: 'cd', description: 'Altera para um diretório diferente' },
+        cat: { usage: 'cat <ficheiro>', description: 'Mostra o conteúdo do ficheiro' },
+        open: { usage: 'open', description: 'Abre o repositório do projeto atual' },
+        clear: { usage: 'clear', description: 'Limpa o terminal' },
+        exit: { usage: 'exit', description: 'Reinicia o terminal para o estado inicial' }
+      },
+      tips: {
+        openDemo: (alias) => `Dica: Execute 'open ${alias} ' para ver a demo`,
+        linksHint: `Dica: Também pode 'cd links' e depois 'open repo' ou 'open demo'`
       },
       responses: {
         frontend: 'Desde que aprendi programação o frontend  foi uma das lados de desenvolvimento que mais me fascinnou,tenho sempre gosto em aprender novas tecnologias. As miinhas experiências no que toca a frontend são React, React native, HTML, CSS, Javascript, Bootstrap e Fillament   ',
@@ -46,6 +85,8 @@ export const translations = {
       }
     },
     projects: {
+      dirName: 'projetos',
+      linksDirName: 'links',
       title: 'Os meus trabalhos',
       subtitle: 'Alguns dos meus trabalhos recentes',
       viewProject: 'Ver Projeto',
@@ -98,9 +139,51 @@ export const translations = {
       noButton: 'No, thanks'
     },
     skills: {
+      dirName: 'skills',
+      fileNames: {
+        frontend: 'frontend',
+        backend: 'backend',
+        tools: 'tools',
+        android: 'android',
+        database: 'database',
+        desktopTools: 'desktop-tools'
+      },
+      welcomeMessage: 'Welcome to the skills section. Use the terminal commands to explore my projects and skills.',
       errorMessages: {
         commandNotFound: 'command not found',
-        helpSuggestion: "Type 'ls' to see available directories"
+        helpSuggestion: "Type 'help' to list available commands",
+        noSuchFileOrDirectory: 'no such file or directory',
+        repositoryNotFound: 'repository not found',
+        targetNotAvailable: 'target not available',
+        helpTopicNotFound: 'no help topics match'
+      },
+      labels: {
+        title: 'Title',
+        stack: 'Stack',
+        summary: 'Summary',
+        links: 'Links',
+        repo: 'Repo',
+        demo: 'Demo',
+        opening: 'Opening'
+      },
+      helpLabels: {
+        command: 'Command',
+        usage: 'Usage',
+        description: 'Description',
+        examples: 'Examples'
+      },
+      helpTip: "Tip: type 'help <command>' for details",
+      help: {
+        ls: { usage: 'ls', description: 'Lists items in the current location' },
+        cd: { usage: 'cd', description: 'Changes to a different directory' },
+        cat: { usage: 'cat <file>', description: 'Shows file contents' },
+        open: { usage: 'open', description: 'Opens the repository of the current project' },
+        clear: { usage: 'clear', description: 'Clears the terminal output' },
+        exit: { usage: 'exit', description: 'Resets the terminal to its initial state' }
+      },
+      tips: {
+        openDemo: (alias) => `Tip: Run 'open ${alias} demo' to view the live demo`,
+        linksHint: `Tip: You can also 'cd links' then 'open repo' or 'open demo'`
       },
       responses: {
         frontend: 'The wonders of frontend are such that nothing can keep us apart. I have experience using HTML, CSS, JavaScript, Bootstrap, and React.',
@@ -112,6 +195,8 @@ export const translations = {
       }      
     },
     projects: {
+      dirName: 'projects',
+      linksDirName: 'links',
       title: 'My work',
       subtitle: 'Some of my recent work',
       viewProject: 'View Project',
