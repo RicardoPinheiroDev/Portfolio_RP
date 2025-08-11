@@ -239,8 +239,37 @@ function SkillsSection() {
         break
       }
       case command === 'help': {
+        const files = Object.values(directories).map(d => `${d}.txt`)
+        const projectAliases = Object.keys(projectsData)
         const list = Object.keys(helpData).map((key) => {
-          const { usage, description } = helpData[key]
+          let { usage, description } = helpData[key]
+          if (key === 'ls') {
+            description = currentDirectory === '~'
+              ? `List directories (available: ${SKILLS_DIR}/, ${PROJECTS_DIR}/)`
+              : isSkillsDirectory(currentDirectory)
+                ? `List files in '${SKILLS_DIR}' (${files.length} files)`
+                : isProjectsRoot(currentDirectory)
+                  ? `List projects (${projectAliases.length} items)`
+                  : isProjectAliasDir(currentDirectory)
+                    ? `List available items in project (info.txt, tech.txt, tips.txt, links/)`
+                    : isProjectLinksDir(currentDirectory)
+                      ? `List available links (repo${Object.keys(projectsData).length ? ', demo' : ''})`
+                      : description
+          }
+          if (key === 'cat') {
+            description = currentDirectory === SKILLS_DIR
+              ? `Print file contents (available: ${files.join(', ')})`
+              : isProjectsRoot(currentDirectory)
+                ? `Show project details (available: ${projectAliases.join(', ')})`
+                : isProjectAliasDir(currentDirectory)
+                  ? `Print item (info.txt | tech.txt | tips.txt)`
+                  : isProjectLinksDir(currentDirectory)
+                    ? `Print link URL (repo | demo)`
+                    : `Print file contents (navigate into '${SKILLS_DIR}' or '${PROJECTS_DIR}' first)`
+          }
+          if (key === 'cd') {
+            description = `Change directory. Use '${SKILLS_DIR}' or '${PROJECTS_DIR}', '..' to go up, '~' to go home`
+          }
           return { key, usage, description }
         })
         response = { type: 'help-list', content: list }
@@ -249,11 +278,50 @@ function SkillsSection() {
       case command.startsWith('help '): {
         const topic = command.split(/\s+/)[1]
         if (helpData[topic]) {
+          const files = Object.values(directories).map(d => `${d}.txt`)
           const detail = { ...helpData[topic] }
-          // Keep translations' description as-is; optionally compute examples per context later if needed
+          // Tailor details to current context
+          if (topic === 'ls') {
+            detail.description = currentDirectory === '~'
+              ? `List directories (available: ${SKILLS_DIR}/, ${PROJECTS_DIR}/)`
+              : isSkillsDirectory(currentDirectory)
+                ? `List files in '${SKILLS_DIR}' (${files.length} files)`
+                : isProjectsRoot(currentDirectory)
+                  ? `List projects (${Object.keys(projectsData).length} items)`
+                  : isProjectAliasDir(currentDirectory)
+                    ? `List available items in project (info, tech, links/)`
+                    : isProjectLinksDir(currentDirectory)
+                      ? `List available links (repo${Object.keys(projectsData).length ? ', demo' : ''})`
+                      : detail.description
+            detail.examples = ['ls']
+          }
+          if (topic === 'cd') {
+            detail.examples = [`cd ${SKILLS_DIR}`, `cd ${PROJECTS_DIR}`, `cd ${PROJECTS_DIR}/project01`, 'cd ..', 'cd ~']
+          }
+          if (topic === 'cat') {
+            detail.description = currentDirectory === SKILLS_DIR
+              ? `Print file contents (available: ${files.join(', ')})`
+              : isProjectsRoot(currentDirectory)
+                ? `Show project details (available: ${Object.keys(projectsData).join(', ')})`
+                : isProjectAliasDir(currentDirectory)
+                  ? `Print item (info | tech | links)`
+                  : isProjectLinksDir(currentDirectory)
+                    ? `Print link URL (repo | demo)`
+                    : `Print file contents (navigate into '${SKILLS_DIR}' or '${PROJECTS_DIR}' first)`
+            const exampleFiles = files.slice(0, 3)
+            detail.examples = currentDirectory === SKILLS_DIR
+              ? ['ls', ...exampleFiles.map(f => `cat ${f}`)].concat(files.length > 3 ? ['...'] : [])
+              : isProjectsRoot(currentDirectory)
+                ? ['ls', ...Object.keys(projectsData).slice(0,3).map(a => `cat ${a}`)].concat(Object.keys(projectsData).length > 3 ? ['...'] : [])
+                : isProjectAliasDir(currentDirectory)
+                  ? ['ls', 'cat info.txt', 'cat tech.txt', 'cat tips.txt']
+                  : isProjectLinksDir(currentDirectory)
+                    ? ['ls', 'cat repo', 'cat demo']
+                    : [`cd ${SKILLS_DIR}`, 'ls', files[0] ? `cat ${files[0]}` : 'cat <file>']
+          }
           response = { type: 'help-detail', content: detail, command: topic }
         } else {
-          response = { type: 'error', content: command, message: `${t.skills.errorMessages.helpTopicNotFound} '${topic}'`, suggestion: t.skills.errorMessages.helpSuggestion }
+          response = { type: 'error', content: command, message: `no help topics match '${topic}'`, suggestion: "Type 'help' to list available commands" }
         }
         break
       }
@@ -427,9 +495,6 @@ function SkillsSection() {
                               <span className="help-command-desc">{c.description}</span>
                             </div>
                           ))}
-                          {t?.skills?.helpTip && (
-                            <div className="help-tip">{t.skills.helpTip}</div>
-                          )}
                         </div>
                       )}
                       {out.type === 'help-detail' && (

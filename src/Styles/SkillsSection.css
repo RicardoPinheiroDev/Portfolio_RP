@@ -466,41 +466,55 @@
   touch-action: manipulation;
 }
 
-/* Mobile optimizations - FIXED */
+/* Mobile optimizations */
 @media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+  }
+  
   .page-container {
     padding: 0;
     margin: 0;
+    width: 100%;
     overflow-x: hidden;
-    width: 100vw;
   }
   
   .skills-section {
     padding: 0;
     margin: 0;
-    overflow-x: hidden;
     width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
   }
   
   .container {
     padding: 0;
-    margin: 0;
+    margin: 0 auto;
     max-width: 100%;
     width: 100%;
+    box-sizing: border-box;
   }
   
   .terminal-container {
-    /* Fixed: Added proper top margin to account for navbar */
-    margin: 6rem auto 0.5rem auto;
-    border-radius: 6px;
-    max-width: 95vw;
-    width: 95vw;
-    /* Fixed: Changed height calculation to account for navbar (assume ~80px navbar) */
-    height: calc(100vh - 18rem);
-    max-height: calc(100vh - 18rem);
-    min-height: 300px;
+    margin: 0;
+    border-radius: 0;
+    width: 100vw;
+    max-width: 100vw;
+    height: 100vh;
+    min-height: 100vh;
+    max-height: none;
     border-top: 15px solid #2a2a2a;
     overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-sizing: border-box;
+    z-index: 1000;
   }
 
   .terminal-help {
@@ -528,9 +542,12 @@
   }
 
   .terminal-content {
-    padding: 0.5rem 0.75rem;
-    max-height: calc(100% - 60px);
+    padding: 1rem;
+    height: calc(100% - 70px);
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .terminal-input-container {
@@ -545,8 +562,11 @@
   }
 
   .output-content {
-    font-size: 0.7rem;
-    line-height: 1.3;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    word-break: break-word;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
   }
 
   .terminal-input-line {
