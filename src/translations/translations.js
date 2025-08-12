@@ -76,8 +76,8 @@ export const translations = {
         linksHint: `Dica: Também pode 'cd links' e depois 'open repo' ou 'open demo'`
       },
       responses: {
-        frontend: 'Desde que aprendi programação o frontend  foi uma das lados de desenvolvimento que mais me fascinnou,tenho sempre gosto em aprender novas tecnologias. As miinhas experiências no que toca a frontend são React, React native, HTML, CSS, Javascript, Bootstrap e Fillament   ',
-        backend: 'O backend tem sido uma tarefa desafiante para sincronizar com o frontend, mas dou sempre o meu melhor! Ultimamente tenho me focado mais em Node.js pois é uma das linugagens nas quias me sinto mais confortavel em trabalhar.',
+        frontend: 'Desde que aprendi programação o frontend  foi uma das lados de desenvolvimento que mais me fascinnou,tenho sempre gosto em aprender novas tecnologias. As miinhas experiências no que toca a frontend são React, HTML, CSS, Javascript, Bootstrap e Fillament   ',
+        backend: 'O backend tem sido uma tarefa desafiante para sincronizar com o frontend, mas quero dar sempre o meu melhor! Eu tenho conhecimentos basicos em Php e Laravel ( Framework baseada em Php). Ultimamente tenho me orientado mais em NodeJS pois é uma linguagem onde me sinto mais confortavel em trabalhar ',
         tools: 'Eu sei usar o Git para fazer uploads de projetos no Github ou Gitlab, tenho conhecimentos basicos sobre o Postman. Para fazer deploy de projetos online recentemente tenho usado o vercel com o vercel cli que  é um programa no temrinal que ajuda de uma maneira mais rapida  fazer deployements e atualizações de projetos em desenvolvimento sem precisar de ir ao site.',
         android: 'Durante a minha jornada, aprendi a desenvolver aplicações Android. Principalmente Java no Android Studio e também tenho vindo a explorar React Native e Kotlin',
         database: 'Tenho experiência em trabalhar com Mongodb e SQlite',
@@ -186,8 +186,8 @@ export const translations = {
         linksHint: `Tip: You can also 'cd links' then 'open repo' or 'open demo'`
       },
       responses: {
-        frontend: 'The wonders of frontend are such that nothing can keep us apart. I have experience using HTML, CSS, JavaScript, Bootstrap, and React.',
-        backend: 'The backend has been a challenging task to synchronize with the frontend, but I always give it my best! I know the basics of PHP, Laravel (a framework based on PHP), and Filament (a framework based on Laravel for building admin panels). I also have knowledge of Node.js which I am more comfortable with.',
+        frontend: 'The wonders of frontend are such that nothing can keep us apart. I have experience using  React, HTML, CSS, Javascript, Bootstrap and Fillament   ',
+        backend: 'The backend has been a challenging task to synchronize with the frontend, but I always give my best to learn new technologies! I know the basics of PHP, Laravel (a framework based on PHP), and  I also have knowledge of Node.js which I am more comfortable working with',         
         tools: 'I know how to use Git, which gives me the advantage of uploading projects to GitHub and GitLab. I also have some basic knowledge of Postman. For deploying projects online, I have started to use Vercel with the Vercel CLI which is a command line tool to deploy and update projects quickly.',
         android: 'As for mobile development, I have knowledge of programming in Java using Android Studio. Recently, I have also been learning the basics of React Native for cross-platform development which I am very curious to explore more.',
         database: 'I have experience working with databases such as MongoDB and SQLite.',
