@@ -32,8 +32,7 @@ function SkillsSection() {
   const isProjectsDirectory = (dirName) => dirName === PROJECTS_DIR
   const isProjectsRoot = (dirName) => dirName === PROJECTS_DIR
   const isProjectAliasDir = (dirName) => dirName.startsWith(`${PROJECTS_DIR}/`) && dirName.split('/').length === 2
-  const isProjectLinksDir = (dirName) => dirName.startsWith(`${PROJECTS_DIR}/`) && dirName.endsWith(`/${LINKS_DIR}`) && dirName.split('/').length === 3
-  const getProjectAliasFromDir = (dirName) => (isProjectAliasDir(dirName) ? dirName.split('/')[1] : (isProjectLinksDir(dirName) ? dirName.split('/')[1] : null))
+  const getProjectAliasFromDir = (dirName) => (isProjectAliasDir(dirName) ? dirName.split('/')[1] : null)
 
   // Derive projects from translations Projects page
   const projectsData = useMemo(() => {
@@ -111,21 +110,17 @@ function SkillsSection() {
         break
       }
       case command === 'ls' && isProjectAliasDir(currentDirectory): {
-        const items = ['info.txt', 'tech.txt', `${LINKS_DIR}/`]
-        response = { type: 'file-list', content: items.join('  ') }
-        break
-      }
-      case command === 'ls' && isProjectLinksDir(currentDirectory): {
         const alias = getProjectAliasFromDir(currentDirectory)
         const p = projectsData[alias]
-        const items = [p?.links?.repo ? 'repo' : null, p?.links?.demo ? 'demo' : null].filter(Boolean)
-        response = { type: 'file-list', content: items.join('  ') || '' }
+        const items = ['info.txt']
+        if (p?.links?.repo) items.push('repo')
+        if (p?.links?.demo) items.push('demo')
+        response = { type: 'file-list', content: items.join('  ') }
         break
       }
 
       case command.startsWith('cd '): {
         const rawTarget = command.slice(3).trim()
-        // Normalize target by removing trailing slashes (so 'links/' works like 'links')
         const target = rawTarget.replace(/\/+$/, '')
         if (target === '~' || target === '') setCurrentDirectory('~')
         else if (target === '..') {
@@ -140,7 +135,6 @@ function SkillsSection() {
         else if (isProjectsDirectory(target)) setCurrentDirectory(PROJECTS_DIR)
         else if (currentDirectory === '~' && target === PROJECTS_DIR) setCurrentDirectory(PROJECTS_DIR)
         else if (isProjectsRoot(currentDirectory) && projectsData[target]) setCurrentDirectory(`${PROJECTS_DIR}/${target}`)
-        else if (isProjectAliasDir(currentDirectory) && (target === LINKS_DIR)) setCurrentDirectory(`${currentDirectory}/${LINKS_DIR}`)
         else if (target.startsWith(`${PROJECTS_DIR}/`)) setCurrentDirectory(target)
         else response = { type: 'error', content: command, message: t.skills.errorMessages.noSuchFileOrDirectory }
         return
@@ -183,16 +177,14 @@ function SkillsSection() {
             ]
             response = { type: 'text', content: lines.join('\n') }
           } else if (file === 'tech.txt') {
-            response = { type: 'text', content: p?.stack?.join(', ') || '-' }
+            response = { type: 'error', content: command, message: t.skills.errorMessages.noSuchFileOrDirectory }
+          } else if (file === 'repo') {
+            response = { type: 'text', content: p?.links?.repo || '-' }
+          } else if (file === 'demo') {
+            response = { type: 'text', content: p?.links?.demo || '-' }
           } else {
             response = { type: 'error', content: command, message: t.skills.errorMessages.noSuchFileOrDirectory }
           }
-        } else if (isProjectLinksDir(currentDirectory)) {
-          const alias = getProjectAliasFromDir(currentDirectory)
-          const p = projectsData[alias]
-          if (file === 'repo') response = { type: 'text', content: p?.links?.repo || '-' }
-          else if (file === 'demo') response = { type: 'text', content: p?.links?.demo || '-' }
-          else response = { type: 'error', content: command, message: t.skills.errorMessages.noSuchFileOrDirectory }
         } else {
           response = { type: 'error', content: command, message: t.skills.errorMessages.noSuchFileOrDirectory }
         }
@@ -205,11 +197,11 @@ function SkillsSection() {
         let alias = parts[0]
         let kind = parts[1] || 'repo'
         // Allow context-based open when inside a project dir
-        if (!alias && (isProjectAliasDir(currentDirectory) || isProjectLinksDir(currentDirectory))) {
+        if (!alias && (isProjectAliasDir(currentDirectory))) {
           alias = getProjectAliasFromDir(currentDirectory)
           kind = 'repo'
         }
-        if ((alias === 'repo' || alias === 'demo') && (isProjectAliasDir(currentDirectory) || isProjectLinksDir(currentDirectory))) {
+        if ((alias === 'repo' || alias === 'demo') && (isProjectAliasDir(currentDirectory))) {
           kind = alias; alias = getProjectAliasFromDir(currentDirectory)
         }
         const p = projectsData[alias]
@@ -217,8 +209,10 @@ function SkillsSection() {
         const url = kind === 'demo' ? p.links.demo : p.links.repo
         if (!url) { response = { type: 'error', content: command, message: t.skills.errorMessages.targetNotAvailable }; break }
         openExternal(url)
-        response = { type: 'text', content: `${t.skills.labels.opening} ${kind}: ${url}` }
-        break
+        setCommandHistory(prev => [...prev, { ...newHistoryItem, output: [] }])
+        setHasExecutedCommand(true)
+        setHistoryIndex(null)
+        return
       }
 
       case command === 'pwd': {
@@ -248,12 +242,10 @@ function SkillsSection() {
               ? `List directories (available: ${SKILLS_DIR}/, ${PROJECTS_DIR}/)`
               : isSkillsDirectory(currentDirectory)
                 ? `List files in '${SKILLS_DIR}' (${files.length} files)`
-                : isProjectsRoot(currentDirectory)
+              : isProjectsRoot(currentDirectory)
                   ? `List projects (${projectAliases.length} items)`
                   : isProjectAliasDir(currentDirectory)
-                    ? `List available items in project (info.txt, tech.txt, tips.txt, links/)`
-                    : isProjectLinksDir(currentDirectory)
-                      ? `List available links (repo${Object.keys(projectsData).length ? ', demo' : ''})`
+                    ? `List available items in project (info.txt, repo${Object.keys(projectsData).length ? ', demo' : ''})`
                       : description
           }
           if (key === 'cat') {
@@ -262,9 +254,7 @@ function SkillsSection() {
               : isProjectsRoot(currentDirectory)
                 ? `Show project details (available: ${projectAliases.join(', ')})`
                 : isProjectAliasDir(currentDirectory)
-                  ? `Print item (info.txt | tech.txt | tips.txt)`
-                  : isProjectLinksDir(currentDirectory)
-                    ? `Print link URL (repo | demo)`
+                  ? `Print item (info.txt | repo | demo)`
                     : `Print file contents (navigate into '${SKILLS_DIR}' or '${PROJECTS_DIR}' first)`
           }
           if (key === 'cd') {
@@ -289,9 +279,7 @@ function SkillsSection() {
                 : isProjectsRoot(currentDirectory)
                   ? `List projects (${Object.keys(projectsData).length} items)`
                   : isProjectAliasDir(currentDirectory)
-                    ? `List available items in project (info, tech, links/)`
-                    : isProjectLinksDir(currentDirectory)
-                      ? `List available links (repo${Object.keys(projectsData).length ? ', demo' : ''})`
+                    ? `List available items in project (info, repo${Object.keys(projectsData).length ? ', demo' : ''})`
                       : detail.description
             detail.examples = ['ls']
           }
@@ -304,9 +292,7 @@ function SkillsSection() {
               : isProjectsRoot(currentDirectory)
                 ? `Show project details (available: ${Object.keys(projectsData).join(', ')})`
                 : isProjectAliasDir(currentDirectory)
-                  ? `Print item (info | tech | links)`
-                  : isProjectLinksDir(currentDirectory)
-                    ? `Print link URL (repo | demo)`
+                  ? `Print item (info | repo | demo)`
                     : `Print file contents (navigate into '${SKILLS_DIR}' or '${PROJECTS_DIR}' first)`
             const exampleFiles = files.slice(0, 3)
             detail.examples = currentDirectory === SKILLS_DIR
@@ -314,9 +300,7 @@ function SkillsSection() {
               : isProjectsRoot(currentDirectory)
                 ? ['ls', ...Object.keys(projectsData).slice(0,3).map(a => `cat ${a}`)].concat(Object.keys(projectsData).length > 3 ? ['...'] : [])
                 : isProjectAliasDir(currentDirectory)
-                  ? ['ls', 'cat info.txt', 'cat tech.txt', 'cat tips.txt']
-                  : isProjectLinksDir(currentDirectory)
-                    ? ['ls', 'cat repo', 'cat demo']
+                  ? ['ls', 'cat info.txt', 'cat repo', 'cat demo']
                     : [`cd ${SKILLS_DIR}`, 'ls', files[0] ? `cat ${files[0]}` : 'cat <file>']
           }
           response = { type: 'help-detail', content: detail, command: topic }
@@ -336,9 +320,9 @@ function SkillsSection() {
   }
 
   const handleTabCompletion = () => {
-    const input = terminalInput.trim(); let prefix = '', suggestions = []
+    const input = terminalInput; let prefix = '', suggestions = []
     if (input.includes(' ')) {
-      const [cmd, argRaw] = input.split(/\s+(.+)/); const arg = argRaw || ''
+      const [cmd, argRaw] = input.split(/\s+(.+)/); const arg = argRaw ?? ''
       const lowerArg = arg.toLowerCase()
       if (cmd === 'cd') {
         if (currentDirectory === '~') {
@@ -351,8 +335,7 @@ function SkillsSection() {
           }
           suggestions = [`${SKILLS_DIR}/`, `${PROJECTS_DIR}/`]
         } else if (isProjectsRoot(currentDirectory)) suggestions = [...Object.keys(projectsData), '..']
-        else if (isProjectAliasDir(currentDirectory)) suggestions = ['links/', '..']
-        else if (isProjectLinksDir(currentDirectory)) suggestions = ['..']
+        else if (isProjectAliasDir(currentDirectory)) suggestions = ['..']
         else suggestions = ['~','..']
         prefix = 'cd '
       }
@@ -365,11 +348,11 @@ function SkillsSection() {
           // Autocomplete skills files
           suggestions = Object.values(directories).map(d => `${d}.txt`)
         } else if (isProjectAliasDir(currentDirectory)) {
-          suggestions = ['info.txt','tech.txt','tips.txt',`${LINKS_DIR}/`]
-        } else if (isProjectLinksDir(currentDirectory)) {
           const alias = getProjectAliasFromDir(currentDirectory)
           const p = projectsData[alias]
-          suggestions = [p?.links?.repo ? 'repo' : null, p?.links?.demo ? 'demo' : null].filter(Boolean)
+          suggestions = ['info.txt']
+          if (p?.links?.repo) suggestions.push('repo')
+          if (p?.links?.demo) suggestions.push('demo')
         }
         prefix = 'ls '
       }
@@ -382,18 +365,18 @@ function SkillsSection() {
         } else if (isProjectsRoot(currentDirectory)) {
           suggestions = Object.keys(projectsData)
         } else if (isProjectAliasDir(currentDirectory)) {
-          suggestions = ['info.txt','tech.txt']
-        } else if (isProjectLinksDir(currentDirectory)) {
           const alias = getProjectAliasFromDir(currentDirectory)
           const p = projectsData[alias]
-          suggestions = [p?.links?.repo ? 'repo' : null, p?.links?.demo ? 'demo' : null].filter(Boolean)
+          suggestions = ['info.txt']
+          if (p?.links?.repo) suggestions.push('repo')
+          if (p?.links?.demo) suggestions.push('demo')
         }
         prefix = 'cat '
       }
       if (cmd === 'open') {
         if (isProjectsRoot(currentDirectory)) {
           suggestions = Object.keys(projectsData)
-        } else if (isProjectAliasDir(currentDirectory) || isProjectLinksDir(currentDirectory)) {
+        } else if (isProjectAliasDir(currentDirectory)) {
           const alias = getProjectAliasFromDir(currentDirectory)
           const p = projectsData[alias]
           suggestions = [p?.links?.repo ? 'repo' : null, p?.links?.demo ? 'demo' : null].filter(Boolean)

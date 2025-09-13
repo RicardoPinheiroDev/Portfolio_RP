@@ -1,11 +1,9 @@
 .terminal-container {
-  width: 100%;
-  max-width: 900px;
-  margin: 2rem auto;
+  width: min(900px, 96vw);
+  max-width: 96vw;
+  margin: clamp(1rem, 5vh, 3rem) auto;
   background: #1a1a1a;
   border: 1px solid #333;
-  height: 600px;
-  min-height: 400px;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -18,6 +16,15 @@
   border-radius: 8px;
   border-top: 20px solid #2a2a2a;
   box-shadow: 0 0 0 1px #444, 0 8px 32px rgba(0, 0, 0, 0.3);
+  min-height: 500px;
+  height: clamp(500px, 60vh, 750px);
+}
+
+.terminal-output {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  min-height: 0;
 }
 
 .terminal-container::before {
@@ -31,6 +38,19 @@
   border-radius: 50%;
   box-shadow: 20px 0 0 #ffbd2e, 40px 0 0 #27c93f;
   z-index: 11;
+}
+
+.terminal-container::after {
+  content: 'Terminal';
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #cfcfcf;
+  font-size: 12px;
+  letter-spacing: 0.4px;
+  z-index: 12;
+  opacity: 0.8;
 }
 
 
@@ -213,15 +233,16 @@
   flex-direction: column;
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 0.5rem 1rem;
   scroll-behavior: smooth;
   background: rgba(0, 0, 0, 0.2);
-  background-image: 
+  background-image:
     linear-gradient(rgba(50, 50, 50, 0.1) 1px, transparent 1px),
     linear-gradient(90deg, rgba(50, 50, 50, 0.1) 1px, transparent 1px);
   background-size: 20px 20px;
-  scrollbar-width: thin;
-  scrollbar-color: #333 #1a1a1a;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   min-height: 0;
 }
 
@@ -649,8 +670,9 @@
   .terminal-content {
     padding: 0.25rem 0.5rem;
     -webkit-overflow-scrolling: touch;
-    max-height: calc(100% - 70px);
+    max-height: none;
     overflow-y: auto;
+    overflow-x: hidden;
     flex: 1;
   }
 
@@ -864,4 +886,27 @@
   .terminal-input {
     font-size: 0.7rem;
   }
+}
+
+.terminal-container {
+  min-height: 500px;
+}
+
+.terminal-output {
+  flex: 1;
+  min-height: 0;
+}
+
+.terminal-content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.terminal-content::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }

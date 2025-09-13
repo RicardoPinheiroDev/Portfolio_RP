@@ -2,8 +2,8 @@ export const translations = {
   pt: {
     nav: {
       home: 'Início',
-      skills: 'Competências',
-      projects: 'Projetos',
+      skills: 'My Stuff',
+      projects: 'My Stuff',
       language: 'Idioma',
       selectLanguage: 'Selecionar Idioma',
       portuguese: 'Português',
@@ -102,7 +102,7 @@ export const translations = {
         {
           id: 'projectEstagio',
           title: 'Projeto Estagio Ctesp',
-          description: 'Plataforma de gestão e domínios com área de cliente',
+          description: 'Plataforma de gestão para alojamentos de websites dos clientes da DigiUP',
           tech: ['PHP', 'Laravel', 'MySQL'],
           link: 'https://github.com/RicardoPinheiroDev/8220611_CTESP_Estagio_DWDM_2025',
         }
@@ -112,18 +112,16 @@ export const translations = {
   en: {
     nav: {
       home: 'Home',
-      skills: 'Skills',
-      projects: 'Projects',
+      skills: 'My Stuff',
+      projects: 'My Stuff',
       language: 'Language',
       selectLanguage: 'Select Language',
       portuguese: 'Portuguese',
       english: 'English'
     },
-    routes: {
-      home: 'home',
-      skills: 'skills',
-      projects: 'projects'
-    },
+     param($m)
+    ($m.Value -replace "skills:\s*'[^']*'","skills: 'competencias'" -replace "projects:\s*'[^']*'","projects: 'projetos'")
+,
     home: {
       greeting: 'Hello',
       intro: 'My name is Richard Pinewood, I am a junior web developer who likes to use creativity to develop innovative solutions for full stack applications.',
