@@ -16,7 +16,7 @@ export const translations = {
     },
     home: {
       greeting: 'Olá',
-      intro: 'Chamo-me Ricardo Pinheiro e sou Programador Web Júnior, focado no desenvolvimento de soluções full-stack robustas e escaláveis.',
+      intro: 'Chamo-me Ricardo Pinheiro e sou um Programador Web Júnior focado no desenvolvimento de soluções full-stack robustas e escaláveis.',
       downloadCV: 'Descarregar CV',
       cvFileName: 'CV_RicardoPinheiro.pdf',
       expertiseTitle: 'Competências e Tecnologias',
