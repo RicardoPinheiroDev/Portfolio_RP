@@ -1,3 +1,4 @@
+/* Global layout */
 #root {
   width: 100%;
   margin: 0;
@@ -5,57 +6,22 @@
   position: relative;
 }
 
-.video-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -2;
-  opacity: 0.4;
-  pointer-events: none;
-  /* Opera specific fixes */
-  -o-object-fit: cover;
-  /* Webkit fixes for mobile */
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
+/* Animated gradient background (replaces video) */
+html, body {
+  min-height: 100%;
 }
-
-/* Mobile optimizations for video background */
-@media (max-width: 768px) {
-  .video-background {
-    opacity: 0.3;
-    /* Reduce quality on mobile for better performance */
-    image-rendering: optimizeSpeed;
-    image-rendering: -webkit-optimize-contrast;
-  }
-}
-
-/* Opera specific fixes */
-@supports (-webkit-appearance: none) {
-  .video-background {
-    will-change: transform;
-  }
-}
-
-/* Check for Opera specifically */
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
-  .video-background {
-    opacity: 0.5;
-    /* Force hardware acceleration on Opera */
-    transform: translate3d(0, 0, 0);
-    -webkit-transform: translate3d(0, 0, 0);
-  }
-}
-
-
-
 
 body {
-  background-color: transparent !important;
+  /* Sleek animated gradient */
+  background: linear-gradient(120deg, #06121f, #0a1a33, #072235, #0a293f);
+  background-size: 300% 300%;
+  animation: bgGradientShift 22s ease infinite;
+}
+
+@keyframes bgGradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 #root {
@@ -63,9 +29,54 @@ body {
   min-height: 100vh;
 }
 
+/* Floating glow blobs (site-wide) */
+.bg-floats {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.bg-floats .float {
+  position: absolute;
+  width: 45vw;
+  height: 45vw;
+  max-width: 520px;
+  max-height: 520px;
+  min-width: 220px;
+  min-height: 220px;
+  border-radius: 50%;
+  opacity: 0.18;
+  filter: blur(35px) saturate(120%);
+  background:
+    radial-gradient(circle at 30% 30%, rgba(0, 212, 255, 0.65), rgba(0, 212, 255, 0) 60%),
+    radial-gradient(circle at 70% 70%, rgba(91, 33, 182, 0.45), rgba(91, 33, 182, 0) 50%);
+  animation: floaty var(--dur, 24s) ease-in-out infinite;
+}
+
+@keyframes floaty {
+  0%   { transform: translate3d(-6px, 0, 0) scale(1); }
+  50%  { transform: translate3d(12px, -28px, 0) scale(1.04); }
+  100% { transform: translate3d(-6px, 0, 0) scale(1); }
+}
+
+.bg-floats .f1 { top: 8%;   left: -10%;           --dur: 22s; }
+.bg-floats .f2 { top: 58%;  left: 4%;             --dur: 28s; }
+.bg-floats .f3 { top: -10%; right: -12%;          --dur: 26s; }
+.bg-floats .f4 { bottom: -10%; right: 6%;         --dur: 24s; }
+.bg-floats .f5 { top: 28%;  left: 34%; opacity: .12; width: 32vw; height: 32vw; --dur: 30s; }
+.bg-floats .f6 { top: 65%;  left: 70%; opacity: .14; width: 26vw; height: 26vw; --dur: 32s; }
+
+@media (max-width: 768px) {
+  .bg-floats .float { opacity: 0.14; filter: blur(28px); }
+  .bg-floats .f1 { left: -18%; }
+  .bg-floats .f3 { right: -20%; }
+}
+
 .main-content {
-  margin-top: 70px;
-  padding: 1rem;
+  margin-top: 0; /* avoid exposing body gradient as a band */
+  padding: 70px 1rem 1rem; /* offset for fixed navbar */
   color: #ffffff;
   display: flex;
   justify-content: center;
@@ -206,6 +217,20 @@ body {
   margin: 0;
   overflow-x: hidden;
   background: rgba(0, 0, 0, 0.6);
+}
+
+/* Smoothly blend the top of the page content with the navbar area
+   to avoid a visible blue band just under the navbar */
+.page-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 24px;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0));
+  z-index: 2;
 }
 
 .page-container .skills-section {

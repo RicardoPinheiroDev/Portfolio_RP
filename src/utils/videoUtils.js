@@ -25,13 +25,10 @@ export const getVideoDuration = async (ffmpeg, file) => {
   const inputName = 'input_video.mp4';
   
   try {
-    // Write the file to FFmpeg's virtual filesystem
     ffmpeg.FS('writeFile', inputName, await fetchFile(file));
     
-    // Run FFprobe to get metadata
     await ffmpeg.run('-i', inputName, '-f', 'ffmetadata', 'metadata.txt');
     
-    // Read and parse the metadata
     const metadata = ffmpeg.FS('readFile', 'metadata.txt').toString();
     const durationMatch = metadata.match(/Duration: (\d+):(\d+):([\d.]+)/);
     
@@ -49,7 +46,6 @@ export const getVideoDuration = async (ffmpeg, file) => {
     
     return hours * 3600 + minutes * 60 + seconds;
   } catch (error) {
-    // Clean up on error
     try {
       ffmpeg.FS('unlink', inputName);
       ffmpeg.FS('unlink', 'metadata.txt');
@@ -66,18 +62,16 @@ export const createSeamlessLoop = async (ffmpeg, file, fadeDuration = 1) => {
   const outputName = 'output_loop.mp4';
   
   try {
-    // Get video duration
+   
     const duration = await getVideoDuration(ffmpeg, file);
-    const offset = Math.max(0.1, duration - fadeDuration); // Ensure offset is at least 0.1s
+    const offset = Math.max(0.1, duration - fadeDuration); 
     
     if (offset <= 0) {
       throw new Error('Video is too short for the specified fade duration');
     }
     
-    // Write the input file
     ffmpeg.FS('writeFile', inputName, await fetchFile(file));
     
-    // Create seamless loop with crossfade
     await ffmpeg.run(
       '-i', inputName,
       '-filter_complex', 
@@ -92,7 +86,6 @@ export const createSeamlessLoop = async (ffmpeg, file, fadeDuration = 1) => {
       outputName
     );
     
-    // Read the result
     const data = ffmpeg.FS('readFile', outputName);
     const blob = new Blob([data.buffer], { type: 'video/mp4' });
     
@@ -104,7 +97,7 @@ export const createSeamlessLoop = async (ffmpeg, file, fadeDuration = 1) => {
     };
     
   } finally {
-    // Clean up
+
     try {
       ffmpeg.FS('unlink', inputName);
       ffmpeg.FS('unlink', outputName);

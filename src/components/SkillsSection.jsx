@@ -273,6 +273,9 @@ function SkillsSection() {
             const dirs = [SHOW_SKILLS ? SKILLS_DIR : null, PROJECTS_DIR].filter(Boolean).join(joinOr)
             description = rep(hl?.cd?.template, { dirs }) || `Change directory. Use '${dirs}', '..' to go up, '~' to go home`
           }
+          if (key === 'open') {
+            usage = 'open <repo>'
+          }
           return { key, usage, description }
         })
         response = { type: 'help-list', content: list }
@@ -296,7 +299,8 @@ function SkillsSection() {
             detail.examples = ['ls']
           }
           if (topic === 'cd') {
-            detail.examples = [SHOW_SKILLS ? `cd ${SKILLS_DIR}` : null, `cd ${PROJECTS_DIR}`, `cd ${PROJECTS_DIR}/project01`, 'cd ..', 'cd ~'].filter(Boolean)
+            const sampleAlias = Object.keys(projectsData)[0] || '<alias>'
+            detail.examples = [SHOW_SKILLS ? `cd ${SKILLS_DIR}` : null, `cd ${PROJECTS_DIR}`, `cd ${PROJECTS_DIR}/${sampleAlias}` , 'cd ..', 'cd ~'].filter(Boolean)
           }
           if (topic === 'cat') {
             detail.description = currentDirectory === SKILLS_DIR
@@ -316,6 +320,13 @@ function SkillsSection() {
                 : isProjectAliasDir(currentDirectory)
                   ? ['ls', 'cat info.txt', 'cat repo', 'cat demo']
                     : [SHOW_SKILLS ? `cd ${SKILLS_DIR}` : `cd ${PROJECTS_DIR}`, 'ls', isProjectsRoot(currentDirectory) ? (Object.keys(projectsData)[0] ? `cat ${Object.keys(projectsData)[0]}` : 'cat <file>') : (files[0] ? `cat ${files[0]}` : 'cat <file>')]
+          }
+          if (topic === 'open') {
+            detail.usage = 'open <repo>'
+            const sample = Object.keys(projectsData)[0] || '<alias>'
+            detail.examples = isProjectAliasDir(currentDirectory)
+              ? ['open repo', 'open demo']
+              : [`open ${sample}`, `open ${sample} demo`]
           }
           response = { type: 'help-detail', content: detail, command: topic }
         } else {
@@ -359,7 +370,6 @@ function SkillsSection() {
         } else if (isProjectsRoot(currentDirectory)) {
           suggestions = Object.keys(projectsData)
         } else if (isSkillsDirectory(currentDirectory)) {
-          // Autocomplete skills files
           suggestions = Object.values(directories).map(d => `${d}.txt`)
         } else if (isProjectAliasDir(currentDirectory)) {
           const alias = getProjectAliasFromDir(currentDirectory)

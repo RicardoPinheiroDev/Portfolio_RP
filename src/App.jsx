@@ -5,24 +5,28 @@ import NavbarComponent from './components/Navbar'
 import AudioPlayer from './components/AudioPlayer'
 import { LanguageProvider } from './context/LanguageContext'
 import HomeSection from './components/HomeSection'
-import VideoBackground from './components/VideoBackground'
 import SkillsSection from './components/SkillsSection'
+import BackgroundFloats from './components/BackgroundFloats'
 import { translations } from './translations/translations'
-import { getRouteKeyFromPath } from './utils/routeUtils'
-import backgroundVideo from './images/video_01.mp4'
 
 function LanguageWrapper() {
   const { lang } = useParams()
   const location = useLocation()
   const routes = translations[lang]?.routes || translations.pt.routes
   const audioPlayerRef = useRef()
-  const routeKey = getRouteKeyFromPath(lang, location.pathname)
+  
+  // Scroll to top on route change to avoid persisting scroll between tabs
+  useEffect(() => {
+    try {
+      window.scrollTo({ top: 0, behavior: 'auto' })
+    } catch {
+      window.scrollTo(0, 0)
+    }
+  }, [location.pathname])
   
   return (
     <LanguageProvider initialLanguage={lang}>
-      {routeKey === 'home' && (
-        <VideoBackground src={backgroundVideo} />
-      )}
+      <BackgroundFloats />
       
       <NavbarComponent />
 

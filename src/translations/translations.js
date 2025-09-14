@@ -16,18 +16,18 @@ export const translations = {
     },
     home: {
       greeting: 'Olá',
-      intro: 'Chamo-me Ricardo Pinheiro e sou um Programador Web Júnior, focado no desenvolvimento de soluções full-stack robustas e escaláveis',
+      intro: 'Chamo-me Ricardo Pinheiro e sou Programador Web Júnior, focado no desenvolvimento de soluções full-stack robustas e escaláveis.',
       downloadCV: 'Descarregar CV',
       cvFileName: 'CV_RicardoPinheiro.pdf',
       expertiseTitle: 'Competências e Tecnologias',
-      expertiseIntro: 'Estas são algumas tecnologias e ferramentas com que trabalho no dia a dia.',
+      expertiseIntro: 'Estas são algumas das tecnologias e ferramentas que utilizo no dia a dia.',
       expertise: {
         frontend: ['JavaScript', 'React', 'HTML', 'CSS', 'Bootstrap', 'Filament'],
-        backend: ['PHP', 'Laravel', 'Node.js', 'Express'],
+        backend: ['PHP', 'Laravel', 'Node.js'],
         mobile: ['Java', 'React Native'],
         desktop: ['Tauri'],
-        ferramentas: ['Git', 'Postman', 'Vercel CLI', 'Visual Studio Code','Android Studio'],
-        baseDeDados: ['MongoDB', 'SQLite', 'MySQL']
+        ferramentas: ['Git', 'Postman', 'Vercel CLI', 'Visual Studio Code', 'Android Studio'],
+        baseDeDados: ['MongoDB', 'SQLite']
       },
       expertiseLabels: {
         frontend: 'Frontend',
@@ -35,14 +35,14 @@ export const translations = {
         mobile: 'Mobile',
         desktop: 'Desktop',
         ferramentas: 'Ferramentas',
-        baseDeDados: 'Bases de dados'
+        baseDeDados: 'Bases de Dados'
       },
       copyright: '© 2025 Ricardo Pinheiro'
     },
     audioPlayer: {
-      welcomeTitle: 'Bem-vindo ao meu Portfólio!',
+      welcomeTitle: 'Bem-vindo ao meu Portefólio!',
       welcomeMessage: 'Gostarias de ouvir música de fundo enquanto exploras?',
-      welcomeNote: 'Nota: este pop-up irá aparecer novamente se recarregares a página',
+      welcomeNote: 'Nota: este pop-up irá surgir novamente se recarregares a página',
       yesButton: 'Sim, tocar música',
       noButton: 'Não, obrigado'
     },
@@ -59,7 +59,7 @@ export const translations = {
       welcomeMessage: 'Bem-vindo à secção de competências. Usa os comandos no terminal para explorar os meus projetos e competências.',
       errorMessages: {
         commandNotFound: 'comando não encontrado',
-        helpSuggestion: "Escreve 'help' para listar os comandos disponíveis",
+        helpSuggestion: "Escreve 'help' para mostrar os comandos disponíveis",
         noSuchFileOrDirectory: 'ficheiro ou diretório inexistente',
         repositoryNotFound: 'repositório não encontrado',
         targetNotAvailable: 'alvo indisponível',
@@ -67,20 +67,14 @@ export const translations = {
       },
       helpList: {
         ls: {
-          root: 'Listar diretórios (disponíveis: {dirs})',
-          skillsDir: "Listar ficheiros em '{dir}' ({count} ficheiros)",
-          projectsRoot: 'Listar projetos ({count} itens)',
-          projectAlias: 'Listar itens disponíveis no projeto (info.txt, repo, demo)'
+          root: 'Mostra os diretórios disponíveis'
         },
         cat: {
-          skillsDir: 'Mostrar conteúdo do ficheiro (disponíveis: {files})',
-          projectsRoot: 'Mostrar detalhes do projeto (disponíveis: {projects})',
-          projectAlias: 'Mostrar item (info.txt | repo | demo)',
-          rootWithSkills: "Mostrar conteúdo do ficheiro (navega para '{skillsDir}' ou '{projectsDir}' primeiro)",
-          rootNoSkills: "Mostrar conteúdo do ficheiro (navega para '{projectsDir}' primeiro)"
+          skillsDir: 'Mosta o conteudo do ficheiro .txt',
+          rootNoSkills: 'Mostra o conteudo do ficheit .txt'
         },
         cd: {
-          template: "Mudar de diretório. Usa '{dirs}', '..' para subir, '~' para ir ao início",
+          template: "Muda de diretório. Usa '{dirs}', '..' para voltar ao diretório anterior, ou '~' para regressar ao diretório principal",
           joinOr: "' ou '"
         }
       },
@@ -101,24 +95,16 @@ export const translations = {
       },
       helpTip: "Dica: escreve 'help <comando>' para ver detalhes",
       help: {
-        ls: { usage: 'ls', description: 'Lista itens no local atual' },
+        ls: { usage: 'ls', description: 'Lista os itens no local atual' },
         cd: { usage: 'cd', description: 'Altera para um diretório diferente' },
-        cat: { usage: 'cat <ficheiro>', description: 'Mostra o conteúdo do ficheiro' },
+        cat: { usage: 'cat <ficheiro>', description: 'Mosta o conteudo do ficheiro .txt' },
         open: { usage: 'open', description: 'Abre o repositório do projeto atual' },
         clear: { usage: 'clear', description: 'Limpa o terminal' },
         exit: { usage: 'exit', description: 'Reinicia o terminal para o estado inicial' }
       },
       tips: {
-        openDemo: (alias) => `Dica: executa 'open ${alias} demo' para ver a demo`,
+        openDemo: (alias) => `Dica: executa 'open ${alias} demo' para ver a demonstração`,
         linksHint: `Dica: também podes 'cd links' e depois 'open repo' ou 'open demo'`
-      },
-      responses: {
-        frontend: 'Desde que aprendi programação, o frontend foi uma das áreas de desenvolvimento que mais me fascinou; estou sempre com vontade de aprender novas tecnologias. As minhas experiências em frontend incluem React, HTML, CSS, JavaScript, Bootstrap e Filament.',
-        backend: 'O backend tem sido um desafio para acompanhar o frontend, mas dou sempre o meu melhor. Tenho conhecimentos básicos de PHP e Laravel. Ultimamente tenho-me orientado mais para Node.js, linguagem com a qual me sinto mais confortável.',
-        tools: 'Sei usar Git para fazer uploads de projetos no GitHub e GitLab e tenho conhecimentos básicos de Postman. Para fazer deploy de projetos online, recentemente tenho usado o Vercel e o Vercel CLI, que ajudam a publicar e atualizar projetos de forma rápida.',
-        android: 'Durante a minha jornada, aprendi a desenvolver aplicações Android, principalmente com Java no Android Studio. Também tenho explorado React Native e Kotlin.',
-        database: 'Tenho experiência com bases de dados como MongoDB e SQLite.',
-        desktopTools: 'Recentemente comecei a aprender Tauri, que é semelhante ao Electron mas usa menos RAM por não depender do Chromium, e suporta desenvolvimento multiplataforma.'
       }
     },
     projects: {
@@ -130,18 +116,18 @@ export const translations = {
       seeOnGithub: 'Ver no GitHub',
       data: [
         {
-          id: 'project01',
-          title: 'Projeto 01',
-          description: 'O melhor lugar para encontrar séries e filmes de ficção científica',
-          tech: ['React', 'JavaScript', 'CSS'],
-          link: 'https://github.com/RicardoPinheiroDev/TimeofScifi',
+          id: 'TimeofSciFI',
+          title: 'Time of Scifi',
+          description: 'O melhor lugar para descobrir séries e filmes de ficção científica',
+          tech: ['HTML', 'JavaScript', 'CSS'],
+          link: 'https://github.com/RicardoPinheiroDev/TimeofScifi'
         },
         {
           id: 'projectEstagio',
-          title: 'Projeto Estágio CTeSP',
-          description: 'Plataforma de gestão e domínios com área de cliente',
-          tech: ['PHP', 'Laravel', 'MySQL'],
-          link: 'https://github.com/RicardoPinheiroDev/8220611_CTESP_Estagio_DWDM_2025',
+          title: 'Projeto de Estágio CTeSP',
+          description: 'Plataforma de gestão de domínios com área de cliente',
+          tech: ['PHP', 'Laravel', 'SQLite', 'Filament'],
+          link: 'https://github.com/RicardoPinheiroDev/8220611_CTESP_Estagio_DWDM_2025'
         }
       ]
     }
@@ -170,11 +156,11 @@ export const translations = {
       expertiseIntro: 'Here are some of the technologies and tools I work with.',
       expertise: {
         frontend: ['JavaScript', 'React', 'HTML', 'CSS', 'Bootstrap', 'Filament'],
-        backend: ['PHP', 'Laravel', 'Node.js', 'Express'],
-        mobile: ['Java', 'Kotlin', 'Android (Java)', 'React Native'],
+        backend: ['PHP', 'Laravel', 'Node.js'],
+        mobile: ['Java', 'Kotlin', 'React Native'],
         desktop: ['Tauri'],
-        tools: ['Git', 'GitHub', 'GitLab', 'Postman', 'Vercel CLI'],
-        databases: ['MongoDB', 'SQLite', 'MySQL']
+        tools: ['Git', 'Postman', 'Vercel CLI', 'Android Studio', 'Visual Studio Code'],
+        databases: ['MongoDB', 'SQLite']
       },
       expertiseLabels: {
         frontend: 'Frontend',
@@ -214,20 +200,14 @@ export const translations = {
       },
       helpList: {
         ls: {
-          root: 'List directories (available: {dirs})',
-          skillsDir: "List files in '{dir}' ({count} files)",
-          projectsRoot: 'List projects ({count} items)',
-          projectAlias: 'List available items in project (info.txt, repo, demo)'
+          root: 'Show available directories'
         },
         cat: {
-          skillsDir: 'Print file contents (available: {files})',
-          projectsRoot: 'Show project details (available: {projects})',
-          projectAlias: 'Print item (info.txt | repo | demo)',
-          rootWithSkills: "Print file contents (navigate into '{skillsDir}' or '{projectsDir}' first)",
-          rootNoSkills: "Print file contents (navigate into '{projectsDir}' first)"
+          skillsDir: 'Show the contents of the .txt file',
+          rootNoSkills: 'Show the contents of the .txt file'
         },
         cd: {
-          template: "Change directory. Use '{dirs}', '..' to go up, '~' to go home",
+          template: "Change directory. Use '{dirs}', '..' to go to the previous directory, or '~' to return to the home directory",
           joinOr: "' or '"
         }
       },
@@ -250,7 +230,7 @@ export const translations = {
       help: {
         ls: { usage: 'ls', description: 'Lists items in the current location' },
         cd: { usage: 'cd', description: 'Changes to a different directory' },
-        cat: { usage: 'cat <file>', description: 'Shows file contents' },
+        cat: { usage: 'cat <file>', description: 'Shows the contents of the .txt file' },
         open: { usage: 'open', description: 'Opens the repository of the current project' },
         clear: { usage: 'clear', description: 'Clears the terminal output' },
         exit: { usage: 'exit', description: 'Resets the terminal to its initial state' }
@@ -258,14 +238,6 @@ export const translations = {
       tips: {
         openDemo: (alias) => `Tip: Run 'open ${alias} demo' to view the live demo`,
         linksHint: `Tip: You can also 'cd links' then 'open repo' or 'open demo'`
-      },
-      responses: {
-        frontend: 'The wonders of frontend are such that nothing can keep us apart. I have experience using React, HTML, CSS, JavaScript, Bootstrap and Filament.',
-        backend: 'The backend has been a challenging task to synchronize with the frontend, but I always give my best to learn new technologies! I know the basics of PHP, Laravel (a framework based on PHP), and I also have knowledge of Node.js which I am more comfortable working with.',
-        tools: 'I know how to use Git, which gives me the advantage of uploading projects to GitHub and GitLab. I also have some basic knowledge of Postman. For deploying projects online, I have started to use Vercel with the Vercel CLI which is a command line tool to deploy and update projects quickly.',
-        android: 'As for mobile development, I have knowledge of programming in Java using Android Studio. Recently, I have also been learning the basics of React Native for cross-platform development which I am very curious to explore more.',
-        database: 'I have experience working with databases such as MongoDB and SQLite.',
-        desktopTools: "I've recently started learning Tauri, which is a framework similar to Electron but uses less RAM since it doesn't rely on Chromium, and it also supports cross-platform development."
       }
     },
     projects: {
@@ -277,18 +249,18 @@ export const translations = {
       seeOnGithub: 'See on GitHub',
       data: [
         {
-          id: 'project01',
+          id: 'TimeofSciFI',
           title: 'Project 01',
           description: 'The best place to find scifi tv shows and movies',
           tech: ['Html', 'Css', 'Nodejs'],
-          link: 'https://github.com/RicardoPinheiroDev/TimeofScifi',
+          link: 'https://github.com/RicardoPinheiroDev/TimeofScifi'
         },
         {
           id: 'projectEstagio',
           title: 'Internship Project',
           description: 'Management and domains platform with client area',
-          tech: ['PHP', 'Laravel', 'MySQL'],
-          link: 'https://github.com/RicardoPinheiroDev/8220611_CTESP_Estagio_DWDM_2025',
+          tech: ['PHP', 'Laravel', 'SQLite'],
+          link: 'https://github.com/RicardoPinheiroDev/8220611_CTESP_Estagio_DWDM_2025'
         }
       ]
     }
