@@ -25,7 +25,7 @@ export const translations = {
         frontend: ['JavaScript', 'React', 'HTML', 'CSS', 'Bootstrap', 'Filament'],
         backend: ['PHP', 'Laravel', 'Node.js'],
         mobile: ['Java', 'React Native'],
-        desktop: ['Tauri'],
+        desktop: ['Tauri', 'Linux'],
         ferramentas: ['Git', 'Postman', 'Vercel CLI', 'Visual Studio Code', 'Android Studio'],
         baseDeDados: ['MongoDB', 'SQLite']
       },
