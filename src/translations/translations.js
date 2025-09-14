@@ -40,7 +40,7 @@ export const translations = {
       copyright: '© 2025 Ricardo Pinheiro'
     },
     audioPlayer: {
-      welcomeTitle: 'Bem-vindo ao meu Portefólio!',
+      welcomeTitle: 'Bem-vindo ao meu Portfólio!',
       welcomeMessage: 'Gostarias de ouvir música de fundo enquanto exploras?',
       welcomeNote: 'Nota: este pop-up irá surgir novamente se recarregares a página',
       yesButton: 'Sim, tocar música',
