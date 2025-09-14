@@ -158,7 +158,7 @@ export const translations = {
         frontend: ['JavaScript', 'React', 'HTML', 'CSS', 'Bootstrap', 'Filament'],
         backend: ['PHP', 'Laravel', 'Node.js'],
         mobile: ['Java', 'Kotlin', 'React Native'],
-        desktop: ['Tauri'],
+        desktop: ['Tauri', 'Linux'],
         tools: ['Git', 'Postman', 'Vercel CLI', 'Android Studio', 'Visual Studio Code'],
         databases: ['MongoDB', 'SQLite']
       },
