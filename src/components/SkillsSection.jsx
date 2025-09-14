@@ -24,11 +24,13 @@ function SkillsSection() {
   }
 
   // Localized directory names
-  const SKILLS_DIR = t?.skills?.dirName || 'skills'
+  // Hide skills directory if no dirName provided in translations
+  const SKILLS_DIR = t?.skills?.dirName || ''
   const PROJECTS_DIR = t?.projects?.dirName || 'projects'
   const LINKS_DIR = t?.projects?.linksDirName || 'links'
+  const SHOW_SKILLS = !!SKILLS_DIR
 
-  const isSkillsDirectory = (dirName) => dirName === SKILLS_DIR
+  const isSkillsDirectory = (dirName) => SHOW_SKILLS && dirName === SKILLS_DIR
   const isProjectsDirectory = (dirName) => dirName === PROJECTS_DIR
   const isProjectsRoot = (dirName) => dirName === PROJECTS_DIR
   const isProjectAliasDir = (dirName) => dirName.startsWith(`${PROJECTS_DIR}/`) && dirName.split('/').length === 2
@@ -79,7 +81,8 @@ function SkillsSection() {
 
     switch (true) {
       case command === 'exit':
-        setCommandHistory([{ type: 'welcome', content: t.skills.welcomeMessage, timestamp: Date.now(), id: 1 }])
+        // Reset terminal without showing the welcome message
+        setCommandHistory([])
         setSelectedCategory(null); setCurrentDirectory('~'); setErrorMessage(''); setHasExecutedCommand(false)
         setHistoryIndex(null)
         return
@@ -93,7 +96,7 @@ function SkillsSection() {
         return
 
       case command === 'ls' && currentDirectory === '~':
-        response = { type: 'file-list', content: `${SKILLS_DIR}/  ${PROJECTS_DIR}/` }
+        response = { type: 'file-list', content: [SHOW_SKILLS ? `${SKILLS_DIR}/` : null, `${PROJECTS_DIR}/`].filter(Boolean).join('  ') }
         break
 
       case command === 'ls' && isSkillsDirectory(currentDirectory):
@@ -191,12 +194,10 @@ function SkillsSection() {
         break
       }
 
-      // Open GitHub repo by alias
       case command.startsWith('open '): {
-        const parts = command.split(/\s+/).slice(1) // [alias?, maybe 'repo'|'demo']
+        const parts = command.split(/\s+/).slice(1) 
         let alias = parts[0]
         let kind = parts[1] || 'repo'
-        // Allow context-based open when inside a project dir
         if (!alias && (isProjectAliasDir(currentDirectory))) {
           alias = getProjectAliasFromDir(currentDirectory)
           kind = 'repo'
@@ -237,28 +238,40 @@ function SkillsSection() {
         const projectAliases = Object.keys(projectsData)
         const list = Object.keys(helpData).map((key) => {
           let { usage, description } = helpData[key]
+
+          const hl = t?.skills?.helpList || {}
+          const rep = (tpl, vars) => {
+            if (!tpl) return null
+            return Object.entries(vars || {}).reduce((s, [k, v]) => s.replaceAll(`{${k}}`, String(v)), tpl)
+          }
+
           if (key === 'ls') {
+            const dirsList = [SHOW_SKILLS ? `${SKILLS_DIR}/` : null, `${PROJECTS_DIR}/`].filter(Boolean).join(', ')
             description = currentDirectory === '~'
-              ? `List directories (available: ${SKILLS_DIR}/, ${PROJECTS_DIR}/)`
+              ? rep(hl?.ls?.root, { dirs: dirsList }) || `List directories (available: ${dirsList})`
               : isSkillsDirectory(currentDirectory)
-                ? `List files in '${SKILLS_DIR}' (${files.length} files)`
+                ? rep(hl?.ls?.skillsDir, { dir: SKILLS_DIR, count: files.length }) || `List files in '${SKILLS_DIR}' (${files.length} files)`
               : isProjectsRoot(currentDirectory)
-                  ? `List projects (${projectAliases.length} items)`
+                  ? rep(hl?.ls?.projectsRoot, { count: projectAliases.length }) || `List projects (${projectAliases.length} items)`
                   : isProjectAliasDir(currentDirectory)
-                    ? `List available items in project (info.txt, repo${Object.keys(projectsData).length ? ', demo' : ''})`
+                    ? hl?.ls?.projectAlias || 'List available items in project (info.txt, repo, demo)'
                       : description
           }
           if (key === 'cat') {
             description = currentDirectory === SKILLS_DIR
-              ? `Print file contents (available: ${files.join(', ')})`
+              ? rep(hl?.cat?.skillsDir, { files: files.join(', ') }) || `Print file contents (available: ${files.join(', ')})`
               : isProjectsRoot(currentDirectory)
-                ? `Show project details (available: ${projectAliases.join(', ')})`
+                ? rep(hl?.cat?.projectsRoot, { projects: projectAliases.join(', ') }) || `Show project details (available: ${projectAliases.join(', ')})`
                 : isProjectAliasDir(currentDirectory)
-                  ? `Print item (info.txt | repo | demo)`
-                    : `Print file contents (navigate into '${SKILLS_DIR}' or '${PROJECTS_DIR}' first)`
+                  ? hl?.cat?.projectAlias || 'Print item (info.txt | repo | demo)'
+                    : SHOW_SKILLS
+                      ? rep(hl?.cat?.rootWithSkills, { skillsDir: SKILLS_DIR, projectsDir: PROJECTS_DIR }) || `Print file contents (navigate into '${SKILLS_DIR}' or '${PROJECTS_DIR}' first)`
+                      : rep(hl?.cat?.rootNoSkills, { projectsDir: PROJECTS_DIR }) || `Print file contents (navigate into '${PROJECTS_DIR}' first)`
           }
           if (key === 'cd') {
-            description = `Change directory. Use '${SKILLS_DIR}' or '${PROJECTS_DIR}', '..' to go up, '~' to go home`
+            const joinOr = hl?.cd?.joinOr || "' or '"
+            const dirs = [SHOW_SKILLS ? SKILLS_DIR : null, PROJECTS_DIR].filter(Boolean).join(joinOr)
+            description = rep(hl?.cd?.template, { dirs }) || `Change directory. Use '${dirs}', '..' to go up, '~' to go home`
           }
           return { key, usage, description }
         })
@@ -270,10 +283,9 @@ function SkillsSection() {
         if (helpData[topic]) {
           const files = Object.values(directories).map(d => `${d}.txt`)
           const detail = { ...helpData[topic] }
-          // Tailor details to current context
           if (topic === 'ls') {
             detail.description = currentDirectory === '~'
-              ? `List directories (available: ${SKILLS_DIR}/, ${PROJECTS_DIR}/)`
+              ? `List directories (available: ${[SHOW_SKILLS ? `${SKILLS_DIR}/` : null, `${PROJECTS_DIR}/`].filter(Boolean).join(', ')})`
               : isSkillsDirectory(currentDirectory)
                 ? `List files in '${SKILLS_DIR}' (${files.length} files)`
                 : isProjectsRoot(currentDirectory)
@@ -284,7 +296,7 @@ function SkillsSection() {
             detail.examples = ['ls']
           }
           if (topic === 'cd') {
-            detail.examples = [`cd ${SKILLS_DIR}`, `cd ${PROJECTS_DIR}`, `cd ${PROJECTS_DIR}/project01`, 'cd ..', 'cd ~']
+            detail.examples = [SHOW_SKILLS ? `cd ${SKILLS_DIR}` : null, `cd ${PROJECTS_DIR}`, `cd ${PROJECTS_DIR}/project01`, 'cd ..', 'cd ~'].filter(Boolean)
           }
           if (topic === 'cat') {
             detail.description = currentDirectory === SKILLS_DIR
@@ -293,7 +305,9 @@ function SkillsSection() {
                 ? `Show project details (available: ${Object.keys(projectsData).join(', ')})`
                 : isProjectAliasDir(currentDirectory)
                   ? `Print item (info | repo | demo)`
-                    : `Print file contents (navigate into '${SKILLS_DIR}' or '${PROJECTS_DIR}' first)`
+                    : SHOW_SKILLS
+                      ? `Print file contents (navigate into '${SKILLS_DIR}' or '${PROJECTS_DIR}' first)`
+                      : `Print file contents (navigate into '${PROJECTS_DIR}' first)`
             const exampleFiles = files.slice(0, 3)
             detail.examples = currentDirectory === SKILLS_DIR
               ? ['ls', ...exampleFiles.map(f => `cat ${f}`)].concat(files.length > 3 ? ['...'] : [])
@@ -301,11 +315,11 @@ function SkillsSection() {
                 ? ['ls', ...Object.keys(projectsData).slice(0,3).map(a => `cat ${a}`)].concat(Object.keys(projectsData).length > 3 ? ['...'] : [])
                 : isProjectAliasDir(currentDirectory)
                   ? ['ls', 'cat info.txt', 'cat repo', 'cat demo']
-                    : [`cd ${SKILLS_DIR}`, 'ls', files[0] ? `cat ${files[0]}` : 'cat <file>']
+                    : [SHOW_SKILLS ? `cd ${SKILLS_DIR}` : `cd ${PROJECTS_DIR}`, 'ls', isProjectsRoot(currentDirectory) ? (Object.keys(projectsData)[0] ? `cat ${Object.keys(projectsData)[0]}` : 'cat <file>') : (files[0] ? `cat ${files[0]}` : 'cat <file>')]
           }
           response = { type: 'help-detail', content: detail, command: topic }
         } else {
-          response = { type: 'error', content: command, message: `no help topics match '${topic}'`, suggestion: "Type 'help' to list available commands" }
+          response = { type: 'error', content: command, message: `${t?.skills?.errorMessages?.helpTopicNotFound || 'no help topics match'} '${topic}'`, suggestion: t?.skills?.errorMessages?.helpSuggestion || "Type 'help' to list available commands" }
         }
         break
       }
@@ -333,7 +347,7 @@ function SkillsSection() {
               .filter(i => i.toLowerCase().startsWith(`${PROJECTS_DIR}/${token}`.toLowerCase()))
             if (matches.length === 1) { setTerminalInput(`cd ${matches[0]}`); return }
           }
-          suggestions = [`${SKILLS_DIR}/`, `${PROJECTS_DIR}/`]
+          suggestions = [SHOW_SKILLS ? `${SKILLS_DIR}/` : null, `${PROJECTS_DIR}/`].filter(Boolean)
         } else if (isProjectsRoot(currentDirectory)) suggestions = [...Object.keys(projectsData), '..']
         else if (isProjectAliasDir(currentDirectory)) suggestions = ['..']
         else suggestions = ['~','..']
@@ -341,7 +355,7 @@ function SkillsSection() {
       }
       if (cmd === 'ls') {
         if (currentDirectory === '~') {
-          suggestions = [`${SKILLS_DIR}/`, `${PROJECTS_DIR}/`]
+          suggestions = [SHOW_SKILLS ? `${SKILLS_DIR}/` : null, `${PROJECTS_DIR}/`].filter(Boolean)
         } else if (isProjectsRoot(currentDirectory)) {
           suggestions = Object.keys(projectsData)
         } else if (isSkillsDirectory(currentDirectory)) {
@@ -390,7 +404,7 @@ function SkillsSection() {
       if (matches.length === 1) { setTerminalInput(prefix + matches[0]); return }
       const exact = suggestions.find(i => i && i.toLowerCase() === lowerArg)
       if (exact) { setTerminalInput(prefix + exact); return }
-      // If multiple matches, extend to the longest common prefix
+
       if (matches.length > 1 && arg.length > 0) {
         const lcp = (arr) => {
           if (arr.length === 0) return ''

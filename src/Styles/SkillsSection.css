@@ -110,7 +110,6 @@
   text-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
 }
 
-/* Linux-like colored prompt segments */
 .terminal-prompt .prompt-user { color: #8ae234; }
 .terminal-prompt .prompt-at { color: #eeeeec; margin: 0 1px; }
 .terminal-prompt .prompt-host { color: #729fcf; }
@@ -189,7 +188,6 @@
   font-family: 'Ubuntu Mono', 'Courier New', 'Monaco', 'Lucida Console', monospace;
 }
 
-/* Subtle focus ring on input when active */
 .terminal-input:focus {
   outline: none;
   text-shadow: 0 0 2px rgba(76, 175, 80, 0.3);
@@ -200,7 +198,6 @@
   margin: 0.5rem 0;
 }
 
-/* Help output styling */
 .help-commands {
   font-family: 'Ubuntu Mono', 'Courier New', 'Monaco', 'Lucida Console', monospace;
   color: #e0e0e0;
@@ -479,7 +476,6 @@
   background: #666666;
 }
 
-/* General mobile touch improvements */
 .terminal-input {
   -webkit-user-select: text;
   user-select: text;
@@ -487,7 +483,6 @@
   touch-action: manipulation;
 }
 
-/* Mobile optimizations */
 @media (max-width: 768px) {
   html, body {
     overflow-x: hidden;
@@ -630,11 +625,9 @@
   }
   
   .terminal-container {
-    /* Fixed: Increased top margin for smaller screens */
     margin: 7rem auto 0.25rem auto;
     max-width: 98vw;
     width: 98vw;
-    /* Fixed: Adjusted height calculation for smaller screens */
     height: calc(100vh - 20rem);
     max-height: calc(100vh - 20rem);
     min-height: 250px;
@@ -702,7 +695,7 @@
   }
 
   .terminal-input {
-    font-size: 16px; /* Prevent zoom on iOS */
+    font-size: 16px;
     min-height: 2rem;
     padding: 0.5rem 0.25rem;
     -webkit-tap-highlight-color: transparent;
@@ -710,14 +703,11 @@
   }
 }
 
-/* Extra small mobile screens */
 @media (max-width: 360px) {
   .terminal-container {
-    /* Fixed: Even more top margin for very small screens */
     margin: 8rem auto 0.25rem auto;
     max-width: 99vw;
     width: 99vw;
-    /* Fixed: Further adjusted height */
     height: calc(100vh - 22rem);
     max-height: calc(100vh - 22rem);
     min-height: 200px;
@@ -767,11 +757,9 @@
   }
   
   .terminal-container {
-    /* Fixed: Maximum top margin for smallest screens */
     margin: 9rem auto 0.5rem auto;
     max-width: 85vw;
     width: 85vw;
-    /* Fixed: Use flexible height for very small screens */
     min-height: 40vh;
     max-height: calc(100vh - 24rem);
     height: auto;
@@ -827,10 +815,8 @@
   }
 }
 
-/* Fixed height-based media queries */
 @media (max-height: 600px) {
   .terminal-container {
-    /* Fixed: Ensure navbar clearance on short screens */
     margin-top: 8rem;
     min-height: 50vh;
     max-height: calc(100vh - 10rem);
@@ -839,7 +825,7 @@
 
 @media (max-height: 500px) and (orientation: landscape) {
   .terminal-container {
-    /* Fixed: Better landscape handling */
+    
     max-height: calc(100vh - 8rem);
     min-height: 60vh;
     height: auto;

@@ -2,34 +2,52 @@ export const translations = {
   pt: {
     nav: {
       home: 'Início',
-      skills: 'My Stuff',
-      projects: 'My Stuff',
+      skills: 'Coisas',
+      projects: 'Projetos',
       language: 'Idioma',
-      selectLanguage: 'Selecionar Idioma',
+      selectLanguage: 'Selecionar idioma',
       portuguese: 'Português',
       english: 'Inglês'
     },
     routes: {
       home: 'inicio',
-      skills: 'competencias',
+      skills: 'skills',
       projects: 'projetos'
     },
     home: {
       greeting: 'Olá',
-      intro: 'Chamo-me Ricardo Pinheiro, sou um programador web junior que gosta de usar a criatividade para desenvolver soluções inovadoras em aplicações full stack.',
+      intro: 'Chamo-me Ricardo Pinheiro e sou um Programador Web Júnior, focado no desenvolvimento de soluções full-stack robustas e escaláveis',
       downloadCV: 'Descarregar CV',
       cvFileName: 'CV_RicardoPinheiro.pdf',
+      expertiseTitle: 'Competências e Tecnologias',
+      expertiseIntro: 'Estas são algumas tecnologias e ferramentas com que trabalho no dia a dia.',
+      expertise: {
+        frontend: ['JavaScript', 'React', 'HTML', 'CSS', 'Bootstrap', 'Filament'],
+        backend: ['PHP', 'Laravel', 'Node.js', 'Express'],
+        mobile: ['Java', 'React Native'],
+        desktop: ['Tauri'],
+        ferramentas: ['Git', 'Postman', 'Vercel CLI', 'Visual Studio Code','Android Studio'],
+        baseDeDados: ['MongoDB', 'SQLite', 'MySQL']
+      },
+      expertiseLabels: {
+        frontend: 'Frontend',
+        backend: 'Backend',
+        mobile: 'Mobile',
+        desktop: 'Desktop',
+        ferramentas: 'Ferramentas',
+        baseDeDados: 'Bases de dados'
+      },
       copyright: '© 2025 Ricardo Pinheiro'
     },
     audioPlayer: {
       welcomeTitle: 'Bem-vindo ao meu Portfólio!',
-      welcomeMessage: 'Gostarias de ouvir uma música de fundo enquanto exploras ?',
-      welcomeNote: 'Nota :Este pop_up irá aparecer novamente se recaregares a página',
+      welcomeMessage: 'Gostarias de ouvir música de fundo enquanto exploras?',
+      welcomeNote: 'Nota: este pop-up irá aparecer novamente se recarregares a página',
       yesButton: 'Sim, tocar música',
       noButton: 'Não, obrigado'
     },
     skills: {
-      dirName: 'competencias',
+      dirName: '',
       fileNames: {
         frontend: 'frontend',
         backend: 'backend',
@@ -38,14 +56,33 @@ export const translations = {
         database: 'base-de-dados',
         desktopTools: 'ferramentas-desktop'
       },
-      welcomeMessage: 'Bem-vindo à secção de competências. Use os comandos no terminal para explorar os meus projetos e competências.',
+      welcomeMessage: 'Bem-vindo à secção de competências. Usa os comandos no terminal para explorar os meus projetos e competências.',
       errorMessages: {
         commandNotFound: 'comando não encontrado',
-        helpSuggestion: "Digite 'help' para listar os comandos disponíveis",
+        helpSuggestion: "Escreve 'help' para listar os comandos disponíveis",
         noSuchFileOrDirectory: 'ficheiro ou diretório inexistente',
         repositoryNotFound: 'repositório não encontrado',
         targetNotAvailable: 'alvo indisponível',
         helpTopicNotFound: 'nenhum tópico de ajuda corresponde a'
+      },
+      helpList: {
+        ls: {
+          root: 'Listar diretórios (disponíveis: {dirs})',
+          skillsDir: "Listar ficheiros em '{dir}' ({count} ficheiros)",
+          projectsRoot: 'Listar projetos ({count} itens)',
+          projectAlias: 'Listar itens disponíveis no projeto (info.txt, repo, demo)'
+        },
+        cat: {
+          skillsDir: 'Mostrar conteúdo do ficheiro (disponíveis: {files})',
+          projectsRoot: 'Mostrar detalhes do projeto (disponíveis: {projects})',
+          projectAlias: 'Mostrar item (info.txt | repo | demo)',
+          rootWithSkills: "Mostrar conteúdo do ficheiro (navega para '{skillsDir}' ou '{projectsDir}' primeiro)",
+          rootNoSkills: "Mostrar conteúdo do ficheiro (navega para '{projectsDir}' primeiro)"
+        },
+        cd: {
+          template: "Mudar de diretório. Usa '{dirs}', '..' para subir, '~' para ir ao início",
+          joinOr: "' ou '"
+        }
       },
       labels: {
         title: 'Título',
@@ -62,7 +99,7 @@ export const translations = {
         description: 'Descrição',
         examples: 'Exemplos'
       },
-      helpTip: "Dica: escreva 'help <comando>' para ver detalhes",
+      helpTip: "Dica: escreve 'help <comando>' para ver detalhes",
       help: {
         ls: { usage: 'ls', description: 'Lista itens no local atual' },
         cd: { usage: 'cd', description: 'Altera para um diretório diferente' },
@@ -72,16 +109,16 @@ export const translations = {
         exit: { usage: 'exit', description: 'Reinicia o terminal para o estado inicial' }
       },
       tips: {
-        openDemo: (alias) => `Dica: Execute 'open ${alias} ' para ver a demo`,
-        linksHint: `Dica: Também pode 'cd links' e depois 'open repo' ou 'open demo'`
+        openDemo: (alias) => `Dica: executa 'open ${alias} demo' para ver a demo`,
+        linksHint: `Dica: também podes 'cd links' e depois 'open repo' ou 'open demo'`
       },
       responses: {
-        frontend: 'Desde que aprendi programação o frontend  foi uma das lados de desenvolvimento que mais me fascinnou,tenho sempre gosto em aprender novas tecnologias. As miinhas experiências no que toca a frontend são React, HTML, CSS, Javascript, Bootstrap e Fillament   ',
-        backend: 'O backend tem sido uma tarefa desafiante para sincronizar com o frontend, mas quero dar sempre o meu melhor! Eu tenho conhecimentos basicos em Php e Laravel ( Framework baseada em Php). Ultimamente tenho me orientado mais em NodeJS pois é uma linguagem onde me sinto mais confortavel em trabalhar ',
-        tools: 'Eu sei usar o Git para fazer uploads de projetos no Github ou Gitlab, tenho conhecimentos basicos sobre o Postman. Para fazer deploy de projetos online recentemente tenho usado o vercel com o vercel cli que  é um programa no temrinal que ajuda de uma maneira mais rapida  fazer deployements e atualizações de projetos em desenvolvimento sem precisar de ir ao site.',
-        android: 'Durante a minha jornada, aprendi a desenvolver aplicações Android. Principalmente Java no Android Studio e também tenho vindo a explorar React Native e Kotlin',
-        database: 'Tenho experiência em trabalhar com Mongodb e SQlite',
-        desktopTools: 'Recentemente comecei a aprender Tauri, tem os mesmos fundamentos que o electron mas não utiliza chromium o que deixa a aplicação mais leve,também suporta desenvolvimento cross-plataform'
+        frontend: 'Desde que aprendi programação, o frontend foi uma das áreas de desenvolvimento que mais me fascinou; estou sempre com vontade de aprender novas tecnologias. As minhas experiências em frontend incluem React, HTML, CSS, JavaScript, Bootstrap e Filament.',
+        backend: 'O backend tem sido um desafio para acompanhar o frontend, mas dou sempre o meu melhor. Tenho conhecimentos básicos de PHP e Laravel. Ultimamente tenho-me orientado mais para Node.js, linguagem com a qual me sinto mais confortável.',
+        tools: 'Sei usar Git para fazer uploads de projetos no GitHub e GitLab e tenho conhecimentos básicos de Postman. Para fazer deploy de projetos online, recentemente tenho usado o Vercel e o Vercel CLI, que ajudam a publicar e atualizar projetos de forma rápida.',
+        android: 'Durante a minha jornada, aprendi a desenvolver aplicações Android, principalmente com Java no Android Studio. Também tenho explorado React Native e Kotlin.',
+        database: 'Tenho experiência com bases de dados como MongoDB e SQLite.',
+        desktopTools: 'Recentemente comecei a aprender Tauri, que é semelhante ao Electron mas usa menos RAM por não depender do Chromium, e suporta desenvolvimento multiplataforma.'
       }
     },
     projects: {
@@ -95,14 +132,14 @@ export const translations = {
         {
           id: 'project01',
           title: 'Projeto 01',
-          description: 'O melhor lugar para encontrar filmes e séries sci-fi',
+          description: 'O melhor lugar para encontrar séries e filmes de ficção científica',
           tech: ['React', 'JavaScript', 'CSS'],
           link: 'https://github.com/RicardoPinheiroDev/TimeofScifi',
         },
         {
           id: 'projectEstagio',
-          title: 'Projeto Estagio Ctesp',
-          description: 'Plataforma de gestão para alojamentos de websites dos clientes da DigiUP',
+          title: 'Projeto Estágio CTeSP',
+          description: 'Plataforma de gestão e domínios com área de cliente',
           tech: ['PHP', 'Laravel', 'MySQL'],
           link: 'https://github.com/RicardoPinheiroDev/8220611_CTESP_Estagio_DWDM_2025',
         }
@@ -119,25 +156,45 @@ export const translations = {
       portuguese: 'Portuguese',
       english: 'English'
     },
-     param($m)
-    ($m.Value -replace "skills:\s*'[^']*'","skills: 'competencias'" -replace "projects:\s*'[^']*'","projects: 'projetos'")
-,
+    routes: {
+      home: 'home',
+      skills: 'skills',
+      projects: 'projects'
+    },
     home: {
       greeting: 'Hello',
       intro: 'My name is Richard Pinewood, I am a junior web developer who likes to use creativity to develop innovative solutions for full stack applications.',
       downloadCV: 'Download CV',
       cvFileName: 'CV_RichardPinewood.pdf',
+      expertiseTitle: 'Expertise & Technologies',
+      expertiseIntro: 'Here are some of the technologies and tools I work with.',
+      expertise: {
+        frontend: ['JavaScript', 'React', 'HTML', 'CSS', 'Bootstrap', 'Filament'],
+        backend: ['PHP', 'Laravel', 'Node.js', 'Express'],
+        mobile: ['Java', 'Kotlin', 'Android (Java)', 'React Native'],
+        desktop: ['Tauri'],
+        tools: ['Git', 'GitHub', 'GitLab', 'Postman', 'Vercel CLI'],
+        databases: ['MongoDB', 'SQLite', 'MySQL']
+      },
+      expertiseLabels: {
+        frontend: 'Frontend',
+        backend: 'Backend',
+        mobile: 'Mobile',
+        desktop: 'Desktop',
+        tools: 'Tools',
+        databases: 'Databases'
+      },
       copyright: '© 2025 Richard Pinewood'
     },
     audioPlayer: {
       welcomeTitle: 'Welcome to my Portfolio!',
       welcomeMessage: 'Would you like to enjoy some background music while exploring?',
-      welcomeNote: 'Note : This pop_up will appear again if you reload the page',
+      welcomeNote: 'Note: This pop-up will appear again if you reload the page',
       yesButton: 'Yes, play music',
       noButton: 'No, thanks'
     },
     skills: {
-      dirName: 'skills',
+      dirName: '',
       fileNames: {
         frontend: 'frontend',
         backend: 'backend',
@@ -154,6 +211,25 @@ export const translations = {
         repositoryNotFound: 'repository not found',
         targetNotAvailable: 'target not available',
         helpTopicNotFound: 'no help topics match'
+      },
+      helpList: {
+        ls: {
+          root: 'List directories (available: {dirs})',
+          skillsDir: "List files in '{dir}' ({count} files)",
+          projectsRoot: 'List projects ({count} items)',
+          projectAlias: 'List available items in project (info.txt, repo, demo)'
+        },
+        cat: {
+          skillsDir: 'Print file contents (available: {files})',
+          projectsRoot: 'Show project details (available: {projects})',
+          projectAlias: 'Print item (info.txt | repo | demo)',
+          rootWithSkills: "Print file contents (navigate into '{skillsDir}' or '{projectsDir}' first)",
+          rootNoSkills: "Print file contents (navigate into '{projectsDir}' first)"
+        },
+        cd: {
+          template: "Change directory. Use '{dirs}', '..' to go up, '~' to go home",
+          joinOr: "' or '"
+        }
       },
       labels: {
         title: 'Title',
@@ -184,13 +260,13 @@ export const translations = {
         linksHint: `Tip: You can also 'cd links' then 'open repo' or 'open demo'`
       },
       responses: {
-        frontend: 'The wonders of frontend are such that nothing can keep us apart. I have experience using  React, HTML, CSS, Javascript, Bootstrap and Fillament   ',
-        backend: 'The backend has been a challenging task to synchronize with the frontend, but I always give my best to learn new technologies! I know the basics of PHP, Laravel (a framework based on PHP), and  I also have knowledge of Node.js which I am more comfortable working with',         
+        frontend: 'The wonders of frontend are such that nothing can keep us apart. I have experience using React, HTML, CSS, JavaScript, Bootstrap and Filament.',
+        backend: 'The backend has been a challenging task to synchronize with the frontend, but I always give my best to learn new technologies! I know the basics of PHP, Laravel (a framework based on PHP), and I also have knowledge of Node.js which I am more comfortable working with.',
         tools: 'I know how to use Git, which gives me the advantage of uploading projects to GitHub and GitLab. I also have some basic knowledge of Postman. For deploying projects online, I have started to use Vercel with the Vercel CLI which is a command line tool to deploy and update projects quickly.',
         android: 'As for mobile development, I have knowledge of programming in Java using Android Studio. Recently, I have also been learning the basics of React Native for cross-platform development which I am very curious to explore more.',
         database: 'I have experience working with databases such as MongoDB and SQLite.',
-        desktopTools: 'I’ve recently started learning Tauri, which is a framework similar to Electron but uses less RAM since it doesn’t rely on Chromium, and it also supports cross-platform development.'
-      }      
+        desktopTools: "I've recently started learning Tauri, which is a framework similar to Electron but uses less RAM since it doesn't rely on Chromium, and it also supports cross-platform development."
+      }
     },
     projects: {
       dirName: 'projects',

@@ -52,7 +52,6 @@
   pointer-events: none;
 }
 
-/* Music Wave Indicator */
 .music-indicator {
   display: flex;
   align-items: center;

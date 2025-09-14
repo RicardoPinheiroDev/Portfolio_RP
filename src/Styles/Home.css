@@ -1,24 +1,28 @@
 html, body {
-  overflow: hidden;
-  height: 100%;
+  overflow: auto;
+  height: auto;
 }
 
 .main-content {
   margin-top: 80px;
-  padding: 1rem;
+  padding: 1rem 1rem 3rem;
   color: #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: calc(100vh - 70px);
-  overflow: hidden;
+  display: block !important; 
 }
 
 .hero-section {
   text-align: center;
-  max-width: 800px;
+  max-width: 960px;
   width: 100%;
-  padding: 0 1rem;
+  padding: 0 1rem 2rem;
+  margin: 0 auto;
+  transform: none !important; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 80px);
+  padding-bottom: 0.25rem; 
 }
 
 .greeting {
@@ -61,10 +65,9 @@ html, body {
 
 @media (max-width: 768px) {
   .main-content {
-    padding: 0 0.5rem 1rem;
+    padding: 0 0.5rem 2rem;
     margin-top: 0;
     min-height: 100vh;
-    justify-content: flex-start;
     padding-top: clamp(0.5rem, 3vh, 2rem);
   }
   
@@ -93,4 +96,112 @@ html, body {
   .greeting {
     font-size: 1.8rem;
   }
+}
+
+
+.expertise-section {
+  margin: 0 auto 0; 
+  max-width: 1100px;
+  padding: 0.25rem 1rem 1rem;
+  width: 100%;
+  display: block;
+}
+
+.expertise-header {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.expertise-title {
+  font-size: clamp(1.4rem, 3.5vw, 2rem);
+  color: #00d4ff;
+  margin: 0 0 0.25rem 0;
+  font-family: 'Orbitron', 'Inter', 'SF Pro Display', 'Segoe UI', sans-serif;
+}
+
+.expertise-intro {
+  color: #e6faff;
+  opacity: 0.9;
+  font-size: 0.95rem;
+}
+
+.expertise-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-top: 0.5rem; 
+  justify-content: center; 
+}
+
+/* Keep Tools/Ferramentas card same width as others (no span) */
+
+.expertise-card {
+  background: rgba(0,0,0,0.4);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 12px;
+  padding: 0.75rem;
+  backdrop-filter: blur(4px);
+}
+
+.expertise-card h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  color: #b4f0ff;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chip {
+  background: #061e26;
+  color: #e6faff;
+  border: 1px solid #0a2e39;
+  border-radius: 999px;
+  padding: 0.32rem 0.65rem;
+  font-size: 0.84rem;
+}
+
+.expertise-grid .tools-card .chips { gap: 0.35rem; }
+.expertise-grid .tools-card .chip {
+  padding: 0.24rem 0.5rem;
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+
+.home-actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.secondary-button {
+  background: transparent;
+  color: #00d4ff;
+  border: 1px solid #00d4ff;
+  padding: 0.8rem 1.2rem;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.secondary-button:hover {
+  background: rgba(0, 212, 255, 0.1);
+}
+
+.fade-element {
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+.fade-element.hidden {
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+}
+.fade-element.visible {
+  opacity: 1;
+  transform: translateY(0);
 }

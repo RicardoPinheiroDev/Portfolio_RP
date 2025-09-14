@@ -27,17 +27,19 @@ function LanguageWrapper() {
       <NavbarComponent />
 
       <Routes>
-        <Route path="/" element={
+        <Route index element={
           <main className="main-content">
             <HomeSection />
           </main>
         } />
-        <Route path={`/${routes.home}`} element={
-          <main className="main-content">
-            <HomeSection />
-          </main>
-        } />
-        <Route path={`/${routes.skills}`} element={<SkillsSection />} />
+        {routes.home && (
+          <Route path={`${routes.home}`} element={
+            <main className="main-content">
+              <HomeSection />
+            </main>
+          } />
+        )}
+        <Route path={`${routes.skills}`} element={<SkillsSection />} />
         { /* Projects route removed: projects are handled within the terminal */ }
       </Routes>
       
