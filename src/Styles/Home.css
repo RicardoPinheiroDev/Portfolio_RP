@@ -66,7 +66,8 @@ html, body {
 
 @media (max-width: 768px) {
   .main-content {
-    padding: 70px 0.75rem 2rem; /* keep offset for fixed navbar */
+    /* Add extra bottom padding so fixed UI (audio/social) won't overlap */
+    padding: 70px 0.75rem 110px; /* keep offset for fixed navbar */
     margin-top: 0;
     min-height: 100vh;
   }
