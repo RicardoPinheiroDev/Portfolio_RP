@@ -16,7 +16,7 @@ export const translations = {
     },
     home: {
       greeting: 'Olá',
-      intro: 'Chamo-me Ricardo Pinheiro e sou um Programador Web Júnior focado no desenvolvimento de soluções full-stack robustas e escaláveis.',
+      intro: 'Chamo-me Ricardo Pinheiro e sou um Programador Web Júnior focado no desenvolvimento de soluções full-stack criativas e escaláveis.',
       downloadCV: 'Descarregar CV',
       cvFileName: 'CV_RicardoPinheiro.pdf',
       expertiseTitle: 'Competências e Tecnologias',
@@ -125,7 +125,7 @@ export const translations = {
         {
           id: 'projectEstagio',
           title: 'Projeto de Estágio CTeSP',
-          description: 'Plataforma de gestão de domínios com área de cliente',
+          description: 'Plataforma de gestão para os serviços de alojamento de websites dos clientes da DigiUP',
           tech: ['PHP', 'Laravel', 'SQLite', 'Filament'],
           link: 'https://github.com/RicardoPinheiroDev/8220611_CTESP_Estagio_DWDM_2025'
         }
@@ -149,7 +149,7 @@ export const translations = {
     },
     home: {
       greeting: 'Hello',
-      intro: 'My name is Richard Pinewood, I am a junior web developer who likes to use creativity to develop innovative solutions for full stack applications.',
+      intro: 'My name is Richard Pinewood, I am a junior web developer who likes to use creativity to develop scalable and robust solutions for full stack applications.',
       downloadCV: 'Download CV',
       cvFileName: 'CV_RichardPinewood.pdf',
       expertiseTitle: 'Expertise & Technologies',
