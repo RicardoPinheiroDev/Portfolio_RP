@@ -896,3 +896,16 @@
   width: 0;
   height: 0;
 }
+
+@media (min-width: 1600px) {
+  .terminal-container {
+    width: min(1200px, 85vw);
+    height: clamp(550px, 58vh, 820px);
+  }
+}
+
+@media (min-width: 1920px) {
+  .terminal-container {
+    width: min(1400px, 75vw);
+  }
+}

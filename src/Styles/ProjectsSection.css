@@ -48,6 +48,26 @@
   max-width: 100%;
 }
 
+/* Ultra-wide screens */
+@media (min-width: 1600px) {
+  .projects-section .container {
+    max-width: 1400px;
+  }
+  .projects-grid {
+    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+}
+
+@media (min-width: 1920px) {
+  .projects-section .container {
+    max-width: 1600px;
+  }
+  .projects-grid {
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  }
+}
+
 .project-card {
   background: linear-gradient(145deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
   border-radius: 15px;

@@ -23,8 +23,6 @@ function SkillsSection() {
     desktopTools: 'desktop-tools'
   }
 
-  // Localized directory names
-  // Hide skills directory if no dirName provided in translations
   const SKILLS_DIR = t?.skills?.dirName || ''
   const PROJECTS_DIR = t?.projects?.dirName || 'projects'
   const LINKS_DIR = t?.projects?.linksDirName || 'links'
@@ -81,14 +79,12 @@ function SkillsSection() {
 
     switch (true) {
       case command === 'exit':
-        // Reset terminal without showing the welcome message
         setCommandHistory([])
         setSelectedCategory(null); setCurrentDirectory('~'); setErrorMessage(''); setHasExecutedCommand(false)
         setHistoryIndex(null)
         return
 
       case command === 'clear':
-        // Clear the terminal screen but keep the current working directory and selections
         setCommandHistory([])
         setErrorMessage('')
         setHasExecutedCommand(true)
@@ -100,7 +96,6 @@ function SkillsSection() {
         break
 
       case command === 'ls' && isSkillsDirectory(currentDirectory):
-        // Localized skill file names
         const fileNames = t?.skills?.fileNames || {
           frontend: 'frontend', backend: 'backend', tools: 'tools', android: 'android', database: 'database', desktopTools: 'desktop-tools'
         }

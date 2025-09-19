@@ -8,6 +8,24 @@
   right: 0;
 }
 
+/* Keep brand + links in a consistent horizontal position */
+.custom-navbar .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 1600px) {
+  .custom-navbar .container { max-width: 1400px; }
+}
+
+@media (min-width: 1920px) {
+  .custom-navbar .container { max-width: 1600px; }
+}
+
 .custom-brand {
   color: #00d4ff !important;
   font-weight: bold;
