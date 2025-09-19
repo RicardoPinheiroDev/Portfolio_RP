@@ -86,7 +86,8 @@ return (
           <h3 className="expertise-title">{t.home.expertiseTitle}</h3>
           <p className="expertise-intro">{t.home.expertiseIntro}</p>
         </div>
-        <div className="expertise-grid">
+        <div className="expertise-grid-shell">
+          <div className="expertise-grid">
           {(language === 'pt') ? (
             <>
               <div className="expertise-card">
@@ -166,6 +167,7 @@ return (
               </div>
             </>
           )}
+          </div>
         </div>
       </section>
 

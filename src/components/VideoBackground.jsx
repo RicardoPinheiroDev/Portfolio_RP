@@ -7,22 +7,16 @@ const VideoBackground = ({ src }) => {
     const video = videoRef.current;
     
     const handleCanPlay = () => {
-      // Try to autoplay the video
       const playPromise = video.play();
-      
-      // Handle autoplay restrictions
       if (playPromise !== undefined) {
         playPromise.catch(error => {
           console.log('Autoplay prevented:', error);
-          // Show play button or handle the error as needed
         });
       }
     };
 
-    // Add event listeners
     video.addEventListener('canplay', handleCanPlay);
-    
-    // Cleanup
+
     return () => {
       video.removeEventListener('canplay', handleCanPlay);
     };

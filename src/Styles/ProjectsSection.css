@@ -1,12 +1,32 @@
 .page-container {
   height: 100vh;
   overflow-y: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 212, 255, 0.45) rgba(0, 0, 0, 0.25);
+  scrollbar-gutter: stable both-edges;
+  overscroll-behavior: contain;
 }
 
 .page-container::-webkit-scrollbar {
-  display: none;
+  width: 9px;
+}
+
+.page-container::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 999px;
+  margin: 12px 0;
+}
+
+.page-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(0, 212, 255, 0.65), rgba(0, 153, 204, 0.6));
+  border-radius: 999px;
+  border: 2px solid rgba(8, 20, 35, 0.65);
+  box-shadow: 0 0 8px rgba(0, 212, 255, 0.35);
+}
+
+.page-container::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(0, 212, 255, 0.85), rgba(0, 153, 204, 0.8));
 }
 
 .projects-section {

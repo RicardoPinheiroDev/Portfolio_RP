@@ -15,7 +15,6 @@ function LanguageWrapper() {
   const routes = translations[lang]?.routes || translations.pt.routes
   const audioPlayerRef = useRef()
   
-  // Scroll to top on route change to avoid persisting scroll between tabs
   useEffect(() => {
     try {
       window.scrollTo({ top: 0, behavior: 'auto' })
@@ -44,7 +43,6 @@ function LanguageWrapper() {
           } />
         )}
         <Route path={`${routes.skills}`} element={<SkillsSection />} />
-        { /* Projects route removed: projects are handled within the terminal */ }
       </Routes>
       
       <AudioPlayer ref={audioPlayerRef} />
