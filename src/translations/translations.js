@@ -18,7 +18,7 @@ export const translations = {
       greeting: 'Olá',
       intro: 'Chamo-me Ricardo Pinheiro e sou um Programador Web Júnior focado no desenvolvimento de soluções full-stack criativas e escaláveis.',
       downloadCV: 'Descarregar CV',
-      cvFileName: 'CV_RicardoPinheiro.pdf',
+      cvFileName: 'CV_RicardoPinheiro01.pdf',
       expertiseTitle: 'Competências e Tecnologias',
       expertiseIntro: 'Estas são algumas das tecnologias e ferramentas que utilizo no dia a dia.',
       expertise: {
@@ -151,7 +151,7 @@ export const translations = {
       greeting: 'Hello',
       intro: 'My name is Richard Pinewood, I am a junior web developer who likes to use creativity to develop scalable and robust solutions for full stack applications.',
       downloadCV: 'Download CV',
-      cvFileName: 'CV_RichardPinewood.pdf',
+      cvFileName: 'CV_RichardPinewood02.pdf',
       expertiseTitle: 'Expertise & Technologies',
       expertiseIntro: 'Here are some of the technologies and tools I work with.',
       expertise: {
